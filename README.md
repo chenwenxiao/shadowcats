@@ -1,4 +1,4 @@
-clownServer
+ShadowCatsServer
 ===
 This repository contains the server side source code for the ShadowCats online code practice project,
 which aims to promote the interactivity of online code practice.
