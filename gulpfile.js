@@ -2,11 +2,18 @@
 var gulp = require('gulp');
 
 // 引入组件
+var bower = require('gulp-bower');
 var jshint = require('gulp-jshint');
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
+
+// gulp-bower-task
+gulp.task('bower', function() {
+  return bower()
+    .pipe(gulp.dest('./public/libs/'))
+});
 
 // 检查脚本
 gulp.task('lint', function() {
