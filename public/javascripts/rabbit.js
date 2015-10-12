@@ -113,7 +113,7 @@ collie.util.addEventListener(window, "load", function () {
 				height : 130
 			}, "rabbit");
 		}
-	})
+	});
 	
 	collie.util.addEventListener(document.body, "keydown", function (e) {
 	var keyCode = e.keyCode || e.key.charCodeAt(0);
