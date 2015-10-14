@@ -1,10 +1,14 @@
 exports.mongoose = null;
 exports.db = null;
-var databaseName = 
+
+var config = require('./db_config');
+var databaseName = config.databseName;
+var host = config.host;
+
 exports.openDb = function(callback)
 {
     mongoose = require('mongoose');
-    db =mongoose.createConnection('localhost','test');
+    db =mongoose.createConnection(host,databaseName);
     db.on('error',console.error.bind(console,'连接错误:'));
     callback();
     
