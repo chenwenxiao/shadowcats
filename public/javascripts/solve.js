@@ -10,7 +10,7 @@ define(['map', 'view'], function(map, view) {
         return false;
       },
       move : function(item, dx, dy) {
-        if (item.move == false)
+        if (!item.move)
           return false;
         item.x = item.x + dx;
         item.y = item.y + dy;
@@ -30,10 +30,10 @@ define(['map', 'view'], function(map, view) {
     init : function() {
       view.init(map);
       act.init();
-    }
+    },
     judge : function (item) {
-      var array = new Array();
-      for (nitem in map.items) {
+      var array = [];
+      for (var nitem in map.items) {
         if (strife(nitem, item))
           array.push(nitem);
       }
@@ -51,7 +51,7 @@ define(['map', 'view'], function(map, view) {
     },
     _move : function(item, dx, dy) {
       if (simulate.move(item, dx, dy)) {
-        move(item, dx, dy)
+        move(item, dx, dy);
       }
     },
     gravity : function(item) {
@@ -70,11 +70,11 @@ define(['map', 'view'], function(map, view) {
       wait(50);
     },
     use : function(item) {
-      var item, nitem
+      var nitem;
       item._use = true;
       if (item.type == 'knob') {
         for (nitem in item.targets)
-          if (nittem._use != true) use(nitem);
+          if (!nitem._use) use(nitem);
         view.use(item);
       }
       if (item.type == 'door') {
@@ -98,7 +98,7 @@ define(['map', 'view'], function(map, view) {
         player = findPlayers()[0];
       },
       findPlayers : function() {
-        var array = new Array();
+        var array = [];
         var item;
         for (item in map.items) {
           if (item.type == 'player')
@@ -107,7 +107,7 @@ define(['map', 'view'], function(map, view) {
         return array;
       },
       findStrifes : function() {
-        var array = new Array();
+        var array = [];
         var item;
         for (item in map.items) {
           if (strife(player, item))

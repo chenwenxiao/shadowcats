@@ -1,12 +1,12 @@
 define([], function() {
   var map = {
     background : {
-      src : ''，
+      src : ''
     },
 
     items : [
       {
-        type : player,
+        type : 'player',
         id : 0,
         x : 100,
         y : 100,
@@ -14,21 +14,21 @@ define([], function() {
         height : 100,
         stable : false,
         gravity : true,
-        src : '',
+        src : ''
       },
       {
-        type : ground,
+        type : 'ground',
         id : 1,
         x : 0,
         y : 0,
         width : 100,
         height : 100,
-        stable ： true,
+        stable : true,
         gravity : false,
-        src : ''，
+        src : ''
       },
       {
-        type : box,
+        type : 'box',
         id : 2,
         x : 50,
         y : 50,
@@ -37,10 +37,10 @@ define([], function() {
         stable : true,
         gravity : true,
         move : true,
-        src ： ‘’，
+        src : ''
       },
       {
-        type : ladder,
+        type : 'ladder',
         id : 3,
         x : 100,
         y : 100,
@@ -49,10 +49,10 @@ define([], function() {
         stable : false,
         gravity : false,
         climb : true,
-        src ： ‘’，
+        src : ''
       },
       {
-        type : knob,
+        type : 'knob',
         id : 4,
         x : 100,
         y : 100,
@@ -62,10 +62,10 @@ define([], function() {
         gravity : true,
         targets : [5],
         status : false,
-        src : '',
+        src : ''
       },
       {
-        type : door,
+        type : 'door',
         id : 5,
         x : 100,
         y : 100,
@@ -74,9 +74,9 @@ define([], function() {
         stable : true,
         gravity : true,
         status : true,
-        src : '',
-      },
-    ],
+        src : ''
+      }
+    ]
   };
   return map;
 });
