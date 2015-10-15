@@ -1,6 +1,7 @@
 define(['map', 'view'], function(map, view) {
   var solve = {
     map : map,
+    view : view,
     simulate : {
       gravity : function(item) {
         if (item.gravity) {
@@ -26,6 +27,10 @@ define(['map', 'view'], function(map, view) {
         return true;
       },
     },
+    init : function() {
+      view.init(map);
+      act.init();
+    }
     judge : function (item) {
       var array = new Array();
       for (nitem in map.items) {
@@ -61,6 +66,7 @@ define(['map', 'view'], function(map, view) {
       var item;
       for (item in map.items)
         _gravity(item);
+      view.draw(map);
       wait(50);
     },
     use : function(item) {
@@ -88,6 +94,9 @@ define(['map', 'view'], function(map, view) {
         cur = new Date().getTime();
     },
     act : {
+      init : function() {
+        player = findPlayers()[0];
+      },
       findPlayers : function() {
         var array = new Array();
         var item;
@@ -97,7 +106,6 @@ define(['map', 'view'], function(map, view) {
         }
         return array;
       },
-      player = findPlayers()[0],
       findStrifes : function() {
         var array = new Array();
         var item;
@@ -113,7 +121,7 @@ define(['map', 'view'], function(map, view) {
           finish();
         }
       },
-      right ： function(num) {
+      right : function(num) {
         for (var i = 0; i < num; ++i) {
           move(player, 1, 0);
           finish();
