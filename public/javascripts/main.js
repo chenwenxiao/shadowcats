@@ -4,7 +4,7 @@ require.config({
 		bootstrap : '../libs/bootstrap/dist/js/bootstrap',
 		jquery : '../libs/jquery/dist/jquery',
 		snapsvg : '../libs/Snap.svg/dist/snap.svg',
-		coffeescript : '../libs/coffee-script/lib/coffee-script/coffee-script'
+		coffeescript : '../libs/coffee-script/extras/coffee-script'
   }
 });
 

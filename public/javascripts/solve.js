@@ -29,7 +29,16 @@ define(['map', 'view'], function(map, view) {
     },
     init : function() {
       view.init(map);
-      act.init();
+      player = findPlayers()[0];
+    },
+    strife : function(item1, item2) {
+      if (item2.x < item1.x + item1.width && item2.x > item1.x &&
+          item2.y < item1.y + item1.height && item2.y > item1.y)
+            return true;
+      if (item1.x < item2.x + item2.width && item1.x > item2.x &&
+          item1.y < item2.y + item2.height && item1.y > item2.y)
+            return true;
+      return false;
     },
     judge : function (item) {
       var array = [];
@@ -93,19 +102,15 @@ define(['map', 'view'], function(map, view) {
       while(cur - start < msecs)
         cur = new Date().getTime();
     },
-    act : {
-      init : function() {
-        player = findPlayers()[0];
-      },
-      findPlayers : function() {
-        var array = [];
-        var item;
-        for (item in map.items) {
-          if (item.type == 'player')
-            array.push(item);
-        }
-        return array;
-      },
+    findPlayers : function() {
+      var array = [];
+      var item;
+      for (item in map.items) {
+        if (item.type == 'player')
+          array.push(item);
+      }
+      return array;
+    },
       findStrifes : function() {
         var array = [];
         var item;
@@ -117,13 +122,13 @@ define(['map', 'view'], function(map, view) {
       },
       left : function(num) {
         for (var i = 0; i < num; ++i) {
-          move(player, -1, 0);
+          this.move(player, -1, 0);
           finish();
         }
       },
       right : function(num) {
         for (var i = 0; i < num; ++i) {
-          move(player, 1, 0);
+          this.move(player, 1, 0);
           finish();
         }
       },
@@ -133,7 +138,7 @@ define(['map', 'view'], function(map, view) {
           var item;
           for (item in o) {
             if (item.climb) {
-              move(player, 0, -1);
+              this.move(player, 0, -1);
               return ;
             }
           }
@@ -146,7 +151,7 @@ define(['map', 'view'], function(map, view) {
           var item;
           for (item in o) {
             if (item.climb) {
-              move(player, 0, 1);
+              this.move(player, 0, 1);
               return ;
             }
           }
@@ -166,7 +171,7 @@ define(['map', 'view'], function(map, view) {
           finish();
         }
       },
-    },
   };
+  solve.init();
   return solve;
 });
