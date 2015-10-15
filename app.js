@@ -10,6 +10,9 @@ var users = require('./routes/users');
 var editor = require('./routes/editor');
 var collie = require('./routes/collie');
 
+var register = require('./routes/register');
+var db = require('./database/db');
+
 var app = express();
 
 // view engine setup
@@ -28,6 +31,7 @@ app.use('/', routes);
 app.use('/editor', editor);
 app.use('/users', users);
 app.use('/collie', collie);
+app.use('/reg',register);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -60,5 +64,25 @@ app.use(function(err, req, res, next) {
   });
 });
 
+
+//open database
+db.openDb(function(err,results){
+  if(err)
+  {
+    console.log("sorry,the number you dial is busy");
+  }
+  app.listen(8080);
+});
+
+var message={userName:'zhouhongqing',passWord:'091594'};
+db.writeDataToDb(message,function(err,results){
+  console.log('wogequ');
+  if(err)
+  {
+    console.log(err);
+    return;
+  }
+  console.log('write successfully!');
+});
 
 module.exports = app;
