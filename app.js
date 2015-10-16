@@ -3,15 +3,20 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var cookieSession = require('cookie-session'); 
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var editor = require('./routes/editor');
 var collie = require('./routes/collie');
+var login = require('./routes/login');
 
 var register = require('./routes/register');
 var db = require('./database/db');
+var config = require('./config');
+var Lockit = require('lockit');
+var lockit = new Lockit(config);
 
 var app = express();
 
@@ -31,7 +36,21 @@ app.use('/', routes);
 app.use('/editor', editor);
 app.use('/users', users);
 app.use('/collie', collie);
-app.use('/reg',register);
+//app.use('/reg',register);
+app.use(cookieSession({
+  secret: 'my super secret String'
+}));
+
+app.use(lockit.router);
+
+lockit.on('signup',function(user,res){
+  res.send('welcome');
+});
+
+lockit.on('login', function(user, res, target) {
+  //console.log('users');  
+});
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -66,23 +85,25 @@ app.use(function(err, req, res, next) {
 
 
 //open database
-db.openDb(function(err,results){
-  if(err)
-  {
-    console.log("sorry,the number you dial is busy");
-  }
-  app.listen(8080);
-});
+// db.openDb(function(err,results){
+//   if(err)
+//   {
+//     console.log("sorry,the number you dial is busy");
+//   }
+//   app.listen(8080);
+// });
 
-var message={userName:'zhouhongqing',passWord:'091594'};
-db.writeDataToDb(message,function(err,results){
-  console.log('wogequ');
-  if(err)
-  {
-    console.log(err);
-    return;
-  }
-  console.log('write successfully!');
-});
+// var message={userName:'zhouhongqing',passWord:'091594'};
+// db.writeDataToDb(message,function(err,results){
+//   console.log('wogequ');
+//   if(err)
+//   {
+//     console.log(err);
+//     return;
+//   }
+//   console.log('write successfully!');
+// });
+
+
 
 module.exports = app;
