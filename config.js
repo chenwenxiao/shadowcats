@@ -20,8 +20,8 @@ exports.signup = {
   views: {
     signup: 'signup.jade',         // input fields 'name', 'email' and 'password' | local variable 'error' | POST /'signup.route'
     linkExpired: '',    // message link has expired | input field 'email' | POST /'signup.route'/resend-verification
-    verified: 'index.jade',       // message email is now verified and maybe link to /'login.route'
-    signedUp: 'login.jade',       // message email has been sent => check your inbox
+    verified: 'login.jade',       // message email is now verified and maybe link to /'login.route'
+    signedUp: 'index.jade',       // message email has been sent => check your inbox
     resend: ''          // input field 'email' | local variable 'error' | POST /'signup.route'/resend-verification
   },
   handleResponse: false  // let lockit handle the response after signup success
