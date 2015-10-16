@@ -31,22 +31,22 @@ html
               h1 Create Your own ShadowCats Account!
               br
               br
-            form.form-horizontal(role="form",action="/signup",method="POST")
+            form.form-horizontal(action="/signup",method="POST",autocomplete="off")
               .form-group
                 .col-sm-2
-                  label.control-label(for="inputEmail3") UserName
+                  label.control-label(for="name") UserName
                 .col-sm-10
-                  input.form-control(type="text", placeholder="UserName")
+                  input.form-control(type="text",name="name",value=name,placeholder="UserName")
               .form-group
                 .col-sm-2
-                  label.control-label(for="inputEmail3") Email
+                  label.control-label(for="email") Email
                 .col-sm-10
-                  input#inputEmail3.form-control(type="email", placeholder="Email")
+                  input#inputEmail3.form-control(type="email",name="email", value=email, placeholder="Your email")
               .form-group
                 .col-sm-2
-                  label.control-label(for="inputPassword3") Password
+                  label.control-label(for="password") Password
                 .col-sm-10
-                  input#inputPassword3.form-control(type="password", placeholder="Password")
+                  input#inputPassword3.form-control(type="password", name="password", placeholder="Create a password")
               .form-group
                 .col-sm-offset-2.col-sm-10
                   button.btn.btn-success(type="submit") Create Account!
