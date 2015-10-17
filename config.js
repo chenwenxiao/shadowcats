@@ -35,7 +35,7 @@ exports.login = {
     login: '',          // input fields 'login' and 'password' | POST /'login.route' | local variable 'error'
     loggedOut: 'login.jade'       // message that user logged out
   },
-  handleResponse: false  // let lockit handle the response after login/logout success
+  handleResponse: true  // let lockit handle the response after login/logout success
 };
 
 // forgot password settings
