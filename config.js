@@ -4,27 +4,27 @@ exports.db = {
   collection: 'users'  // collection name for MongoDB
 };
 
-exports.emailType = 'nodemailer-smtp-transport';
-exports.emailSettings = {
-  service: 'Mailgun',
-  auth: {
-    user: 'postmaster@username.mailgun.org',
-    pass: 'secret-password'
-  }
-};
+// exports.emailType = 'nodemailer-smtp-transport';
+// exports.emailSettings = {
+//   service: 'Mailgun',
+//   auth: {
+//     user: 'postmaster@username.mailgun.org',
+//     pass: 'secret-password'
+//   }
+// };
 
 
 exports.signup = {
   route: '/signup',
   tokenExpiration: '1 day',
   views: {
-    signup: 'signup.jade',         // input fields 'name', 'email' and 'password' | local variable 'error' | POST /'signup.route'
+    signup: '',         // input fields 'name', 'email' and 'password' | local variable 'error' | POST /'signup.route'
     linkExpired: '',    // message link has expired | input field 'email' | POST /'signup.route'/resend-verification
-    verified: 'login.jade',       // message email is now verified and maybe link to /'login.route'
+    verified: '',       // message email is now verified and maybe link to /'login.route'
     signedUp: 'index.jade',       // message email has been sent => check your inbox
     resend: ''          // input field 'email' | local variable 'error' | POST /'signup.route'/resend-verification
   },
-  handleResponse: false  // let lockit handle the response after signup success
+  handleResponse: true  // let lockit handle the response after signup success
 };
 
 // login settings
@@ -32,10 +32,10 @@ exports.login = {
   route: '/login',
   logoutRoute: '/logout',
   views: {
-    login: 'login.jade',          // input fields 'login' and 'password' | POST /'login.route' | local variable 'error'
-    loggedOut: 'index.jade'       // message that user logged out
+    login: '',          // input fields 'login' and 'password' | POST /'login.route' | local variable 'error'
+    loggedOut: 'login.jade'       // message that user logged out
   },
-  handleResponse: true  // let lockit handle the response after login/logout success
+  handleResponse: false  // let lockit handle the response after login/logout success
 };
 
 // forgot password settings

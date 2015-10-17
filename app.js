@@ -10,7 +10,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var editor = require('./routes/editor');
 var collie = require('./routes/collie');
-var login = require('./routes/login');
+//var login = require('./routes/login');
 
 var register = require('./routes/register');
 var db = require('./database/db');
@@ -44,12 +44,30 @@ app.use(cookieSession({
 app.use(lockit.router);
 
 lockit.on('signup',function(user,res){
-  res.send('welcome');
+  console.log(user);
+//  res.send('welcome');
 });
 
-lockit.on('login', function(user, res, target) {
-  //console.log('users');  
-});
+// lockit.on('login', function(user, res, target) {
+  
+//   console.log('*****************88');  
+// });
+
+// lockit.on('logout', function(user, res) {
+//   // ...
+// });
+
+// lockit.on('forgot::sent', function(user, res) {
+//   // ...
+// });
+
+// lockit.on('forgot::success', function(user, res) {
+//   // ...
+// });
+
+// lockit.on('delete', function(user, res) {
+//   // ...
+// });
 
 
 // catch 404 and forward to error handler
