@@ -28,8 +28,53 @@ define(['map', 'view'], function(map, view) {
       },
     },
     init : function() {
+      //
+      var map = {
+        background : {
+          src : "/images/bg.jpg"
+        },
+        items : [
+          {
+            type : 'player',
+            id : 0,
+            x : 100,
+            y : 100,
+            width : 100,
+            height : 100,
+            stable : true,
+            gravity : true,
+            src : "/images/py.jpg"
+          },
+          {
+            type : 'knob',
+            id : 4,
+            x : 100,
+            y : 100,
+            width : 100,
+            height : 100,
+            stable : false,
+            gravity : true,
+            targets : [5],
+            status : false,
+            src : ''
+          },
+          {
+            type : 'door',
+            id : 5,
+            x : 100,
+            y : 100,
+            width : 100,
+            height : 100,
+            stable : true,
+            gravity : true,
+            status : true,
+            src : ''
+          }
+        ]
+      };
+      //
       view.init(map);
-      player = findPlayers()[0];
+      //player = findPlayers()[0];
     },
     strife : function(item1, item2) {
       if (item2.x < item1.x + item1.width && item2.x > item1.x &&
