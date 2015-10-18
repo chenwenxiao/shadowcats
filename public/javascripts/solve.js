@@ -28,6 +28,14 @@ define(['map', 'view'], function(map, view) {
         return true;
       },
     },
+    startAnimate : function() {
+      setInterval(function(){
+        if (this.round < map.round) {
+          view.startAnimate(this.round);
+          this.round++;
+        }
+      }, 50);
+    },
     init : function() {
       // test code
       var map = {
@@ -83,25 +91,21 @@ define(['map', 'view'], function(map, view) {
       // }
 
       view.init(map);
-      $("#btn").click(function(){
+      $("#test").click(function(){
         //view.use(map.items[2]);
         view.move(map.items[0], 100, 0);
         view.move(map.items[0], 100, 100);
-
-        var now = new Date();
-        var exitTime = now.getTime() + 2000;
-        while (true) {
-          now = new Date();
-          if (now.getTime() > exitTime)
-            break;
-        }
-
-        this.startAnimate();
-
+        // var now = new Date();
+        // var exitTime = now.getTime() + 2000;
+        // while (true) {
+        //   now = new Date();
+        //   if (now.getTime() > exitTime)
+        //     break;
+        // }
+        // solve.startAnimate();
       });
       $("#go").click(function(){
-        view.use(map.items[2]);
-        view.use(map.items[2]);
+        view.__use(map.items[2]);
       });
 
       // player = findPlayers()[0];
@@ -244,15 +248,8 @@ define(['map', 'view'], function(map, view) {
         for (var i = 0; i < num; ++i) {
           finish();
         }
-      },
-      startAnimate : function() {
-        setInterval(function(){
-          if (this.round < map.round) {
-            view.startAnimate(this.round);
-            this.round++;
-          }
-        }, 50);
       }
+
   };
   solve.init();
   return solve;

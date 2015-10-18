@@ -67,15 +67,15 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
   function __use(item) {
     for (var i in item_list) {
       if(item.id == item_list[i].id && item.type == 'door') {
-        // var old_cx = parseInt(item_list[i].obj.attr("x"));
-        // var old_cy = parseInt(item_list[i].obj.attr("y"));
-        // var new_cx = old_cx + dx;
-        // var new_cy = old_cy + dy;
+        var old_cx = parseInt(item_list[i].obj.attr("x"));
+        var old_cy = parseInt(item_list[i].obj.attr("y"));
+
         var rot = 0;
         Snap.animate(rot+0, rot+45, function(val) {
           rot = val;
-          item_list[i].obj.transform(new Snap.Matrix().rotate(val, 50, 50));
+          item_list[i].obj.transform(new Snap.Matrix().rotate(val, old_cx, old_cy));
         }, 1000);
+
         break;
       }
     }
@@ -108,6 +108,8 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
   return {
     init : init,
     move : move,
-    use : use
+    use : use,
+    __use : __use,
+
   };
 });
