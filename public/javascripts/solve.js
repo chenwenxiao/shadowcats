@@ -3,7 +3,7 @@ define(['map', 'view'], function(map, view) {
     player : undefined,
     map : map,
     view : view,
-
+    round : 0,
     simulateMove : function(item, dx, dy) {
       if (!item.move)
         return false;
@@ -26,8 +26,86 @@ define(['map', 'view'], function(map, view) {
       item_use = false;
       return true;
     },
+    startAnimate : function() {
+      setInterval(function(){
+        if (this.round < map.round) {
+          view.startAnimate(this.round);
+          this.round++;
+        }
+      }, 50);
+    },
     init : function() {
-      //view.init(map);
+      // test code
+      var map = {
+        round : 0,
+        background : {
+          src : "/images/bg.jpg"
+        },
+        items : [
+          {
+            type : 'player',
+            id : 0,
+            x : 100,
+            y : 100,
+            width : 50,
+            height : 50,
+            stable : true,
+            gravity : true,
+            src : "/images/py.gif"
+          },
+          {
+            type : 'knob',
+            id : 4,
+            x : 300,
+            y : 300,
+            width : 80,
+            height : 80,
+            stable : true,
+            gravity : true,
+            targets : [5],
+            status : false,
+            src : '/images/sw.jpg'
+          },
+          {
+            type : 'door',
+            id : 5,
+            x : 400,
+            y : 200,
+            width : 50,
+            height : 100,
+            stable : true,
+            gravity : true,
+            status : true,
+            src : '/images/dr.jpg'
+          }
+        ]
+      };
+
+      // function __move(item, dx, dy) {
+      //   var startTime = map.round*1000;
+      //   setTimeout(function(){
+      //     view.move(item, dx, dy);
+      //   }, startTime);
+      // }
+
+      view.init(map);
+      $("#test").click(function(){
+        //view.use(map.items[2]);
+        view.move(map.items[0], 100, 0);
+        view.move(map.items[0], 100, 100);
+        // var now = new Date();
+        // var exitTime = now.getTime() + 2000;
+        // while (true) {
+        //   now = new Date();
+        //   if (now.getTime() > exitTime)
+        //     break;
+        // }
+        // solve.startAnimate();
+      });
+      $("#go").click(function(){
+        view.__use(map.items[2]);
+      });
+
       this.player = this.findPlayers()[0];
     },
     strife : function(item1, item2) {
@@ -72,8 +150,7 @@ define(['map', 'view'], function(map, view) {
       var item;
       for (item in map.items)
         this.gravity(map.items[item]);
-      //view.draw(map);
-      this.sleep(50);
+      map.round++;
     },
     use : function(item) {
       var nitem;
@@ -167,7 +244,8 @@ define(['map', 'view'], function(map, view) {
         for (var i = 0; i < num; ++i) {
           this.finish();
         }
-      },
+      }
+
   };
   solve.init();
   return solve;
