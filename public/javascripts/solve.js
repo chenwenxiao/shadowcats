@@ -2,6 +2,7 @@ define(['map', 'view'], function(map, view) {
   var solve = {
     map : map,
     view : view,
+    round : 0,
     simulate : {
       gravity : function(item) {
         if (item.gravity) {
@@ -28,8 +29,9 @@ define(['map', 'view'], function(map, view) {
       },
     },
     init : function() {
-      //
+      // test code
       var map = {
+        round : 0,
         background : {
           src : "/images/bg.jpg"
         },
@@ -39,42 +41,70 @@ define(['map', 'view'], function(map, view) {
             id : 0,
             x : 100,
             y : 100,
-            width : 100,
-            height : 100,
+            width : 50,
+            height : 50,
             stable : true,
             gravity : true,
-            src : "/images/py.jpg"
+            src : "/images/py.gif"
           },
           {
             type : 'knob',
             id : 4,
-            x : 100,
-            y : 100,
-            width : 100,
-            height : 100,
-            stable : false,
+            x : 300,
+            y : 300,
+            width : 80,
+            height : 80,
+            stable : true,
             gravity : true,
             targets : [5],
             status : false,
-            src : ''
+            src : '/images/sw.jpg'
           },
           {
             type : 'door',
             id : 5,
-            x : 100,
-            y : 100,
-            width : 100,
+            x : 400,
+            y : 200,
+            width : 50,
             height : 100,
             stable : true,
             gravity : true,
             status : true,
-            src : ''
+            src : '/images/dr.jpg'
           }
         ]
       };
-      //
+
+      // function __move(item, dx, dy) {
+      //   var startTime = map.round*1000;
+      //   setTimeout(function(){
+      //     view.move(item, dx, dy);
+      //   }, startTime);
+      // }
+
       view.init(map);
-      //player = findPlayers()[0];
+      $("#btn").click(function(){
+        //view.use(map.items[2]);
+        view.move(map.items[0], 100, 0);
+        view.move(map.items[0], 100, 100);
+
+        var now = new Date();
+        var exitTime = now.getTime() + 2000;
+        while (true) {
+          now = new Date();
+          if (now.getTime() > exitTime)
+            break;
+        }
+
+        this.startAnimate();
+
+      });
+      $("#go").click(function(){
+        view.use(map.items[2]);
+        view.use(map.items[2]);
+      });
+
+      // player = findPlayers()[0];
     },
     strife : function(item1, item2) {
       if (item2.x < item1.x + item1.width && item2.x > item1.x &&
@@ -120,8 +150,7 @@ define(['map', 'view'], function(map, view) {
       var item;
       for (item in map.items)
         _gravity(item);
-      view.draw(map);
-      wait(50);
+      map.round++;
     },
     use : function(item) {
       var nitem;
@@ -216,6 +245,14 @@ define(['map', 'view'], function(map, view) {
           finish();
         }
       },
+      startAnimate : function() {
+        setInterval(function(){
+          if (this.round < map.round) {
+            view.startAnimate(this.round);
+            this.round++;
+          }
+        }, 50);
+      }
   };
   solve.init();
   return solve;

@@ -1,5 +1,7 @@
 define([], function() {
   var map = {
+    round : 0,
+    
     background : {
       src : ''
     },
