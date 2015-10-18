@@ -1,6 +1,11 @@
 define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
   var item_list = [];
+  var stack = [];
+
   function init(map) {
+    stack = [];
+    item_list = [];
+    
     var svg = Snap("#svg");
     var background = svg.paper.image(map.background.src, 0, 0, 600, 600);
     item_list.push(background);
@@ -58,7 +63,7 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
             x: val[0],
             y: val[1]
           });
-        }, 1000);
+        }, 10);
         break;
       }
     }
@@ -82,15 +87,15 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
     console.log("one use...done...");
   };
 
-  var stack = [];
   function startAnimate(round) {
-    stack[round].each(function(val) {
-      switch (val) {
+    stack[round].forEach(function(val) {
+      switch (val.type) {
         case 'move':
           __move(val.item, val.dx, val.dy);
           break;
         case 'use':
           __use(val.item);
+          break;
         default:
       }
     });
@@ -98,7 +103,14 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
   // add movement task to stack, calculate data but without running the animations;
   function move(item, dx, dy) {
     while (stack.length <= map.round) stack.push([]);
-    stack[map.round].push({item : item, dx : dx, dy : dy, type : 'move'});
+    var flag = false;
+    stack[map.round].forEach(function(val){
+      if (val.item.id == item.id) {
+        flag = true;
+        val.dx += dx, val.dy += dy;
+      }
+    });
+    if (!flag) stack[map.round].push({item : item, dx : dx, dy : dy, type : 'move'});
   };
   function use(item) {
     while (stack.length <= map.round) stack.push([]);
@@ -110,6 +122,7 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
     move : move,
     use : use,
     __use : __use,
+    startAnimate : startAnimate
 
   };
 });

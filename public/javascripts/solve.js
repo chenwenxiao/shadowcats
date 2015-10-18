@@ -1,4 +1,5 @@
 define(['map', 'view'], function(map, view) {
+
   var solve = {
     player : undefined,
     map : map,
@@ -14,99 +15,44 @@ define(['map', 'view'], function(map, view) {
       item.x = item.x + dx;
       item.y = item.y + dy;
 
-      var o = this.judge(item);
+      var o = solve.judge(item);
       var nitem, flag = true;
       for (nitem in o) {
-        if (!this.simulateMove(o[nitem], dx, dy))
+        if (!solve.simulateMove(o[nitem], dx, dy))
           flag = false;
       }
       item.x = item.x - dx;
       item.y = item.y - dy;
 
-      item_use = false;
+      item._use = false;
       return true;
     },
     startAnimate : function() {
       setInterval(function(){
-        if (this.round < map.round) {
-          view.startAnimate(this.round);
-          this.round++;
+        if (solve.round < map.round) {
+          view.startAnimate(solve.round);
+          solve.round++;
         }
       }, 50);
     },
     init : function() {
       // test code
-      var map = {
-        round : 0,
-        background : {
-          src : "/images/bg.jpg"
-        },
-        items : [
-          {
-            type : 'player',
-            id : 0,
-            x : 100,
-            y : 100,
-            width : 50,
-            height : 50,
-            stable : true,
-            gravity : true,
-            src : "/images/py.gif"
-          },
-          {
-            type : 'knob',
-            id : 4,
-            x : 300,
-            y : 300,
-            width : 80,
-            height : 80,
-            stable : true,
-            gravity : true,
-            targets : [5],
-            status : false,
-            src : '/images/sw.jpg'
-          },
-          {
-            type : 'door',
-            id : 5,
-            x : 400,
-            y : 200,
-            width : 50,
-            height : 100,
-            stable : true,
-            gravity : true,
-            status : true,
-            src : '/images/dr.jpg'
-          }
-        ]
-      };
-
-      // function __move(item, dx, dy) {
-      //   var startTime = map.round*1000;
-      //   setTimeout(function(){
-      //     view.move(item, dx, dy);
-      //   }, startTime);
-      // }
-
+      map.round = 0;
+      solve.round = 0;
       view.init(map);
+
       $("#test").click(function(){
-        //view.use(map.items[2]);
-        view.move(map.items[0], 100, 0);
-        view.move(map.items[0], 100, 100);
-        // var now = new Date();
-        // var exitTime = now.getTime() + 2000;
-        // while (true) {
-        //   now = new Date();
-        //   if (now.getTime() > exitTime)
-        //     break;
-        // }
-        // solve.startAnimate();
+        for (map.round = 0; map.round < 100; ++map.round) {
+          view.move(map.items[0], 4, 0);
+          view.move(map.items[1], 0, 1);
+        }
+        solve.startAnimate();
       });
       $("#go").click(function(){
         view.__use(map.items[2]);
       });
 
-      this.player = this.findPlayers()[0];
+      solve.player = solve.findPlayers()[0];
     },
     strife : function(item1, item2) {
       if (item2.x < item1.x + item1.width && item2.x > item1.x &&
@@ -120,7 +66,7 @@ define(['map', 'view'], function(map, view) {
     judge : function (item) {
       var array = [];
       for (var nitem in map.items) {
-        if (this.strife(map.items[nitem], item))
+        if (solve.strife(map.items[nitem], item))
           array.push(map.items[nitem]);
       }
       return array;
@@ -131,25 +77,25 @@ define(['map', 'view'], function(map, view) {
       item._use = true;
       item.x = item.x + dx;
       item.y = item.y + dy;
-      var o = this.judge(item);
+      var o = solve.judge(item);
       for (var nitem in o) {
-        this.move(o[nitem], dx, dy);
+        solve.move(o[nitem], dx, dy);
       }
       item._use = false;
-      //view.move(item, dx, dy);
+      view.move(item, dx, dy);
     },
     _move : function(item, dx, dy) {
-      if (this.simulateMove(item, dx, dy)) {
-        this.move(item, dx, dy);
+      if (solve.simulateMove(item, dx, dy)) {
+        solve.move(item, dx, dy);
       }
     },
     gravity : function(item) {
-      this._move(item, 0, 1);
+      solve._move(item, 0, 1);
     },
     finish : function() {
       var item;
       for (item in map.items)
-        this.gravity(map.items[item]);
+        solve.gravity(map.items[item]);
       map.round++;
     },
     use : function(item) {
@@ -157,7 +103,7 @@ define(['map', 'view'], function(map, view) {
       item._use = true;
       if (item.type == 'knob') {
         for (nitem in item.targets)
-          if (!item.targets[nitem]._use) this.use(nitem);
+          if (!item.targets[nitem]._use) solve.use(nitem);
         //view.use(item);
       }
       if (item.type == 'door') {
@@ -189,21 +135,21 @@ define(['map', 'view'], function(map, view) {
         var array = [];
         var item;
         for (item in map.items) {
-          if (this.strife(this.player, map.items[item]))
+          if (solve.strife(solve.player, map.items[item]))
             array.push(map.items[item]);
         }
         return array;
       },
       left : function(num) {
         for (var i = 0; i < num; ++i) {
-          this._move(this.player, -1, 0);
-          this.finish();
+          solve._move(solve.player, -1, 0);
+          solve.finish();
         }
       },
       right : function(num) {
         for (var i = 0; i < num; ++i) {
-          this._move(this.player, 1, 0);
-          this.finish();
+          solve._move(solve.player, 1, 0);
+          solve.finish();
         }
       },
       up : function(num) {
@@ -212,11 +158,11 @@ define(['map', 'view'], function(map, view) {
           var item;
           for (item in o) {
             if (o[item].climb) {
-              this._move(this.player, 0, -1);
+              solve._move(solve.player, 0, -1);
               return ;
             }
           }
-          this.finish();
+          solve.finish();
         }
       },
       down : function(num) {
@@ -225,27 +171,26 @@ define(['map', 'view'], function(map, view) {
           var item;
           for (item in o) {
             if (o[item].climb) {
-              this._move(this.player, 0, 1);
+              solve._move(solve.player, 0, 1);
               return ;
             }
           }
-          this.finish();
+          solve.finish();
         }
       },
       useItem : function(item, num) {
         for (var i = 0; i < num; ++i) {
-          if (this.strife(this.player, item)) {
+          if (solve.strife(solve.player, item)) {
             use(item);
           }
-          this.finish();
+          solve.finish();
         }
       },
       wait : function(num) {
         for (var i = 0; i < num; ++i) {
-          this.finish();
+          solve.finish();
         }
       }
-
   };
   solve.init();
   return solve;
