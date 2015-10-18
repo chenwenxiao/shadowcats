@@ -1,32 +1,30 @@
 define(['map', 'view'], function(map, view) {
   var solve = {
+    player : undefined,
     map : map,
     view : view,
     round : 0,
-    simulate : {
-      gravity : function(item) {
-        if (item.gravity) {
-          return move(item, 0, 1);
-        }
+    simulateMove : function(item, dx, dy) {
+      if (!item.move)
         return false;
-      },
-      move : function(item, dx, dy) {
-        if (!item.move)
-          return false;
-        item.x = item.x + dx;
-        item.y = item.y + dy;
-        var o = judge(item);
-        var nitem, flag = true;
-        for (nitem in o) {
-          if (!move(nitem, dx, dy))
-            flag = false;
-        }
-        if (!flag) {
-          item.x = item.x - dx;
-          item.y = item.y - dy;
-        }
+      if (item._use)
         return true;
-      },
+      item._use = true;
+
+      item.x = item.x + dx;
+      item.y = item.y + dy;
+
+      var o = this.judge(item);
+      var nitem, flag = true;
+      for (nitem in o) {
+        if (!this.simulateMove(o[nitem], dx, dy))
+          flag = false;
+      }
+      item.x = item.x - dx;
+      item.y = item.y - dy;
+
+      item_use = false;
+      return true;
     },
     startAnimate : function() {
       setInterval(function(){
@@ -108,7 +106,7 @@ define(['map', 'view'], function(map, view) {
         view.__use(map.items[2]);
       });
 
-      // player = findPlayers()[0];
+      this.player = this.findPlayers()[0];
     },
     strife : function(item1, item2) {
       if (item2.x < item1.x + item1.width && item2.x > item1.x &&
@@ -122,38 +120,36 @@ define(['map', 'view'], function(map, view) {
     judge : function (item) {
       var array = [];
       for (var nitem in map.items) {
-        if (strife(nitem, item))
-          array.push(nitem);
+        if (this.strife(map.items[nitem], item))
+          array.push(map.items[nitem]);
       }
       return array;
     },
     move : function(item, dx, dy) {
+      if (item._use)
+        return true;
+      item._use = true;
       item.x = item.x + dx;
       item.y = item.y + dy;
-      var o = judge(item);
-      var nitem;
-      for (nitem in o) {
-        move(nitem, dx, dy);
+      var o = this.judge(item);
+      for (var nitem in o) {
+        this.move(o[nitem], dx, dy);
       }
-      view.move(item, dx, dy);
+      item._use = false;
+      //view.move(item, dx, dy);
     },
     _move : function(item, dx, dy) {
-      if (simulate.move(item, dx, dy)) {
-        move(item, dx, dy);
+      if (this.simulateMove(item, dx, dy)) {
+        this.move(item, dx, dy);
       }
     },
     gravity : function(item) {
-      move(item, 0, 1);
-    },
-    _gravity : function(item) {
-      if (simulate.gravity(item)) {
-        gravity(item);
-      }
+      this._move(item, 0, 1);
     },
     finish : function() {
       var item;
       for (item in map.items)
-        _gravity(item);
+        this.gravity(map.items[item]);
       map.round++;
     },
     use : function(item) {
@@ -161,8 +157,8 @@ define(['map', 'view'], function(map, view) {
       item._use = true;
       if (item.type == 'knob') {
         for (nitem in item.targets)
-          if (!nitem._use) use(nitem);
-        view.use(item);
+          if (!item.targets[nitem]._use) this.use(nitem);
+        //view.use(item);
       }
       if (item.type == 'door') {
         if (item.status) {
@@ -170,11 +166,11 @@ define(['map', 'view'], function(map, view) {
         } else {
           item.status = item.stable = true;
         }
-        view.use(item, false);
+        //view.use(item, false);
       }
       item._use = false;
     },
-    wait : function(msecs) {
+    sleep : function(msecs) {
       var start = new Date().getTime();
       var cur = start;
       while(cur - start < msecs)
@@ -184,8 +180,8 @@ define(['map', 'view'], function(map, view) {
       var array = [];
       var item;
       for (item in map.items) {
-        if (item.type == 'player')
-          array.push(item);
+        if (map.items[item].type == 'player')
+          array.push(map.items[item]);
       }
       return array;
     },
@@ -193,34 +189,34 @@ define(['map', 'view'], function(map, view) {
         var array = [];
         var item;
         for (item in map.items) {
-          if (strife(player, item))
-            array.push(item);
+          if (this.strife(this.player, map.items[item]))
+            array.push(map.items[item]);
         }
         return array;
       },
       left : function(num) {
         for (var i = 0; i < num; ++i) {
-          this.move(player, -1, 0);
-          finish();
+          this._move(this.player, -1, 0);
+          this.finish();
         }
       },
       right : function(num) {
         for (var i = 0; i < num; ++i) {
-          this.move(player, 1, 0);
-          finish();
+          this._move(this.player, 1, 0);
+          this.finish();
         }
       },
       up : function(num) {
-          for (var i = 0; i < num; ++i) {
+        for (var i = 0; i < num; ++i) {
           var o = findStrifes();
           var item;
           for (item in o) {
-            if (item.climb) {
-              this.move(player, 0, -1);
+            if (o[item].climb) {
+              this._move(this.player, 0, -1);
               return ;
             }
           }
-          finish();
+          this.finish();
         }
       },
       down : function(num) {
@@ -228,25 +224,25 @@ define(['map', 'view'], function(map, view) {
           var o = findStrifes();
           var item;
           for (item in o) {
-            if (item.climb) {
-              this.move(player, 0, 1);
+            if (o[item].climb) {
+              this._move(this.player, 0, 1);
               return ;
             }
           }
-          finish();
+          this.finish();
         }
       },
       useItem : function(item, num) {
         for (var i = 0; i < num; ++i) {
-          if (strife(player, item)) {
+          if (this.strife(this.player, item)) {
             use(item);
           }
-          finish();
+          this.finish();
         }
       },
       wait : function(num) {
         for (var i = 0; i < num; ++i) {
-          finish();
+          this.finish();
         }
       }
 
