@@ -17,12 +17,15 @@ router.get('/', function(req, res, next){
 /* 获取地图信息 */
 router.get('/1-1', function(req, res, next){
 	var map = require('../mapInfo/1-1');
-	res.render('index', { title: '1-1', map });	
+	//console.log({ title: '1-1', map});
+	//map = JSON.stringify(map);
+	//console.log(map);
+	res.render('game', { title: '1-1', map });	
 })
 
-router.get('/1-1/image/:id', function(req, res, next){
-	console.log(req.params);
-	
-});
+//router.get('/1-1/image/:id', function(req, res, next){
+//	console.log(req.params);
+//	
+//});
 
 module.exports = router;
