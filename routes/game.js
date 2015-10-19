@@ -16,7 +16,7 @@ router.get('/', function(req, res, next){
 
 /* 获取地图信息 */
 router.get('/1-1', function(req, res, next){
-	var map = require('../mapInfo/1-1');
+	var map = require('../public/javascripts/mapInfo/1-1');
 	//console.log({ title: '1-1', map});
 	//map = JSON.stringify(map);
 	//console.log(map);
