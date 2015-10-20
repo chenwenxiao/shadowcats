@@ -5,7 +5,7 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
   function init(map) {
     stack = [];
     item_list = [];
-    
+
     var svg = Snap("#svg");
     var background = svg.paper.image(map.background.src, 0, 0, 600, 600);
     item_list.push(background);
@@ -13,19 +13,19 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
       var nitem = map.items[i];
       if(nitem.type == 'player') {
         var player = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
-        item_list.push({id: nitem.id, obj: player});
+        item_list.push({id: nitem.id, obj: player, type : 'player'});
       }
       else if(nitem.type == 'ground') {
         var ground = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
-        item_list.push({id: nitem.id, obj: ground});
+        item_list.push({id: nitem.id, obj: ground, type : 'ground'});
       }
       else if(nitem.type == 'box') {
         var box = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
-        item_list.push({id: nitem.id, obj: box});
+        item_list.push({id: nitem.id, obj: box, type : 'box'});
       }
       else if(nitem.type == 'ladder') {
         var ladder = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
-        item_list.push({id: nitem.id, obj: ladder});
+        item_list.push({id: nitem.id, obj: ladder, type : 'ladder'});
       }
       else if(nitem.type == 'knob') {
         if(nitem.status == true) {
@@ -34,7 +34,7 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
         else {
           var knob = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
         }
-        item_list.push({id: nitem.id, obj: knob});
+        item_list.push({id: nitem.id, obj: knob, type : 'knob'});
       }
       else if(nitem.type == 'door') {
         if(nitem.status == true) {
@@ -43,7 +43,7 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
         else {
           var door = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
         }
-        item_list.push({id: nitem.id, obj: door});
+        item_list.push({id: nitem.id, obj: door, type : 'door'});
       }
       else {
         console.log("error, unknown item in initialization");
@@ -51,13 +51,13 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
     }
     console.log("init...finished...");
   };
-  function __move(item, dx, dy) {
+  function __move(id, x, y) {
     for (var i in item_list) {
-      if(item.id == item_list[i].id) {
+      if (id == item_list[i].id) {
         var old_cx = parseInt(item_list[i].obj.attr("x"));
 		    var old_cy = parseInt(item_list[i].obj.attr("y"));
-		    var new_cx = old_cx + dx;
-		    var new_cy = old_cy + dy;
+		    var new_cx = x;
+		    var new_cy = y;
 		    Snap.animate([old_cx, old_cy], [new_cx, new_cy], function (val){
           item_list[i].obj.attr({
             x: val[0],
@@ -69,9 +69,9 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
     }
     console.log("one move...done...");
   };
-  function __use(item) {
+  function __use(id) {
     for (var i in item_list) {
-      if(item.id == item_list[i].id && item.type == 'door') {
+      if(id == item_list[i].id && item_list[i].type == 'door') {
         var old_cx = parseInt(item_list[i].obj.attr("x"));
         var old_cy = parseInt(item_list[i].obj.attr("y"));
 
@@ -88,33 +88,35 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
   };
 
   function startAnimate(round) {
+    if (stack[round] == null)
+      return ;
     stack[round].forEach(function(val) {
       switch (val.type) {
         case 'move':
-          __move(val.item, val.dx, val.dy);
+          __move(val.id, val.x, val.y);
           break;
         case 'use':
-          __use(val.item);
+          __use(val.id);
           break;
         default:
       }
     });
   };
   // add movement task to stack, calculate data but without running the animations;
-  function move(item, dx, dy) {
+  function move(item) {
     while (stack.length <= map.round) stack.push([]);
     var flag = false;
     stack[map.round].forEach(function(val){
-      if (val.item.id == item.id) {
+      if (val.id == item.id && val.type == 'move') {
         flag = true;
-        val.dx += dx, val.dy += dy;
+        val.x = item.x, val.y += item.y;
       }
     });
-    if (!flag) stack[map.round].push({item : item, dx : dx, dy : dy, type : 'move'});
+    if (!flag) stack[map.round].push({id : item.id, x : item.x, y : item.y, type : 'move'});
   };
   function use(item) {
     while (stack.length <= map.round) stack.push([]);
-    stack[map.round].push({item : item, type : 'use'});
+    stack[map.round].push({id : item.id, type : 'use'});
   };
 
   return {
