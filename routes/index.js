@@ -6,7 +6,7 @@ var router = express.Router();
 
 var editor = require('./editor');
 var users = require('./users');
-var collie = require('./collie');
+var bigmap = require('./bigmap');
 var game = require('./game');
 
 /* 路由 */
@@ -18,7 +18,7 @@ module.exports = function(app){
 
 	app.use('/editor', editor);
 	app.use('/usrs', users);
-	app.use('/collie', collie);
+	app.use('/bigmap', bigmap);
 	app.use('/game', game);
 };
 
