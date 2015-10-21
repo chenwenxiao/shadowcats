@@ -17,7 +17,14 @@
         move : true,
         vx : 0,
         vy : 0,
-        src : "/images/py.gif"
+        src_walk_front : "/images/player_walk_front.gif",
+        src_walk_back : "/images/player_walk_back.gif",
+        src_walk_left : "/images/player_walk_left.gif",
+        src_walk_right : "/images/player_walk_right.gif",
+        src_stand_front : "/images/player_stand_front.png",
+        src_stand_back : "/images/player_stand_back.png",
+        src_stand_left : "/images/player_stand_left.png",
+        src_stand_right : "/images/player_stand_right.png"
       },
       {
         type : 'ground',

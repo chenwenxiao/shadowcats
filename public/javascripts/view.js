@@ -9,22 +9,30 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
     var svg = Snap("#svg");
     var background = svg.paper.image(map.background.src, 0, 0, 600, 600);
     item_list.push(background);
+    var player;
     for (var i in map.items) {
       var nitem = map.items[i];
       if(nitem.type == 'player') {
-        var player = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
+        player = svg.paper.image(nitem.src_stand_front, nitem.x, nitem.y, nitem.width, nitem.height);
         item_list.push({id: nitem.id, obj: player, type : 'player'});
+        background.after(player);
       }
       else if(nitem.type == 'ground') {
         var ground = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
+        background.after(ground);
+        player.before(ground);
         item_list.push({id: nitem.id, obj: ground, type : 'ground'});
       }
       else if(nitem.type == 'box') {
         var box = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
+        background.after(box);
+        player.before(box);
         item_list.push({id: nitem.id, obj: box, type : 'box'});
       }
       else if(nitem.type == 'ladder') {
         var ladder = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
+        background.after(ladder);
+        player.before(ladder);
         item_list.push({id: nitem.id, obj: ladder, type : 'ladder'});
       }
       else if(nitem.type == 'knob') {
@@ -34,6 +42,8 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
         else {
           var knob = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
         }
+        background.after(knob);
+        player.before(knob);
         item_list.push({id: nitem.id, obj: knob, type : 'knob'});
       }
       else if(nitem.type == 'door') {
@@ -43,10 +53,12 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
         else {
           var door = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
         }
+        background.after(door);
+        player.before(door);
         item_list.push({id: nitem.id, obj: door, type : 'door'});
       }
       else {
-        console.log("error, unknown item in initialization");
+        console.log("error, unknown item in initialization.");
       }
     }
     console.log("init...finished...");
@@ -123,7 +135,6 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
     init : init,
     move : move,
     use : use,
-    __use : __use,
     startAnimate : startAnimate
 
   };
