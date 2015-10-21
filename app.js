@@ -43,15 +43,14 @@ app.use(cookieSession({
 
 app.use(lockit.router);
 
-lockit.on('signup',function(user,res){
-  console.log(user);
-//  res.send('welcome');
-});
-
-// lockit.on('login', function(user, res, target) {
-  
-//   console.log('*****************88');  
+// lockit.on('signup',function(user,res){
+//   //console.log(user);
+// //  res.send('welcome');
 // });
+
+lockit.on('login', function(user, res, target) {
+ res.send(user);
+});
 
 // lockit.on('logout', function(user, res) {
 //   // ...
