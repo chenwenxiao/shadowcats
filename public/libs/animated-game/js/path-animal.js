@@ -2,6 +2,7 @@ var PathAnimal = Backbone.View.extend({
 	initialize: function () {
 		var _x,
 			_y,
+      _id,
 			PATHS = [
 				'M0,0c0,0,0-28.008,0-46.707S0-89,0-89',
 				'M0,0c0,0-9.634-22.317,10-46.707S50-69,50-69',
@@ -12,6 +13,7 @@ var PathAnimal = Backbone.View.extend({
 		this.dot = this.options.dot;
 		_x = this.dot.attr('cx');
 		_y = this.dot.attr('cy');
+    _id = this.dot.node.id;
 
 		this.el = this.s.g();
 
@@ -40,9 +42,7 @@ var PathAnimal = Backbone.View.extend({
 		this.hitarea.mouseover(this.handle_MOUSEOVER.bind(this));
 		this.hitarea.mouseout(this.handle_MOUSEOUT.bind(this));
 		this.hitarea.click(function() {
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", "/game", true);
-      xhr.send("stage=1-1");
+       window.location.href = "game?stage=1-" + _id;
     });
 
 		this.addFace();

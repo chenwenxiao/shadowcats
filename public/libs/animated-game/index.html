@@ -16,7 +16,7 @@
 	 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 	 See the License for the specific language governing permissions and
 	 limitations under the License.">
-	
+
 		<title>illustration</title>
 		<style>
 			body{
@@ -25,7 +25,7 @@
 				background: #b7bf76;
 				overflow: hidden;
 			}
-			
+
 			svg{
 				display: block;
 				margin: auto;
@@ -34,11 +34,11 @@
 				-moz-transform-origin: top center;
 				-moz-transform: scale(1.5);
 			}
-			
+
 			.hit-area{
 				cursor: pointer;
 			}
-			
+
 			.face .mouth{
 				-webkit-transform-origin: 0px 4px;
 				-webkit-transition: -webkit-transform .4s;
@@ -47,24 +47,24 @@
 				-moz-transition: -webkit-transform .4s;
 				-moz-transform: scale(1, 0);
 			}
-			
+
 			.face .eye.right{
 				-webkit-transform-origin: 8px -4px;
 				-moz-transform-origin: 8px -4px;
 			}
-			
+
 			.face .eye.left{
 				-webkit-transform-origin: -8px -4px;
 				-moz-transform-origin: -8px -4px;
 			}
-			
+
 			.face .eye{
 				-webkit-transition: -webkit-transform .2s;
 				-webkit-transform: scale(1, 0);
 				-moz-transition: -webkit-transform .2s;
 				-moz-transform: scale(1, 0);
 			}
-			
+
 			@-webkit-keyframes breeze{
 				0% {
 					-webkit-transform: rotate(0deg);
@@ -76,7 +76,7 @@
 					-webkit-transform: rotate(0deg);
 				}
 			}
-			
+
 			@-moz-keyframes breeze{
 				0% {
 					-moz-transform: rotate(0deg);
@@ -88,7 +88,7 @@
 					-moz-transform: rotate(0deg);
 				}
 			}
-			
+
 			@-webkit-keyframes blink{
 				0% {
 					-webkit-transform: scale(1, 0);
@@ -103,7 +103,7 @@
 					-webkit-transform: scale(1, 0);
 				}
 			}
-			
+
 			@-moz-keyframes blink{
 				0% {
 					-moz-transform: scale(1, 0);
@@ -118,7 +118,7 @@
 					-moz-transform: scale(1, 0);
 				}
 			}
-			
+
 			@-webkit-keyframes talk{
 				0% {
 					-webkit-transform: scale(1, 0);
@@ -130,7 +130,7 @@
 					-webkit-transform: scale(1, 0);
 				}
 			}
-			
+
 			@-moz-keyframes talk{
 				0% {
 					-moz-transform: scale(1, 0);
@@ -142,38 +142,38 @@
 					-moz-transform: scale(1, 0);
 				}
 			}
-			
+
 			.tree{
 				-webkit-transform-origin: 50% 100%;
 				-webkit-animation: breeze 2s ease-out infinite;
 				-moz-transform-origin: 50% bottom;
 				/*-moz-animation: breeze 2s ease-out infinite;*/
 			}
-			
+
 			.tree .face.animating .eye{
 				-webkit-transform: scale(1, 1);
 				-moz-transform: scale(1, 1);
 			}
-			
+
 			.face.animating .eye{
 				-webkit-animation: blink 5s infinite;
 				-moz-animation: blink 5s infinite;
 			}
-			
+
 			.face.animating .mouth{
 				-webkit-animation: talk 1s infinite;
 				-moz-animation: talk 1s infinite;
 			}
-			
+
 			#cube-hitarea{
 				position: absolute;
 				top: 100px;
 				left: 100px;
 				width: 125px;
-				height: 125px;	
-				cursor: pointer;		
+				height: 125px;
+				cursor: pointer;
 			}
-			
+
 			#cube{
 				position: absolute;
 				left: 25px;
@@ -194,7 +194,7 @@
 				-moz-transform: rotateX(-45deg) rotateY(50deg);
 				-moz-transition: -moz-transform 1s;
 			}
-			
+
 			.side{
 				position: absolute;
 				top: 0;
@@ -208,49 +208,49 @@
 				-moz-transform-origin: center center;
 				-moz-backface-visibility: visible;
 			}
-			
+
 			.side *{
 				pointer-events: none;
 			}
-			
+
 			#cube .side:nth-child(1) {
 				-webkit-transform: translateY(37px) rotateX(90deg);
 				-moz-transform: translateY(37px) rotateX(90deg);
 			}
-			
+
 			#cube .side:nth-child(2) {
 				-webkit-transform: translateY(-37px) rotateX(-90deg);
 				-moz-transform: translateY(-37px) rotateX(-90deg);
-				
+
 			}
-		
-			#cube .side:nth-child(3) {				
+
+			#cube .side:nth-child(3) {
 				-webkit-transform: translateX(37px) rotateY(-90deg);
 				-moz-transform: translateX(37px) rotateY(-90deg);
-				
+
 			}
-			
-			#cube .side:nth-child(4) {				
+
+			#cube .side:nth-child(4) {
 				-webkit-transform: translateX(-37px) rotateY(-90deg);
 				-moz-transform: translateX(-37px) rotateY(-90deg);
 			}
-			
-			#cube .side:nth-child(5) {	
+
+			#cube .side:nth-child(5) {
 				-webkit-transform: translateZ(37px) rotateZ(90deg);
 				-moz-transform: translateZ(37px) rotateZ(90deg);
 			}
-			
-			#cube .side:nth-child(6) {			
+
+			#cube .side:nth-child(6) {
 				-webkit-transform: translateZ(-37px) rotateZ(0deg);
 				-moz-transform: translateZ(-37px) rotateZ(0deg);
 			}
-		
+
 		</style>
 	</head>
 	<body>
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="500px"
 			 height="500px" viewBox="0 0 500 500" enable-background="new 0 0 500 500" xml:space="preserve">
-		
+
 		<g id="Layer_1">
 			<rect x="1.103" y="-3.397" fill="#B7C077" width="498.897" height="503.397"/>
 			<polygon fill="#8FA268" points="418.781,75.171 403.456,67.284 371.524,101.763 386.849,109.65 	"/>
@@ -410,7 +410,7 @@
 				<g filter="url(#Adobe_OpacityMaskFilter)">
 					<g>
 						<g>
-							<polygon fill="#FFFFFF" points="369.002,174.823 349.888,155.712 327.395,140.715 330.333,127 360.675,90.792 388.113,109.084 
+							<polygon fill="#FFFFFF" points="369.002,174.823 349.888,155.712 327.395,140.715 330.333,127 360.675,90.792 388.113,109.084
 								411.425,132.396 					"/>
 						</g>
 						<g>
@@ -427,7 +427,7 @@
 								L299.667,107L298.7,118.625z"/>
 						</g>
 						<g>
-							<polygon fill="#FFFFFF" points="94.679,500 61.398,450.077 89.706,431.204 101,423.397 137,454.333 142,469.397 
+							<polygon fill="#FFFFFF" points="94.679,500 61.398,450.077 89.706,431.204 101,423.397 137,454.333 142,469.397
 								116.301,485.584 					"/>
 						</g>
 					</g>
@@ -473,7 +473,7 @@
 					<g filter="url(#Adobe_OpacityMaskFilter_1_)">
 						<g>
 							<g>
-								<polygon fill="#FFFFFF" points="369.002,165.425 349.888,146.314 327.395,131.318 360.675,81.395 388.113,99.687 
+								<polygon fill="#FFFFFF" points="369.002,165.425 349.888,146.314 327.395,131.318 360.675,81.395 388.113,99.687
 									411.425,122.999 						"/>
 							</g>
 							<g>
@@ -1235,7 +1235,7 @@
 				<g>
 					<g enable-background="new    ">
 						<defs>
-							<polygon id="SVGID_17_" enable-background="new    " points="-176.386,392.016 -169.129,348.955 -133.251,349.627 
+							<polygon id="SVGID_17_" enable-background="new    " points="-176.386,392.016 -169.129,348.955 -133.251,349.627
 								-140.434,393.717 					"/>
 						</defs>
 						<clipPath id="SVGID_18_">
@@ -1261,7 +1261,7 @@
 			<path display="inline" fill="none" stroke="#42B19D" stroke-width="40" stroke-linecap="round" stroke-miterlimit="10" d="
 				M-632,579c0,0-8-97,53-97s31,63,91,63s54-124,54-124"/>
 		</g>
-		
+
 		<g>
 			<g>
 				<g>
@@ -1454,9 +1454,9 @@
 					S312.848,434.2,312.848,436.639z"/>
 			</g>
 		</g>
-		
+
 		</svg>
-		
+
 		<div id="cube-hitarea">
 			<div id="cube">
 				<svg class="side"  width="100px" height="100px">
@@ -1556,7 +1556,7 @@
 		<script src="js/seedrandom.js"></script>
 		<script src="js/path-animal.js"></script>
 		<script src="js/tree-face.js"></script>
-		
+
 		<script src="js/snap.svg.js"></script>
 		<script src="js/main.js"></script>
 	</body>
