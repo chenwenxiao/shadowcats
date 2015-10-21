@@ -93,7 +93,6 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
           choose_src = item_list[i].src_walk_right;
         }
         else if(new_cx < old_cx) {
-          console.log("go left!!");
           choose_src = item_list[i].src_walk_left;
         }
         else {
@@ -107,14 +106,17 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
 		    Snap.animate([old_cx, old_cy], [new_cx, new_cy], function (val){
           item_list[i].obj.attr({
             x: val[0],
-            y: val[1],
-            src: choose_src
+            y: val[1]
           });
+          var set = {
+            "xlink:href": choose_src,
+            preserveAspectRatio: "none"
+          };
+　　　　　　　　　　Snap._.$(item_list[i].obj.node, set);
         }, 10);
         break;
       }
     }
-    console.log("one move...done...");
   };
   function __use(id) {
     for (var i in item_list) {
