@@ -18,6 +18,7 @@ var config = require('./config');
 var Lockit = require('lockit');
 var lockit = new Lockit(config);
 
+
 var app = express();
 
 // view engine setup
@@ -43,14 +44,12 @@ app.use(cookieSession({
 
 app.use(lockit.router);
 
-// lockit.on('signup',function(user,res){
-//   //console.log(user);
-// //  res.send('welcome');
-// });
-
-lockit.on('login', function(user, res, target) {
- res.send(user);
+lockit.on('signup',function(user,res){
+ //  console.log(user);
+ // res.send('welcome');
+ res.redirect('/');
 });
+
 
 // lockit.on('logout', function(user, res) {
 //   // ...
