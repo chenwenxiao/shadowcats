@@ -26,6 +26,8 @@
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",
 	"lockit-mongodb-adapter": "*",
-	"connect-flash": "*"
+	"connect-flash": "*",
+	"lockit-template-blank": "*",
+	"nodemailer-stub-transport": "*"
   }
 }

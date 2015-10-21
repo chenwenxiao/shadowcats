@@ -3,7 +3,13 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('bigmap', { title: 'Bigmap' });
+	if (req.session.email == null){
+		res.redirect("/")
+	}
+	else{
+		console.log(req.session.email);
+  		res.render('bigmap', { title: 'Bigmap' });
+	}
 });
 
 module.exports = router;

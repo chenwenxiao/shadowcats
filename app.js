@@ -47,8 +47,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 //app.use('/editor', editor);
 //app.use('/users', users);
 //app.use('/collie', collie);
-routes(app);
+//routes(app);
 lockit(app);
+routes(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
