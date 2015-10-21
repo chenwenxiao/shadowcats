@@ -1,8 +1,8 @@
-//exports.db = {
-//  url: 'mongodb://127.0.0.1/',
-//  name: 'test',
-//  collection: 'users'  // collection name for MongoDB
-//};
+exports.db = {
+  url: 'mongodb://127.0.0.1/',
+  name: 'usr',
+  collection: 'info'  // collection name for MongoDB
+};
 
 // exports.emailType = 'nodemailer-smtp-transport';
 // exports.emailSettings = {
@@ -15,16 +15,16 @@
 
 
 exports.signup = {
-  route: '/signup',
+  route: '/reg',
   tokenExpiration: '1 day',
   views: {
-    signup: 'signup.jade',         // input fields 'name', 'email' and 'password' | local variable 'error' | POST /'signup.route'
+    signup: 'reg.jade',         // input fields 'name', 'email' and 'password' | local variable 'error' | POST /'signup.route'
     linkExpired: '',    // message link has expired | input field 'email' | POST /'signup.route'/resend-verification
     verified: '',       // message email is now verified and maybe link to /'login.route'
     signedUp: 'login.jade',       // message email has been sent => check your inbox
     resend: ''          // input field 'email' | local variable 'error' | POST /'signup.route'/resend-verification
   },
-  handleResponse: true  // let lockit handle the response after signup success
+  handleResponse: false  // let lockit handle the response after signup success
 };
 
 // login settings
@@ -35,7 +35,7 @@ exports.login = {
     login: 'login.jade',          // input fields 'login' and 'password' | POST /'login.route' | local variable 'error'
     loggedOut: 'login.jade'       // message that user logged out
   },
-  handleResponse: true  // let lockit handle the response after login/logout success
+  handleResponse: false  // let lockit handle the response after login/logout success
 };
 
 // forgot password settings

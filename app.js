@@ -5,21 +5,24 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var flash = require('connect-flash');
 var routes = require('./routes/index');
+var lockit = require('./models/lockit');
 //var users = require('./routes/users');
 //var editor = require('./routes/editor');
 //var collie = require('./routes/collie');
 
-var config = require('./config.js');
-var cookieSession = require('cookie-session');
-var Lockit = require('lockit');
-var lockit = new Lockit(config);
+//var config = require('./config.js');
+//var cookieSession = require('cookie-session');
+//var Lockit = require('lockit');
+//var lockit = new Lockit(config);
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+app.use(flash());
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -29,20 +32,23 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(cookieSession({
-  secret: 'my super secret String'
-}));
-app.use(lockit.router);
-lockit.on('signup', function(user, res) {
-  console.log('a new user signed up');
-  res.send('Welcome!');   // set signup.handleResponse to 'false' for this to work
-});
+//app.use(cookieSession({
+//  secret: 'my super secret String'
+//}));
+//app.use(lockit.router);
+//lockit.on('signup', function(user, res) {
+//  console.log('a new user signed up');
+//  res.send('Welcome!');   // set signup.handleResponse to 'false' for this to work
+//});
+
+
 
 //app.use('/', routes);
 //app.use('/editor', editor);
 //app.use('/users', users);
 //app.use('/collie', collie);
 routes(app);
+lockit(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
