@@ -1,52 +1,30 @@
-html
-  head
-    meta(charset="utf-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1")
-    script(type="text/javascript", src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
-    script(type="text/javascript", src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js")
-    link(href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css", rel="stylesheet", type="text/css")
-    link(href="/stylesheets/signup.css", rel="stylesheet", type="text/css")
-  body
-    .navbar.navbar-default.navbar-static-top
-      .container
-        .navbar-header
-          button.navbar-toggle(type="button", data-toggle="collapse", data-target="#navbar-ex-collapse")
-            span.sr-only Toggle navigation
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          a.navbar-brand(href="#")
-            span Brand
-        #navbar-ex-collapse.collapse.navbar-collapse
-          ul.nav.navbar-nav.navbar-right
-            li.active
-              a(href="#") Home
-            li
-              a(href="#") Contacts
-    .section
-      .container
-        .row
-          .col-md-12
-            .row
-              h1 Create Your own ShadowCats Account!
-              br
-              br
-            form.form-horizontal(action="/signup",method="POST",autocomplete="off")
-              .form-group
-                .col-sm-2
-                  label.control-label(for="name") UserName
-                .col-sm-10
-                  input.form-control(type="text",name="name",value=name,placeholder="UserName")
-              .form-group
-                .col-sm-2
-                  label.control-label(for="email") Email
-                .col-sm-10
-                  input#inputEmail3.form-control(type="email",name="email", value=email, placeholder="Your email")
-              .form-group
-                .col-sm-2
-                  label.control-label(for="password") Password
-                .col-sm-10
-                  input#inputPassword3.form-control(type="password", name="password", placeholder="Create a password")
-              .form-group
-                .col-sm-offset-2.col-sm-10
-                  button.btn.btn-success(type="submit") Create Account!
+extend layout
+
+block content
+  .section
+    .container
+      .row
+        .col-md-12
+          .row
+            h1 Signup Your ShadowCats Account!
+            br
+            br
+          form.form-horizontal(action="/signup",method="POST",autocomplete="off")
+            .form-group
+              .col-sm-2
+                label.control-label(for="name") UserName
+              .col-sm-10
+                input.form-control(type="text",name="name",value=name,placeholder="UserName")
+            .form-group
+              .col-sm-2
+                label.control-label(for="email") Email
+              .col-sm-10
+                input#inputEmail3.form-control(type="email",name="email", value=email, placeholder="Your email")
+            .form-group
+              .col-sm-2
+                label.control-label(for="password") Password
+              .col-sm-10
+                input#inputPassword3.form-control(type="password", name="password", placeholder="Create a password")
+            .form-group
+              .col-sm-offset-2.col-sm-10
+                button.btn.btn-success(type="submit") Create Account!
