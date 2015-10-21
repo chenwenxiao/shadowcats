@@ -1,117 +1,134 @@
-
 define(['editor', 'coffeescript', 'jquery', 'solve'], function(editor, coffeescript, $, solve) {
-  $('#run').click = function() {
+  $('#run').click(function() {
     var compiledJS;
-    compiledJS = coffeescript.compile(editor.editor.getSession().getDocument().getValue(), {
+    var session = editor.getSession();
+    var coffeeCode = session.getDocument().getValue().split("\n");
+    var realCode = "";
+    for (var code in coffeeCode) {
+      var str = coffeeCode[code];
+      if (str[0] != ' ' && str[0] != '\t')
+        realCode += "solve.setIndex " + code + " \n";
+        //realCode += "session.clearBreakpoints" + "\n" + "session.setBreakpoint " + code + "\n" + "solve.sleep　500" + "\n";
+      realCode += coffeeCode[code] + "\n";
+    }
+    compiledJS = coffeescript.compile(realCode, {
       bare : true
     });
+    solve.init();
     eval(compiledJS);
-  };
+    solve.startAnimate();
+  });
+
 });
 
-define(['ace', 'jquery'], function(ace, $) {
+define(['ace/ace', 'jquery'], function(ace, $) {
   var editor = ace.edit("editor");
       editor.setTheme("ace/theme/twilight");
-      editor.session.setMode("ace/mode/javascript");
+      editor.session.setMode("ace/mode/coffee");
   return editor;
 });
 
 require.config({
   paths: {
-    ace: 'public/libs/ace/lib/ace/ace.js',
-		bootstrap : 'public/libs/bootstrap/dist/js/bootstrap.js',
-		jquery : 'public/libs/jquery/dist/jquery.js',
-		snapsvg : 'public/libs/Snap.svg/dist/snap.svg.js',
-		coffeescript : 'public/libs/coffee-script/lib/coffee-script/coffee-script.js'
+    ace: '../libs/ace-build/src',
+		bootstrap : '../libs/bootstrap/dist/js/bootstrap',
+		jquery : '../libs/jquery/dist/jquery',
+		snapsvg : '../libs/Snap.svg/dist/snap.svg',
+		coffeescript : '../libs/coffee-script/extras/coffee-script'
   }
 });
 
 define(['compile', 'bootstrap'], function(compile, bootstrap) {
-
+  
 });
 
-define([], function() {
-  var map = {
-    background : {
-      src : ''
-    },
-
-    items : [
-      {
-        type : player,
-        id : 0,
-        x : 100,
-        y : 100,
-        width : 100,
-        height : 100,
-        stable : false,
-        gravity : true,
-        src : ''
-      },
-      {
-        type : ground,
-        id : 1,
-        x : 0,
-        y : 0,
-        width : 100,
-        height : 100,
-        stable : true,
-        gravity : false,
-        src : ''
-      },
-      {
-        type : box,
-        id : 2,
-        x : 50,
-        y : 50,
-        width : 50,
-        height : 50,
-        stable : true,
-        gravity : true,
-        move : true,
-        src : ''
-      },
-      {
-        type : ladder,
-        id : 3,
-        x : 100,
-        y : 100,
-        width : 100,
-        height : 100,
-        stable : false,
-        gravity : false,
-        climb : true,
-        src : ''
-      },
-      {
-        type : knob,
-        id : 4,
-        x : 100,
-        y : 100,
-        width : 100,
-        height : 100,
-        stable : false,
-        gravity : true,
-        targets : [5],
-        status : false,
-        src : ''
-      },
-      {
-        type : door,
-        id : 5,
-        x : 100,
-        y : 100,
-        width : 100,
-        height : 100,
-        stable : true,
-        gravity : true,
-        status : true,
-        src : ''
-      }
-    ]
-  };
+define(['jquery'], function($) {
+  var str = $('#map').text();
+  var map = JSON.parse(str);
   return map;
 });
+
+  //
+  // var map = {
+  //   round : 0,
+  //
+  //   background : {
+  //     src : ''
+  //   },
+  //
+  //   items : [
+  //     {
+  //       type : 'player',
+  //       id : 0,
+  //       x : 100,
+  //       y : 100,
+  //       width : 100,
+  //       height : 100,
+  //       stable : false,
+  //       gravity : true,
+  //       src : ''
+  //     },
+  //     {
+  //       type : 'ground',
+  //       id : 1,
+  //       x : 0,
+  //       y : 0,
+  //       width : 100,
+  //       height : 100,
+  //       stable : true,
+  //       gravity : false,
+  //       src : ''
+  //     },
+  //     {
+  //       type : 'box',
+  //       id : 2,
+  //       x : 50,
+  //       y : 50,
+  //       width : 50,
+  //       height : 50,
+  //       stable : true,
+  //       gravity : true,
+  //       move : true,
+  //       src : ''
+  //     },
+  //     {
+  //       type : 'ladder',
+  //       id : 3,
+  //       x : 100,
+  //       y : 100,
+  //       width : 100,
+  //       height : 100,
+  //       stable : false,
+  //       gravity : false,
+  //       src : ''
+  //     },
+  //     {
+  //       type : 'knob',
+  //       id : 4,
+  //       x : 100,
+  //       y : 100,
+  //       width : 100,
+  //       height : 100,
+  //       stable : false,
+  //       gravity : true,
+  //       targets : [5],
+  //       status : false,
+  //       src : ''
+  //     },
+  //     {
+  //       type : 'door',
+  //       id : 5,
+  //       x : 100,
+  //       y : 100,
+  //       width : 100,
+  //       height : 100,
+  //       stable : true,
+  //       gravity : true,
+  //       status : true,
+  //       src : ''
+  //     }
+  //   ]
+  // };
 
 
 var box2d;
@@ -282,84 +299,125 @@ collie.util.addEventListener(window, "load", function () {
 	box2d.load(false);
 });
 
-define(['map', 'view'], function(map, view) {
+define(['map', 'view', 'editor'], function(map, view, editor) {
+
   var solve = {
+    player : undefined,
     map : map,
     view : view,
-    simulate : {
-      gravity : function(item) {
-        if (item.gravity) {
-          return move(item, 0, 1);
-        }
-        return false;
-      },
-      move : function(item, dx, dy) {
-        if (!item.move)
-          return false;
-        item.x = item.x + dx;
-        item.y = item.y + dy;
-        var o = judge(item);
-        var nitem, flag = true;
-        for (nitem in o) {
-          if (!move(nitem, dx, dy))
-            flag = false;
-        }
-        if (!flag) {
-          item.x = item.x - dx;
-          item.y = item.y - dy;
-        }
-        return true;
-      },
+    round : 0,
+    index : [],
+    startAnimate : function() {
+      var timer = setInterval(function(){
+        if (solve.round < map.round) {
+          view.startAnimate(solve.round);
+          solve.round++;
+          editor.getSession().clearBreakpoints();
+          editor.getSession().setBreakpoint(solve.index[solve.round]);
+        } else
+          clearInterval(timer);
+      }, 50);
     },
     init : function() {
+      // test code
+      map.round = 0;
+      solve.round = 0;
+      map.index = 0;
+      solve.index = [];
+
       view.init(map);
-      act.init();
+      solve.player = solve.findPlayers()[0];
+    },
+    strife : function(item1, item2) {
+      if ((item2.x < item1.x + item1.width && item2.x >= item1.x) ||
+          (item1.x < item2.x + item2.width && item1.x >= item2.x))
+         if ((item2.y < item1.y + item1.height && item2.y >= item1.y) ||
+             (item1.y < item2.y + item2.height && item1.y >= item2.y))
+            return true;
+      return false;
     },
     judge : function (item) {
       var array = [];
       for (var nitem in map.items) {
-        if (strife(nitem, item))
-          array.push(nitem);
+        if (solve.strife(map.items[nitem], item))
+          if (item.id != nitem)
+            array.push(map.items[nitem]);
       }
       return array;
     },
-    move : function(item, dx, dy) {
-      item.x = item.x + dx;
-      item.y = item.y + dy;
-      var o = judge(item);
-      var nitem;
-      for (nitem in o) {
-        move(nitem, dx, dy);
+    move : function(item) {
+      if (!item.move)
+         return !item.stable;
+      if (item._use) return true;
+      item._use = true;
+      item.x += item.vx, item.y += item.vy;
+      var o = solve.judge(item);
+      var flag = true;
+      for (var nitem in o) {
+        if (o[nitem].move) {
+          o[nitem].vx += item.vx, o[nitem].vy += item.vy;
+        }
+        if (!solve.move(o[nitem])) flag = false;
       }
-      view.move(item, dx, dy);
+      if (!flag) {
+        item.x -= item.vx, item.y -= item.vy;
+        item.vx = 0, item.vy = 0;
+      }
+      item._use = false;
+      return flag;
     },
-    _move : function(item, dx, dy) {
-      if (simulate.move(item, dx, dy)) {
-        move(item, dx, dy);
+    _move : function(item) {
+      if (item.ladder != null) {
+        item.x += item.vx;
+        if (!solve.strife(item, solve.findId(item.ladder)))
+          item.x -= item.vx;
+        item.y += item.vy;
+        if (!solve.strife(item, solve.findId(item.ladder)))
+          item.y -= item.vy;
+        view.move(item);
+      } else {
+        var x = item.vx, y = item.vy;
+        item.vx = x, item.vy = 0;
+        solve.move(item);
+        x = item.vx;
+        item.vx = 0, item.vy = y;
+        solve.move(item);
+        y = item.vy;
+        item.vx = x, item.vy = y;
+        view.move(item);
       }
     },
-    gravity : function(item) {
-      move(item, 0, 1);
-    },
-    _gravity : function(item) {
-      if (simulate.gravity(item)) {
-        gravity(item);
-      }
+    setIndex : function(num) {
+      map.index = num;
     },
     finish : function() {
       var item;
       for (item in map.items)
-        _gravity(item);
-      view.draw(map);
-      wait(50);
+        if (map.items[item].gravity)
+          map.items[item].vy += 3;
+//======================================
+      for (item in map.items)
+        if (map.items[item].move)
+          solve._move(map.items[item]);
+      solve.index.push(map.index);
+      map.round++;
+
+      for (item in map.items)
+        if (map.items[item].move) {
+          if (map.items[item].vx > 0) map.items[item].vx -= 2;
+          if (map.items[item].vx < 0) map.items[item].vx += 2;
+          if (map.items[item].vy > 0) map.items[item].vy -= 2;
+          if (map.items[item].vy < 0) map.items[item].vy += 2;
+        }
     },
     use : function(item) {
       var nitem;
       item._use = true;
       if (item.type == 'knob') {
         for (nitem in item.targets)
-          if (!nitem._use) use(nitem);
+          if (!item.targets[nitem]._use) solve.use(solve.findId(item.targets[nitem]));
         view.use(item);
+        item.status = !item.status;
       }
       if (item.type == 'door') {
         if (item.status) {
@@ -367,90 +425,210 @@ define(['map', 'view'], function(map, view) {
         } else {
           item.status = item.stable = true;
         }
-        view.use(item, false);
+        view.use(item);
+      }
+      if (item.type == 'ladder') {
+        if (solve.player.ladder == item.id)
+          solve.player.gravity = true, solve.player.ladder = null;
+        else
+          solve.player.gravity = false, solve.player.ladder = item.id;
       }
       item._use = false;
     },
-    wait : function(msecs) {
+    sleep : function(msecs) {
       var start = new Date().getTime();
       var cur = start;
       while(cur - start < msecs)
         cur = new Date().getTime();
     },
-    act : {
-      init : function() {
-        player = findPlayers()[0];
-      },
-      findPlayers : function() {
-        var array = [];
-        var item;
-        for (item in map.items) {
-          if (item.type == 'player')
-            array.push(item);
-        }
-        return array;
-      },
-      findStrifes : function() {
-        var array = [];
-        var item;
-        for (item in map.items) {
-          if (strife(player, item))
-            array.push(item);
-        }
-        return array;
-      },
+    findId : function(id) {
+      var item;
+      for (item in map.items) {
+        if (map.items[item].id == id)
+          return map.items[item];
+      }
+    },
+    findPlayers : function() {
+      var array = [];
+      var item;
+      for (item in map.items) {
+        if (map.items[item].type == 'player')
+          array.push(map.items[item]);
+      }
+      return array;
+    },
       left : function(num) {
         for (var i = 0; i < num; ++i) {
-          move(player, -1, 0);
-          finish();
+          solve.player.vx -= 2;
+          solve.finish();
         }
       },
       right : function(num) {
         for (var i = 0; i < num; ++i) {
-          move(player, 1, 0);
-          finish();
+          solve.player.vx += 2;
+          solve.finish();
         }
       },
       up : function(num) {
-          for (var i = 0; i < num; ++i) {
-          var o = findStrifes();
-          var item;
-          for (item in o) {
-            if (item.climb) {
-              move(player, 0, -1);
-              return ;
-            }
-          }
-          finish();
+        for (var i = 0; i < num; ++i) {
+          if (solve.player.ladder != null)
+            solve.player.vy -= 2;
+          solve.finish();
         }
       },
       down : function(num) {
         for (var i = 0; i < num; ++i) {
-          var o = findStrifes();
-          var item;
-          for (item in o) {
-            if (item.climb) {
-              move(player, 0, 1);
-              return ;
-            }
-          }
-          finish();
+          if (solve.player.ladder != null)
+              solve.player.vy -= 2;
+          solve.finish();
         }
       },
       useItem : function(item, num) {
         for (var i = 0; i < num; ++i) {
-          if (strife(player, item)) {
-            use(item);
-          }
-          finish();
+          if (solve.strife(solve.player, item))
+            if (item.canuse) {
+              solve.use(item);
+            }
+          solve.finish();
         }
       },
       wait : function(num) {
         for (var i = 0; i < num; ++i) {
-          finish();
+          solve.finish();
         }
-      },
-    },
+      }
   };
+  solve.init();
   return solve;
+});
+
+define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
+  var item_list = [];
+  var stack = [];
+
+  function init(map) {
+    stack = [];
+    item_list = [];
+
+    var svg = Snap("#svg");
+    var background = svg.paper.image(map.background.src, 0, 0, 600, 600);
+    item_list.push(background);
+    for (var i in map.items) {
+      var nitem = map.items[i];
+      if(nitem.type == 'player') {
+        var player = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
+        item_list.push({id: nitem.id, obj: player, type : 'player'});
+      }
+      else if(nitem.type == 'ground') {
+        var ground = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
+        item_list.push({id: nitem.id, obj: ground, type : 'ground'});
+      }
+      else if(nitem.type == 'box') {
+        var box = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
+        item_list.push({id: nitem.id, obj: box, type : 'box'});
+      }
+      else if(nitem.type == 'ladder') {
+        var ladder = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
+        item_list.push({id: nitem.id, obj: ladder, type : 'ladder'});
+      }
+      else if(nitem.type == 'knob') {
+        if(nitem.status == true) {
+          var knob = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
+        }
+        else {
+          var knob = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
+        }
+        item_list.push({id: nitem.id, obj: knob, type : 'knob'});
+      }
+      else if(nitem.type == 'door') {
+        if(nitem.status == true) {
+          var door = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
+        }
+        else {
+          var door = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
+        }
+        item_list.push({id: nitem.id, obj: door, type : 'door'});
+      }
+      else {
+        console.log("error, unknown item in initialization");
+      }
+    }
+    console.log("init...finished...");
+  };
+  function __move(id, x, y) {
+    for (var i in item_list) {
+      if (id == item_list[i].id) {
+        var old_cx = parseInt(item_list[i].obj.attr("x"));
+		    var old_cy = parseInt(item_list[i].obj.attr("y"));
+		    var new_cx = x;
+		    var new_cy = y;
+		    Snap.animate([old_cx, old_cy], [new_cx, new_cy], function (val){
+          item_list[i].obj.attr({
+            x: val[0],
+            y: val[1]
+          });
+        }, 10);
+        break;
+      }
+    }
+    console.log("one move...done...");
+  };
+  function __use(id) {
+    for (var i in item_list) {
+      if(id == item_list[i].id && item_list[i].type == 'door') {
+        var old_cx = parseInt(item_list[i].obj.attr("x"));
+        var old_cy = parseInt(item_list[i].obj.attr("y"));
+
+        var rot = 0;
+        Snap.animate(rot+0, rot+45, function(val) {
+          rot = val;
+          item_list[i].obj.transform(new Snap.Matrix().rotate(val, old_cx, old_cy));
+        }, 1000);
+
+        break;
+      }
+    }
+    console.log("one use...done...");
+  };
+
+  function startAnimate(round) {
+    if (stack[round] == null)
+      return ;
+    stack[round].forEach(function(val) {
+      switch (val.type) {
+        case 'move':
+          __move(val.id, val.x, val.y);
+          break;
+        case 'use':
+          __use(val.id);
+          break;
+        default:
+      }
+    });
+  };
+  // add movement task to stack, calculate data but without running the animations;
+  function move(item) {
+    while (stack.length <= map.round) stack.push([]);
+    var flag = false;
+    stack[map.round].forEach(function(val){
+      if (val.id == item.id && val.type == 'move') {
+        flag = true;
+        val.x = item.x, val.y += item.y;
+      }
+    });
+    if (!flag) stack[map.round].push({id : item.id, x : item.x, y : item.y, type : 'move'});
+  };
+  function use(item) {
+    while (stack.length <= map.round) stack.push([]);
+    stack[map.round].push({id : item.id, type : 'use'});
+  };
+
+  return {
+    init : init,
+    move : move,
+    use : use,
+    __use : __use,
+    startAnimate : startAnimate
+
+  };
 });
