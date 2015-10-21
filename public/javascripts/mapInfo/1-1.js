@@ -68,4 +68,4 @@
       }
     ]
   };
-return map;
+module.exports = map;
