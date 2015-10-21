@@ -53,14 +53,17 @@
         id : 4,
         x : 325,
         y : 275,
-        width : 25,
+        width : 30,
         height : 25,
         stable : false,
         gravity : true,
         targets : [5],
         status : true,
         canuse : true,
-        src : '/images/knob.jpg'
+        src_closed : "/images/knob_closed.png",
+        src_closing : "/images/knob_closing.gif",
+        src_opened : "/images/knob_opened.png",
+        src_opening : "/images/knob_opening.gif"
       },
       {
         type : 'door',
@@ -71,7 +74,10 @@
         height : 100,
         stable : true,
         status : true,
-        src : '/images/dr.jpg'
+        src_closed : "/images/door_closed.png",
+        src_closing : "/images/door_closing.gif",
+        src_opened : "/images/door_opened.png",
+        src_opening : "/images/door_opening.gif"
       }
     ]
   };

@@ -37,10 +37,10 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
       }
       else if(nitem.type == 'knob') {
         if(nitem.status == true) {
-          var knob = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
+          var knob = svg.paper.image(nitem.src_opened, nitem.x, nitem.y, nitem.width, nitem.height);
         }
         else {
-          var knob = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
+          var knob = svg.paper.image(nitem.src_closed, nitem.x, nitem.y, nitem.width, nitem.height);
         }
         background.after(knob);
         player.before(knob);
@@ -48,10 +48,10 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
       }
       else if(nitem.type == 'door') {
         if(nitem.status == true) {
-          var door = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
+          var door = svg.paper.image(nitem.src_closed, nitem.x, nitem.y, nitem.width, nitem.height);
         }
         else {
-          var door = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
+          var door = svg.paper.image(nitem.src_opened, nitem.x, nitem.y, nitem.width, nitem.height);
         }
         background.after(door);
         player.before(door);
