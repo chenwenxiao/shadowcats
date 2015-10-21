@@ -14,7 +14,15 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
       var nitem = map.items[i];
       if(nitem.type == 'player') {
         player = svg.paper.image(nitem.src_stand_front, nitem.x, nitem.y, nitem.width, nitem.height);
-        item_list.push({id: nitem.id, obj: player, type : 'player'});
+        item_list.push({id: nitem.id, obj: player, type : 'player',
+                        src_walk_front : nitem.src_stand_front,
+                        src_walk_back : nitem.src_walk_back,
+                        src_walk_left : nitem.src_walk_left,
+                        src_walk_right : nitem.src_walk_right,
+                        src_stand_front : nitem.src_stand_front,
+                        src_stand_back : nitem.src_stand_back,
+                        src_stand_left : nitem.src_stand_left,
+                        src_stand_right : nitem.src_stand_right});
         background.after(player);
       }
       else if(nitem.type == 'ground') {
@@ -37,14 +45,19 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
       }
       else if(nitem.type == 'knob') {
         if(nitem.status == true) {
-          var knob = svg.paper.image(nitem.src_opened, nitem.x, nitem.y, nitem.width, nitem.height);
+          var knob = svg.paper.image(nitem.src_closed, nitem.x, nitem.y, nitem.width, nitem.height);
         }
         else {
-          var knob = svg.paper.image(nitem.src_closed, nitem.x, nitem.y, nitem.width, nitem.height);
+          var knob = svg.paper.image(nitem.src_opened, nitem.x, nitem.y, nitem.width, nitem.height);
         }
         background.after(knob);
         player.before(knob);
-        item_list.push({id: nitem.id, obj: knob, type : 'knob'});
+        item_list.push({id: nitem.id, obj: knob, type : 'knob',
+                        status : nitem.status,
+                        src_closed : nitem.src_closed,
+                        src_closing : nitem.src_closing,
+                        src_opened : nitem.src_opened,
+                        src_opening : nitem.src_opening});
       }
       else if(nitem.type == 'door') {
         if(nitem.status == true) {
@@ -55,7 +68,12 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
         }
         background.after(door);
         player.before(door);
-        item_list.push({id: nitem.id, obj: door, type : 'door'});
+        item_list.push({id: nitem.id, obj: door, type : 'door',
+                        status : nitem.status,
+                        src_closed : nitem.src_closed,
+                        src_closing : nitem.src_closing,
+                        src_opened : nitem.src_opened,
+                        src_opening : nitem.src_opening});
       }
       else {
         console.log("error, unknown item in initialization.");
@@ -70,10 +88,27 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
 		    var old_cy = parseInt(item_list[i].obj.attr("y"));
 		    var new_cx = x;
 		    var new_cy = y;
+        var choose_src;
+        if(new_cx > old_cx) {
+          choose_src = item_list[i].src_walk_right;
+        }
+        else if(new_cx < old_cx) {
+          console.log("go left!!");
+          choose_src = item_list[i].src_walk_left;
+        }
+        else {
+          if(new_cy >= old_cy) {
+            choose_src = item_list[i].src_walk_front;
+          }
+          else {
+            choose_src = item_list[i].src_walk_back;
+          }
+        }
 		    Snap.animate([old_cx, old_cy], [new_cx, new_cy], function (val){
           item_list[i].obj.attr({
             x: val[0],
-            y: val[1]
+            y: val[1],
+            src: choose_src
           });
         }, 10);
         break;
@@ -83,16 +118,21 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
   };
   function __use(id) {
     for (var i in item_list) {
-      if(id == item_list[i].id && item_list[i].type == 'door') {
+      if(id == item_list[i].id) {
         var old_cx = parseInt(item_list[i].obj.attr("x"));
-        var old_cy = parseInt(item_list[i].obj.attr("y"));
-
-        var rot = 0;
-        Snap.animate(rot+0, rot+45, function(val) {
-          rot = val;
-          item_list[i].obj.transform(new Snap.Matrix().rotate(val, old_cx, old_cy));
-        }, 1000);
-
+		    var old_cy = parseInt(item_list[i].obj.attr("y"));
+        var choose_src;
+        if(item_list[i].status == true) {
+          choose_src = item_list[i].src_closing;
+        }
+        else {
+          choose_src = item_list[i].src_opening;
+        }
+        Snap.animate([old_cx, old_cy], [old_cx, old_cy], function (){
+          item_list[i].obj.attr({
+            src: choose_src
+          });
+        }, 25);
         break;
       }
     }
