@@ -5,7 +5,13 @@ require.config({
 		jquery : '../libs/jquery/dist/jquery',
 		snapsvg : '../libs/Snap.svg/dist/snap.svg',
 		coffeescript : '../libs/coffee-script/extras/coffee-script'
-  }
+  },
+  shim : {  
+    bootstrap : {  
+      deps : [ 'jquery' ],  
+      exports : 'bootstrap'  
+    }  
+  }  
 });
 
 define(['compile', 'bootstrap'], function(compile, bootstrap) {
