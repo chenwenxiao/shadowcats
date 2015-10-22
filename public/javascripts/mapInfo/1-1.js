@@ -53,12 +53,12 @@ race = (winner, runners...) ->\n\
         type : 'ladder',
         id : 3,
         x : 220,
-        y : 0,
-        width : 100,
-        height : 500,
+        y : 400,
+        width : 50,
+        height : 100,
         stable : false,
         gravity : false,
-        src : ''
+        src : '/images/ladder.png'
       },
       {
         type : 'knob',
