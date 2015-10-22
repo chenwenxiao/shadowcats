@@ -3,7 +3,7 @@
     index : 0,
     code : 'six = (one = 10) + (two = 20) + (three = 30)\n\
 solve.left 65\n\
-solve.use solve.map.items[1]\n\
+solve.use solve.map.items[2], 1\n\
 solve.up 30\n\
 list = [1, 2, 3, 4, 5]\n\
 race = (winner, runners...) ->\n\
@@ -58,7 +58,7 @@ race = (winner, runners...) ->\n\
         height : 100,
         stable : false,
         gravity : false,
-        src : '/images/ladder.png'
+        src : ''
       },
       {
         type : 'knob',
