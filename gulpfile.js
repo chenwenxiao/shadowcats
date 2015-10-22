@@ -1,5 +1,7 @@
 // 引入 gulp
 var gulp = require('gulp');
+var jshint = require('gulp-jshint');
+var mocha  = require('gulp-mocha');
 
 // 引入组件
 var bower = require('gulp-bower');
@@ -13,13 +15,6 @@ var rename = require('gulp-rename');
 gulp.task('bower', function() {
   return bower()
     .pipe(gulp.dest('./public/libs/'))
-});
-
-// 检查脚本
-gulp.task('lint', function() {
-    gulp.src('./public/javascripts/*.js')
-        .pipe(jshint())
-        .pipe(jshint.reporter('default'));
 });
 
 // 编译Sass
@@ -39,12 +34,26 @@ gulp.task('scripts', function() {
         .pipe(gulp.dest('./dist'));
 });
 
+// 检查脚本
+gulp.task('lint', function() {
+  return gulp
+    .src(['gulpfile.js', 'public/javascripts/*.js', 'test/*.js'])
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
+});
+
+gulp.task('test', function() {
+  return gulp
+    .src('test/*.js')
+    .pipe(mocha());
+});
+
 // 默认任务
 gulp.task('default', function(){
     gulp.run('lint', 'sass', 'scripts');
 
     // 监听文件变化
-    gulp.watch('./public/javascripts/*.js', function(){
-        gulp.run('lint', 'sass', 'scripts');
+    gulp.watch(['public/javascripts/*.js', 'test/*.js'], function(){
+        gulp.run('lint', 'sass', 'test');
     });
 });
