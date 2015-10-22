@@ -1,54 +1,30 @@
 extend layout
 
 block content
-  div.raw-fluid.clearfix
-    div.span6.ui-sortable
-      svg#svg
-    div.span5.ui-sortable
-      pre#editor.
-        six = (one = 10) + (two = 20) + (three = 30)
-        solve.left 65
-        solve.use solve.map.items[1]
-        solve.up 30
-        list = [1, 2, 3, 4, 5]
-        race = (winner, runners...) ->
-          print winner, runners
-      p
-        button#run.btn.btn-primary.btn-large 运行
-        button#test.btn test
-        button#go.btn go
+  header.jumbotron
+    h1 ShadowCats
+    p.lead 用游戏的方式学习Coding
+    p
+      a.btn.btn-lg.btn-default.btn-getting-started(href='bigmap', role='button') 开始使用
+  main.benefits.container
+    // Example row of columns
+    .row
+      .col-md-6
+        h2 易于使用
+        p 通过代码优于配置的策略，ShadowCats 让简单的学习更简单
+      .col-md-6
+        h2 快速参与
+        p 只需立即注册就可以参与到游戏中
+    .row
+      .col-md-6
+        h2 代码高质
+        p ShadowCats 使用Ace　editor作为代码编写工具，支持各种风格
+      .col-md-6
+        h2 易于学习
+        p CoffeeScript作为最容易的语言，非常容易领会
+  script(src='http://cdn.bootcss.com/highlight.js/8.4/highlight.min.js')
+  script.
+    hljs.initHighlightingOnLoad();
+  script(src='http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js')
+  script(src='http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js')
 
-  script(data-main="javascripts/main.js", src="/libs/requirejs/require.js")
-
-  style(type='text/css', media='screen').
-    body {
-      width: 100%;
-      height: 100%;
-      background-color: #aaa;
-    }
-    #editor {
-      margin: 0;
-      position: relative;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      width: 100%;
-      height: 500px;
-    }
-    #svg {
-      margin: 0;
-      position: relative;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      width: 600px;
-      height: 600px;
-    }
-    #btn {
-
-    }
-    .ace_gutter-cell.ace_breakpoint{
-      background-image: url(images/breakpoint.png);
-    }
