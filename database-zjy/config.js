@@ -1,5 +1,5 @@
 exports.db = {
-  url: 'mongodb://101.200.204.116:27017',
+  url: 'mongodb://127.0.0.1/',
   name: 'test',
   collection: 'users'  // collection name for MongoDB
 };

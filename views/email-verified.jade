@@ -1,0 +1,30 @@
+extend layout
+
+block content
+  header.jumbotron
+    h1 ShadowCats
+    p.lead 用游戏的方式学习Coding
+    p
+      a.btn.btn-lg.btn-default.btn-getting-started(href='bigmap', role='button') 开始使用
+  main.benefits.container
+    // Example row of columns
+    .row
+      .col-md-6
+        h2 易于使用
+        p 通过代码优于配置的策略，ShadowCats 让简单的学习更简单
+      .col-md-6
+        h2 快速参与
+        p 只需立即注册就可以参与到游戏中
+    .row
+      .col-md-6
+        h2 代码高质
+        p ShadowCats 使用Ace　editor作为代码编写工具，支持各种风格
+      .col-md-6
+        h2 易于学习
+        p CoffeeScript作为最容易的语言，非常容易领会
+  script(src='http://cdn.bootcss.com/highlight.js/8.4/highlight.min.js')
+  script.
+    hljs.initHighlightingOnLoad();
+  script(src='http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js')
+  script(src='http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js')
+
