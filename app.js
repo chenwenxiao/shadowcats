@@ -10,7 +10,6 @@ var routes = require('./routes/index');
 //var editor = require('./routes/editor');
 //var collie = require('./routes/collie');
 
-var config = require('./config.js');
 var cookieSession = require('cookie-session');
 
 
