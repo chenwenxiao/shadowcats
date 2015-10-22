@@ -210,7 +210,20 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
           item_list[i].obj.attr({
 
           });
-        }, 25);
+        }, 25, mina.linear, function() {
+          /*
+          if(last_state==) {
+            console.log("what");
+            if(item_list[i].cur_src == item_list[i].src_walk_front) {
+              var set = {
+                "xlink:href": item_list[i].src_stand_front,
+                preserveAspectRatio: "none"
+              };
+  　　　　     Snap._.$(item_list[i].obj.node, set);
+              item_list[i].cur_src = item_list[i].src_stand_front;
+            }
+            */
+        });
         break;
       }
     }
