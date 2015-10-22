@@ -1,6 +1,18 @@
   var map = {
     round : 0,
     index : 0,
+    code : 'six = (one = 10) + (two = 20) + (three = 30)\n\
+solve.left 65\n\
+solve.use solve.map.items[1]\n\
+solve.up 30\n\
+list = [1, 2, 3, 4, 5]\n\
+race = (winner, runners...) ->\n\
+  print winner, runners\n',
+    tip : {
+      title : '第一关指南',
+      content : '向右前进即可：\n\
+      solve.right 30\n'
+    },
     background : {
       src : "/images/background.jpg"
     },
