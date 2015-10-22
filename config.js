@@ -21,7 +21,7 @@ exports.signup = {
     signup: 'reg.jade',         // input fields 'name', 'email' and 'password' | local variable 'error' | POST /'signup.route'
     linkExpired: '',    // message link has expired | input field 'email' | POST /'signup.route'/resend-verification
     verified: '',       // message email is now verified and maybe link to /'login.route'
-    signedUp: 'email-sent.jade',       // message email has been sent => check your inbox
+    signedUp: 'emailG-sent.jade',       // message email has been sent => check your inbox
     resend: ''          // input field 'email' | local variable 'error' | POST /'signup.route'/resend-verification
   },
   handleResponse: true  // let lockit handle the response after signup success
@@ -35,7 +35,7 @@ exports.login = {
     login: 'login.jade',          // input fields 'login' and 'password' | POST /'login.route' | local variable 'error'
     loggedOut: ''       // message that user logged out
   },
-  handleResponse: false  // let lockit handle the response after login/logout success
+  handleResponse: true  // let lockit handle the response after login/logout success
 };
 
 // forgot password settings
