@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var login  = require('./database-zjy/login');
 var routes = require('./routes/index');
 //var users = require('./routes/users');
 //var editor = require('./routes/editor');
@@ -12,8 +12,7 @@ var routes = require('./routes/index');
 
 var config = require('./config.js');
 var cookieSession = require('cookie-session');
-var Lockit = require('lockit');
-var lockit = new Lockit(config);
+
 
 var app = express();
 
@@ -32,11 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieSession({
   secret: 'my super secret String'
 }));
-app.use(lockit.router);
-lockit.on('signup', function(user, res) {
-  console.log('a new user signed up');
-  res.send('Welcome!');   // set signup.handleResponse to 'false' for this to work
-});
+app.use(login);
 
 //app.use('/', routes);
 //app.use('/editor', editor);
