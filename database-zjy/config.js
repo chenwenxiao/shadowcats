@@ -18,7 +18,7 @@ exports.signup = {
   route: '/signup',
   tokenExpiration: '1 day',
   views: {
-    signup: 'reg.jade',         // input fields 'name', 'email' and 'password' | local variable 'error' | POST /'signup.route'
+    signup: 'signup.jade',         // input fields 'name', 'email' and 'password' | local variable 'error' | POST /'signup.route'
     linkExpired: '',    // message link has expired | input field 'email' | POST /'signup.route'/resend-verification
     verified: '',       // message email is now verified and maybe link to /'login.route'
     signedUp: 'email-sent.jade',       // message email has been sent => check your inbox
