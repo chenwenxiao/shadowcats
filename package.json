@@ -29,6 +29,7 @@
 	"lockit-mongodb-adapter": "*",
 	"connect-flash": "*",
 	"lockit-template-blank": "*",
-	"nodemailer-stub-transport": "*"
+	"nodemailer-stub-transport": "*",
+    "nodemailer": "*"
   }
 }

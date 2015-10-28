@@ -4,14 +4,14 @@ exports.db = {
   collection: 'info'  // collection name for MongoDB
 };
 
-// exports.emailType = 'nodemailer-smtp-transport';
-// exports.emailSettings = {
-//   service: 'Mailgun',
-//   auth: {
-//     user: 'postmaster@sandboxe7a678e6162e449cba8cb53a398c7320.mailgun.org',
-//     pass: 'e629a415fe07d2e35bdc6cbab53487bf'
-//   }
-// };
+ exports.emailType = 'nodemailer-smtp-transport';
+ exports.emailSettings = {
+   service: 'Gmail',
+   auth: {
+     user: 'mfhraven@gmail.com',
+     pass: 'ABCDabcd88066256'
+   }
+ };
 
 
 exports.signup = {
