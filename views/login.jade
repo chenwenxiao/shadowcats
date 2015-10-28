@@ -1,31 +1,13 @@
-html
-  head
-    meta(charset="utf-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1")
-    script(type="text/javascript", src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
-    script(type="text/javascript", src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js")
-    link(href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css", rel="stylesheet", type="text/css")
-    link(href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css", rel="stylesheet", type="text/css")
-  body
-    .cover
-      .navbar
-        .container
-          .navbar-header
-            button.navbar-toggle(type="button", data-toggle="collapse", data-target="#navbar-ex-collapse")
-              span.sr-only Toggle navigation
-              span.icon-bar
-              span.icon-bar
-              span.icon-bar
-            a.navbar-brand(href="#")
-              span ShadowCats
-          #navbar-ex-collapse.collapse.navbar-collapse
-            ul.nav.navbar-nav.navbar-right
-              li.active
-                a(href="/") &#39318;&#39029;
-              li
-                a(href="#") &#32852;&#31995;&#25105;&#20204;
-      .cover-image(style="background-image : url('https://ununsplash.imgix.net/photo-1423753623104-718aaace6772?w=1024&q=50&fm=jpg&s=1ffa61419561b5c796bca3158e7c704c')")
+extend layout
+
+block content
       .container
+        .row
+          .col-md-6.col-md-offset-3
+            .row
+              h1 Login Your ShadowCats Account!
+              br
+              br
         .row
           .col-md-6.col-md-offset-3
             form.form-horizontal(role="form", action="/login", method="POST")
@@ -47,4 +29,4 @@ html
                       | Remember me
               .form-group
                 .col-sm-offset-2.col-sm-10
-                  button.btn.btn-default(type="submit") log in
+                  button.btn.btn-success(type="submit") log in
