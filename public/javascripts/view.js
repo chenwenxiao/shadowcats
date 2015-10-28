@@ -10,11 +10,13 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
     var background = svg.paper.image(map.background.src, 0, 0, 600, 600);
     item_list.push(background);
     var player;
+    // initialize every objects in map
     for (var i in map.items) {
       var nitem = map.items[i];
       if(nitem.type == 'player') {
         player = svg.paper.image(nitem.src_stand_front, nitem.x, nitem.y, nitem.width, nitem.height);
         item_list.push({id: nitem.id, obj: player, type : 'player',
+                        cur_src : nitem.src_stand_front,
                         src_walk_front : nitem.src_stand_front,
                         src_walk_back : nitem.src_walk_back,
                         src_walk_left : nitem.src_walk_left,
@@ -46,42 +48,66 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
       else if(nitem.type == 'knob') {
         if(nitem.status == true) {
           var knob = svg.paper.image(nitem.src_closed, nitem.x, nitem.y, nitem.width, nitem.height);
+          item_list.push({id: nitem.id, obj: knob, type : 'knob',
+                          status : nitem.status,
+                          cur_src : nitem.src_closed,
+                          src_closed : nitem.src_closed,
+                          src_closing : nitem.src_closing,
+                          src_opened : nitem.src_opened,
+                          src_opening : nitem.src_opening});
         }
         else {
           var knob = svg.paper.image(nitem.src_opened, nitem.x, nitem.y, nitem.width, nitem.height);
+          item_list.push({id: nitem.id, obj: knob, type : 'knob',
+                          status : nitem.status,
+                          cur_src : nitem.src_opened,
+                          src_closed : nitem.src_closed,
+                          src_closing : nitem.src_closing,
+                          src_opened : nitem.src_opened,
+                          src_opening : nitem.src_opening});
         }
         background.after(knob);
         player.before(knob);
-        item_list.push({id: nitem.id, obj: knob, type : 'knob',
-                        status : nitem.status,
-                        src_closed : nitem.src_closed,
-                        src_closing : nitem.src_closing,
-                        src_opened : nitem.src_opened,
-                        src_opening : nitem.src_opening});
       }
       else if(nitem.type == 'door') {
         if(nitem.status == true) {
           var door = svg.paper.image(nitem.src_closed, nitem.x, nitem.y, nitem.width, nitem.height);
+          item_list.push({id: nitem.id, obj: door, type : 'door',
+                          status : nitem.status,
+                          cur_src : nitem.src_closed,
+                          src_closed : nitem.src_closed,
+                          src_closing : nitem.src_closing,
+                          src_opened : nitem.src_opened,
+                          src_opening : nitem.src_opening});
         }
         else {
           var door = svg.paper.image(nitem.src_opened, nitem.x, nitem.y, nitem.width, nitem.height);
+          item_list.push({id: nitem.id, obj: door, type : 'door',
+                          status : nitem.status,
+                          cur_src : nitem.src_opened,
+                          src_closed : nitem.src_closed,
+                          src_closing : nitem.src_closing,
+                          src_opened : nitem.src_opened,
+                          src_opening : nitem.src_opening});
         }
         background.after(door);
         player.before(door);
-        item_list.push({id: nitem.id, obj: door, type : 'door',
-                        status : nitem.status,
-                        src_closed : nitem.src_closed,
-                        src_closing : nitem.src_closing,
-                        src_opened : nitem.src_opened,
-                        src_opening : nitem.src_opening});
       }
       else {
-        console.log("error, unknown item in initialization.");
+        console.log("!!!error, unknown item in initialization!!!");
       }
     }
-    console.log("init...finished...");
+    console.log("initialization finished...");
   };
+  // player movement function
   function __move(id, x, y) {
+    if(stack[stack.length-1][0].id == 0) {
+      var last_pos_x = stack[stack.length-1][0].x;
+      var last_pos_y = stack[stack.length-1][0].y;
+    }
+    else {
+      console.log("in __move err...");
+    }
     for (var i in item_list) {
       if (id == item_list[i].id) {
         var old_cx = parseInt(item_list[i].obj.attr("x"));
@@ -103,21 +129,62 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
             choose_src = item_list[i].src_walk_back;
           }
         }
-        var set = {
-          "xlink:href": choose_src,
-          preserveAspectRatio: "none"
-        };
-　　　　　　　　Snap._.$(item_list[i].obj.node, set);
-		    Snap.animate([old_cx, old_cy], [new_cx, new_cy], function (val){
+        // change the pic's src by the obj's behavier
+        if(item_list[i].cur_src != choose_src) {
+          var set = {
+            "xlink:href": choose_src,
+            preserveAspectRatio: "none"
+          };
+　　　　   Snap._.$(item_list[i].obj.node, set);
+          item_list[i].cur_src = choose_src;
+        }
+        Snap.animate([old_cx, old_cy], [new_cx, new_cy], function (val){
           item_list[i].obj.attr({
             x: val[0],
             y: val[1]
           });
-        }, 10);
+        }, 10, mina.linear, function(){
+          if(last_pos_x==new_cx && last_pos_y==new_cy) {
+            console.log("what");
+            if(item_list[i].cur_src == item_list[i].src_walk_front) {
+              var set = {
+                "xlink:href": item_list[i].src_stand_front,
+                preserveAspectRatio: "none"
+              };
+  　　　　     Snap._.$(item_list[i].obj.node, set);
+              item_list[i].cur_src = item_list[i].src_stand_front;
+            }
+            if(item_list[i].cur_src == item_list[i].src_walk_back) {
+              var set = {
+                "xlink:href": item_list[i].src_stand_back,
+                preserveAspectRatio: "none"
+              };
+  　　　　     Snap._.$(item_list[i].obj.node, set);
+              item_list[i].cur_src = item_list[i].src_stand_back;
+            }
+            if(item_list[i].cur_src == item_list[i].src_walk_left) {
+              var set = {
+                "xlink:href": item_list[i].src_stand_left,
+                preserveAspectRatio: "none"
+              };
+  　　　　     Snap._.$(item_list[i].obj.node, set);
+              item_list[i].cur_src = item_list[i].src_stand_left;
+            }
+            if(item_list[i].cur_src == item_list[i].src_walk_right) {
+              var set = {
+                "xlink:href": item_list[i].src_stand_right,
+                preserveAspectRatio: "none"
+              };
+  　　　　     Snap._.$(item_list[i].obj.node, set);
+              item_list[i].cur_src = item_list[i].src_stand_right;
+            }
+          }
+        });
         break;
       }
     }
   };
+  // door and knob usage status function
   function __use(id) {
     for (var i in item_list) {
       if(id == item_list[i].id) {
@@ -130,9 +197,18 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
         else {
           choose_src = item_list[i].src_opening;
         }
-        Snap.animate([old_cx, old_cy], [old_cx, old_cy], function (){
+        // change the pic's src by the obj's behavier
+        if(item_list[i].cur_src != choose_src) {
+          var set = {
+            "xlink:href": choose_src,
+            preserveAspectRatio: "none"
+          };
+　　　　   Snap._.$(item_list[i].obj.node, set);
+          item_list[i].cur_src = choose_src;
+        }
+        Snap.animate([old_cx, old_cy], [old_cx, old_cy], function (val){
           item_list[i].obj.attr({
-            src: choose_src
+
           });
         }, 25);
         break;
@@ -178,6 +254,5 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
     move : move,
     use : use,
     startAnimate : startAnimate
-
   };
 });

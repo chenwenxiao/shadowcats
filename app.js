@@ -6,12 +6,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var flash = require('connect-flash');
+var login  = require('./database-zjy/login');
 var routes = require('./routes/index');
 var lockit = require('./models/lockit');
 //var users = require('./routes/users');
 //var editor = require('./routes/editor');
 //var collie = require('./routes/collie');
-
 //var config = require('./config.js');
 //var cookieSession = require('cookie-session');
 //var Lockit = require('lockit');
@@ -31,17 +31,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-//app.use(cookieSession({
-//  secret: 'my super secret String'
-//}));
-//app.use(lockit.router);
-//lockit.on('signup', function(user, res) {
-//  console.log('a new user signed up');
-//  res.send('Welcome!');   // set signup.handleResponse to 'false' for this to work
-//});
-
-
 
 //app.use('/', routes);
 //app.use('/editor', editor);

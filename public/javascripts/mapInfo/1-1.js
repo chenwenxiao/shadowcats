@@ -2,12 +2,7 @@
     round : 0,
     index : 0,
     code : 'six = (one = 10) + (two = 20) + (three = 30)\n\
-solve.left 65\n\
-solve.use solve.map.items[1]\n\
-solve.up 30\n\
-list = [1, 2, 3, 4, 5]\n\
-race = (winner, runners...) ->\n\
-  print winner, runners\n',
+solve.right three\n',
     tip : {
       title : '第一关指南',
       content : '向右前进即可：\n\
@@ -53,9 +48,9 @@ race = (winner, runners...) ->\n\
         type : 'ladder',
         id : 3,
         x : 220,
-        y : 0,
-        width : 100,
-        height : 500,
+        y : 400,
+        width : 50,
+        height : 100,
         stable : false,
         gravity : false,
         src : ''
@@ -80,7 +75,7 @@ race = (winner, runners...) ->\n\
       {
         type : 'door',
         id : 5,
-        x : 400,
+        x : 500,
         y : 200,
         width : 50,
         height : 100,
