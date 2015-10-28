@@ -1,17 +1,22 @@
+exports.url = 'http://101.200.204.116:3000';
+
 exports.db = {
   url: 'mongodb://127.0.0.1/',
   name: 'usr',
   collection: 'info'  // collection name for MongoDB
 };
 
- exports.emailType = 'nodemailer-smtp-transport';
- exports.emailSettings = {
-   service: 'Gmail',
-   auth: {
-     user: 'mfhraven@gmail.com',
-     pass: 'ABCDabcd88066256'
-   }
- };
+exports.emailType = 'nodemailer-smtp-transport';
+exports.emailSettings = {
+   //service: 'Gmail',
+  host: 'smtp.126.com',
+  secureConnection: true,
+  post: 25,
+  auth: {
+    user: 'mfhraven@126.com',
+    pass: 'ABCDabcd88066256'
+  }
+};
 
 
 exports.signup = {
@@ -68,3 +73,4 @@ exports.failedLoginsWarning = 3;
 exports.failedLoginAttempts = 5;
 // lock account for 20 minutes
 exports.accountLockedTime = '20 minutes';
+exports.emailFrom = 'mfhraven@126.com';
