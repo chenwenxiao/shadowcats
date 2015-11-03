@@ -1,7 +1,7 @@
 exports.url = 'http://101.200.204.116:3000';
 
 exports.db = {
-  url: 'mongodb://127.0.0.1/',
+  url: 'mongodb://101.200.204.116/',
   name: 'usr',
   collection: 'info'  // collection name for MongoDB
 };
