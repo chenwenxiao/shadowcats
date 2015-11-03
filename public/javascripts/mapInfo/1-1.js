@@ -17,8 +17,8 @@ solve.right three\n',
         id : 0,
         x : 350,
         y : 250,
-        width : 50,
-        height : 50,
+        width : 200,
+        height : 180,
         stable : true,
         gravity : true,
         move : true,
@@ -42,7 +42,7 @@ solve.right three\n',
         height : 20,
         stable : true,
         gravity : false,
-        src : ''
+        src : ""
       },
       {
         type : 'ladder',
@@ -67,10 +67,10 @@ solve.right three\n',
         targets : [5],
         status : true,
         canuse : true,
-        src_closed : "/images/knob_closed.png",
-        src_closing : "/images/knob_closing.gif",
-        src_opened : "/images/knob_opened.png",
-        src_opening : "/images/knob_opening.gif"
+        src_closed : "",
+        src_closing : "",
+        src_opened : "",
+        src_opening : ""
       },
       {
         type : 'door',
@@ -81,10 +81,10 @@ solve.right three\n',
         height : 100,
         stable : true,
         status : true,
-        src_closed : "/images/door_closed.png",
-        src_closing : "/images/door_closing.gif",
-        src_opened : "/images/door_opened.png",
-        src_opening : "/images/door_opening.gif"
+        src_closed : "",
+        src_closing : "",
+        src_opened : "",
+        src_opening : ""
       }
     ]
   };
