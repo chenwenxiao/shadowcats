@@ -31,10 +31,14 @@ module.exports = function(app){
 	});
 
 	lockit.on('login', function(user, res, target){
+		//res.cookie(user.name, 'cookie', {httpOnly: false });
 		res.redirect('/bigmap');
+		//res.cookie(user.name, 'cookie', { httpOnly: false });
 	});
 
 	lockit.on('logout', function(user, res){
+		//res.clearCookie(user.name, 'cookie', { httpOnly: false });
 		res.redirect('/');
+		//res.clearCookie(user.name, { httpOnly: false });
 	});
 }
