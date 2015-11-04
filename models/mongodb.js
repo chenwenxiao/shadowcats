@@ -22,7 +22,7 @@ var PAdapter = module.exports = function(){
 };
 
 PAdapter.prototype.save = function(personality, callback){
-	that.db.collection(that.collection).save(personality, function(saveErr){
+	this.db.collection(this.collection).save(personality, function(saveErr){
 		callback(saveErr);
 	});	
 };
