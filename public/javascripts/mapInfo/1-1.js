@@ -15,8 +15,8 @@ solve.right three\n',
       {
         type : 'player',
         id : 0,
-        x : 0,
-        y : 160,
+        x : 100,
+        y : 210,
         width : 50,
         height : 45,
         stable : true,
@@ -149,8 +149,19 @@ solve.right three\n',
         width : 80,
         height : 40,
 		stable : false,
+		canuse : true,
         src : "/images/fish.png",
       },
+	  {
+        type : 'stone',
+        id : 11,
+        x : 10,
+        y : 130,
+        width : 80,
+        height : 75,
+        stable : true,
+        src : "/images/stone.png"
+      }
     ]
   };
 module.exports = map;

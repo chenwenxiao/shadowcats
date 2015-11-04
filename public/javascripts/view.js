@@ -99,6 +99,12 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
         player.before(fish);
         item_list.push({id: nitem.id, obj: ladder, type : 'fish'});
       }
+	  else if(nitem.type == 'stone') {
+        var stone = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
+        background.after(stone);
+        player.before(stone);
+        item_list.push({id: nitem.id, obj: ladder, type : 'stone'});
+      }
       else {
         console.log("!!!error, unknown item in initialization!!!");
       }

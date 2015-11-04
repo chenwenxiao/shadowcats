@@ -16,16 +16,16 @@ race = (winner, runners...) ->\n\
       items[2] is a ladder\n'
     },
     background : {
-      src : "/images/background.jpg"
+      src : "/images/1-2.png"
     },
     items : [
       {
         type : 'player',
         id : 0,
-        x : 350,
-        y : 250,
+        x : 500,
+        y : 365,
         width : 50,
-        height : 50,
+        height : 45,
         stable : true,
         gravity : true,
         move : true,
@@ -40,58 +40,49 @@ race = (winner, runners...) ->\n\
         src_stand_left : "/images/player_stand_left.png",
         src_stand_right : "/images/player_stand_right.png"
       },
-      {
+	  {
         type : 'ground',
         id : 1,
-        x : 300,
-        y : 300,
-        width : 300,
-        height : 20,
+        x : 0,
+        y : 200,
+        width : 200,
+        height : 10,
         stable : true,
         gravity : false,
-        src : ''
+        src : ""
+      },
+	  {
+        type : 'ground',
+        id : 2,
+        x : 100,
+        y : 400,
+        width : 500,
+        height : 10,
+        stable : true,
+        gravity : false,
+        src : ""
       },
       {
         type : 'ladder',
         id : 3,
-        x : 220,
-        y : 400,
-        width : 50,
-        height : 100,
+        x : 200,
+        y : 180,
+        width : 10,
+        height : 200,
         stable : false,
         gravity : false,
-        src : ''
+        src : "/images/string.png"
       },
-      {
-        type : 'knob',
+	  {
+        type : 'fish',
         id : 4,
-        x : 325,
-        y : 275,
-        width : 30,
-        height : 25,
-        stable : false,
-        gravity : true,
-        targets : [5],
-        status : true,
-        canuse : true,
-        src_closed : "/images/knob_closed.png",
-        src_closing : "/images/knob_closing.gif",
-        src_opened : "/images/knob_opened.png",
-        src_opening : "/images/knob_opening.gif"
-      },
-      {
-        type : 'door',
-        id : 5,
-        x : 400,
-        y : 200,
-        width : 50,
-        height : 100,
-        stable : true,
-        status : true,
-        src_closed : "/images/door_closed.png",
-        src_closing : "/images/door_closing.gif",
-        src_opened : "/images/door_opened.png",
-        src_opening : "/images/door_opening.gif"
+        x : 20,
+        y : 165,
+        width : 80,
+        height : 40,
+		stable : false,
+		canuse : true,
+        src : "/images/fish.png",
       }
     ]
   };
