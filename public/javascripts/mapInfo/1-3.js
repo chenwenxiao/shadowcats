@@ -115,7 +115,15 @@
         src_closing : "/images/door_closing.gif",
         src_opened : "/images/door_opened.png",
         src_opening : "/images/door_opening.gif"
-      }
+      },	
+	  {
+		type : 'victory',
+		x : 0,
+		y : 0, 
+		width : 10,
+		height : 10,
+		src : "victory.png"
+	  },
     ]
   };
 module.exports = map;

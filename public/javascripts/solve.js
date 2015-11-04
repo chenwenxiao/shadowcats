@@ -132,6 +132,10 @@ define(['map', 'view', 'editor'], function(map, view, editor) {
         else
           solve.player.gravity = false, solve.player.ladder = item.id;
       }
+	  if (item.type == 'victory') {
+		viwe.use(item);
+	  }
+	  
       item._use = false;
     },
     sleep : function(msecs) {
