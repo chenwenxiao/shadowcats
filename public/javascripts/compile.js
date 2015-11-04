@@ -14,7 +14,7 @@ define(['editor', 'coffeescript', 'jquery', 'solve'], function(editor, coffeescr
     compiledJS = coffeescript.compile(realCode, {
       bare : true
     });
-    solve.init();
+    //solve.init();
     eval(compiledJS);
     solve.startAnimate();
   });
@@ -33,4 +33,5 @@ define(['editor', 'coffeescript', 'jquery', 'solve'], function(editor, coffeescr
       $('.tutor').animate({bottom: '0px'});
     }
   });
+
 });
