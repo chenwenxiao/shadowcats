@@ -140,7 +140,17 @@ solve.right three\n',
         src_closing : "",
         src_opened : "",
         src_opening : ""
-      }
+      },
+	  {
+        type : 'fish',
+        id : 10,
+        x : 520,
+        y : 410,
+        width : 80,
+        height : 40,
+		stable : false,
+        src : "/images/fish.png",
+      },
     ]
   };
 module.exports = map;

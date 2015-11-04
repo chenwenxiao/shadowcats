@@ -93,6 +93,12 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
         background.after(door);
         player.before(door);
       }
+	  else if(nitem.type == 'fish') {
+        var fish = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
+        background.after(fish);
+        player.before(fish);
+        item_list.push({id: nitem.id, obj: ladder, type : 'fish'});
+      }
       else {
         console.log("!!!error, unknown item in initialization!!!");
       }
