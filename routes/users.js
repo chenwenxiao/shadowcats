@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 			console.log(err);
 		}else{
 			if (res == null)	console.log('no such people');
-			else				render('usrs', { title : 'User\'s infomation', nfo : res });
+			else				render('usrs', { title : 'User\'s infomation', info : res });
 		}
 	});
 });
