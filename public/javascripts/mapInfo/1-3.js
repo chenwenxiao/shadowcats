@@ -80,7 +80,7 @@
         type : 'fish',
         id : 4,
         x : 520,
-        y : 460,
+        y : 360,
         width : 80,
         height : 40,
         stable : false,
