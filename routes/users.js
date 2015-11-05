@@ -5,15 +5,19 @@ var adapter = require('../models/mongodb.js')();
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   //res.send('respond with a resource');
-	console.log(req.session.email);
-	adapter.find(req.session.email, function(err, res){
-		if (err){
-			console.log(err);
-		}else{
-			if (res == null)	console.log('no such people');
-			else				render('usrs', { title : 'User\'s infomation', info : res });
-		}
-	});
+	if (req.session.email == null){
+		res.redirect("/login");
+	}else{
+		console.log(req.session.email);
+		adapter.find(req.session.email, function(err, res){
+			if (err){
+				console.log(err);
+			}else{
+				if (res == null)	console.log('no such people');
+				else				render('usrs', { title : 'User\'s infomation', info : res });
+			}
+		});
+	}
 });
 
 router.post('/', function(req, res){

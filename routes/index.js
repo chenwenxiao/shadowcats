@@ -13,7 +13,8 @@ var game = require('./game');
 
 module.exports = function(app){
 	app.get('/', function(req, res){
-		res.render('index', { title: 'Express' });
+		console.log(res.locals.email);
+		res.render('index', { title: 'Express', email: res.locals.email });
 	});
 
 	app.use('/editor', editor);

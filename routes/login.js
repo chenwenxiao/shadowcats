@@ -4,7 +4,11 @@ var router = express.Router();
 
 
 router.get('/', function(req, res, next) {
-  res.render('login', { title: 'Editor' });
+	if (req.session.email == null){
+  		res.render('login', { title: 'Editor' });
+	}else{
+		res.redirect('/bigmap');
+	}
 });
 
 // router.post('/',function(req,res){
