@@ -1,86 +1,58 @@
-.section
-  .container
-    .row
-      h1 &#20010;&#20154;&#26723;&#26696;
-.section
-  .container
-    .row
-      .col-md-12
-        form.form-horizontal(role="form")
-          .form-group
-            .col-sm-2
-              label.control-label(for="inputEmail3") &#29992;&#25143;&#21517;
-            .col-sm-5
-              input#inputEmail3.form-control(type="email", placeholder="Email")
-          .form-group
-            .col-sm-2
-              label.control-label(for="inputPassword3") &#23494;&#30721;
-            .col-sm-5
-              input#inputPassword3.form-control(type="password", placeholder="Password")
-          .form-group
-            .col-sm-2
-              label.control-label(for="inputPassword3") &#37038;&#31665;
-            .col-sm-5
-              input#inputPassword3.form-control(type="password", placeholder="Password")
-          .form-group
-            .col-sm-2
-              label.control-label(for="inputPassword3") &#21333;&#20301;
-            .col-sm-5
-              input#inputPassword3.form-control(type="password", placeholder="Password")
-          .form-group
-            .col-sm-2
-              label.control-label(for="inputPassword3") &#22791;&#27880;
-            .col-sm-5
-              input#inputPassword3s'w.form-control(type="password", placeholder="Password")
-          .form-group
-            .col-sm-offset-2.col-sm-10
-              .checkbox
-                label
-                  input(type="checkbox")
-                  | Remember me
-          .form-group
-            .col-sm-offset-2.col-sm-10
-              button.btn.btn-default(type="submit") Sign in
-.section
-  .container
-    .row
-      h1 &#20010;&#20154;&#26723;&#26696;
-.section
-  .container
-    .row
-      .col-md-12
-        form.form-horizontal(role="form")
-          .form-group
-            .col-sm-2
-              label.control-label(for="inputEmail3") &#29992;&#25143;&#21517;
-            .col-sm-5
-              input#inputEmail3.form-control(type="email", placeholder="Email")
-          .form-group
-            .col-sm-2
-              label.control-label(for="inputPassword3") &#23494;&#30721;
-            .col-sm-5
-              input#inputPassword3.form-control(type="password", placeholder="Password")
-          .form-group
-            .col-sm-2
-              label.control-label(for="inputPassword3") &#37038;&#31665;
-            .col-sm-5
-              input#inputPassword3.form-control(type="password", placeholder="Password")
-          .form-group
-            .col-sm-2
-              label.control-label(for="inputPassword3") &#21333;&#20301;
-            .col-sm-5
-              input#inputPassword3.form-control(type="password", placeholder="Password")
-          .form-group
-            .col-sm-2
-              label.control-label(for="inputPassword3") &#22791;&#27880;
-            .col-sm-5
-              input#inputPassword3s'w.form-control(type="password", placeholder="Password")
-          .form-group
-            .col-sm-offset-2.col-sm-10
-              .checkbox
-                label
-                  input(type="checkbox")
-                  | Remember me
-          .form-group
-            .col-sm-offset-2.col-sm-10
-              button.btn.btn-default(type="submit") Sign in
+html
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    script(type="text/javascript", src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
+    script(type="text/javascript", src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js")
+    link(href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css", rel="stylesheet", type="text/css")
+    link(href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css", rel="stylesheet", type="text/css")
+  body
+    .section
+      .container
+        .row
+          h1 &#20010;&#20154;&#26723;&#26696;
+    .section
+      .container
+        .row
+          .col-md-12
+            form.form-horizontal(role="form")
+              .form-group
+                .col-sm-2
+                  label.control-label(for="inputEmail3") &#29992;&#25143;&#21517;
+                .col-sm-5
+                  label.form-control #{info.username}
+              .form-group
+                .col-sm-2
+                  label.control-label(for="inputEmail3") &#37038;&#31665;
+                .col-sm-5
+                  label.form-control #{info.email}
+              .form-group
+                .col-sm-2
+                  label.control-label(for="inputPassword3") &#26165;&#31216;
+                .col-sm-5
+                  input.form-control(type="text" value=info.nickname) 
+              .form-group
+                .col-sm-2
+                  label.control-label(for="inputPassword3") &#24180;&#40836;
+                .col-sm-5
+                  input.form-control(type="text" value=info.age) 
+              .form-group
+                .col-sm-2
+                  label.control-label(for="inputPassword3") &#24615;&#21035;
+                .col-sm-5
+                  select#inputPassword3.form-control
+                    option(value="男") &#30007;
+                    option(value="女") &#22899;
+              .form-group
+                .col-sm-2
+                  label.control-label(for="inputPassword3") &#21333;&#20301;
+                .col-sm-5
+                  input#inputPassword3.form-control(type="text" value=info.workplace)
+              .form-group
+                .col-sm-2
+                  label.control-label(for="inputPassword3") &#22791;&#27880;
+                .col-sm-5
+                  textarea#inputPassword3.form-control #{info.remarks}
+              .form-group
+                .col-sm-offset-2.col-sm-10
+                  button.btn.btn-default(type="submit") Sign in
