@@ -48,23 +48,44 @@ define(['map', 'view', 'editor', 'jquery'], function(map, view, editor, $) {
       }
       return array;
     },
-    move : function(item) {
+    movex : function(item) {
       if (!item.move)
          return !item.stable;
       if (item._use) return true;
       item._use = true;
-      item.x += item.vx, item.y += item.vy;
+      item.x += item.vx;
       var o = solve.judge(item);
       var flag = true;
       for (var nitem in o) {
         if (o[nitem].move) {
-          o[nitem].vx += item.vx, o[nitem].vy += item.vy;
+          o[nitem].vx += item.vx;
         }
-        if (!solve.move(o[nitem])) flag = false;
+        if (!solve.movex(o[nitem])) flag = false;
       }
       if (!flag) {
-        item.x -= item.vx, item.y -= item.vy;
-        item.vx = 0, item.vy = 0;
+        item.x -= item.vx;
+        item.vx = 0;
+      }
+      item._use = false;
+      return flag;
+    },
+    movey : function(item) {
+      if (!item.move)
+         return !item.stable;
+      if (item._use) return true;
+      item._use = true;
+      item.y += item.vy;
+      var o = solve.judge(item);
+      var flag = true;
+      for (var nitem in o) {
+        if (o[nitem].move) {
+          o[nitem].vy += item.vy;
+        }
+        if (!solve.movey(o[nitem])) flag = false;
+      }
+      if (!flag) {
+        item.y -= item.vy;
+        item.vy = 0;
       }
       item._use = false;
       return flag;
@@ -79,14 +100,8 @@ define(['map', 'view', 'editor', 'jquery'], function(map, view, editor, $) {
           item.y -= item.vy;
         view.move(item);
       } else {
-        var x = item.vx, y = item.vy;
-        item.vx = x, item.vy = 0;
-        solve.move(item);
-        x = item.vx;
-        item.vx = 0, item.vy = y;
-        solve.move(item);
-        y = item.vy;
-        item.vx = x, item.vy = y;
+        solve.movex(item);
+        solve.movey(item);
         view.move(item);
       }
     },
