@@ -11,6 +11,10 @@ html
     link(rel='stylesheet', href='stylesheets/bootstrap.min.css')
     // Custom styles for this template
     link(rel='stylesheet', href='stylesheets/style.css')
+    link(rel='stylesheet', type='text/css', href='stylesheets/normalize.css')
+    link(rel='stylesheet', type='text/css', href='stylesheets/demo.css')
+    link(rel='stylesheet', type='text/css', href='stylesheets/component.css')
+    link(rel='stylesheet', type='text/css', href='stylesheets/content.css')
   body
     nav.navbar.navbar-inverse.navbar-fixed-top.site-navbar
       .container
@@ -37,4 +41,10 @@ html
               a(href='recipes') 使用技巧
         // /.nav-collapse
     // Jumbotron
+
+    script(src='javascripts/modernizr.custom.js')
+    script(src='javascripts/classie.js')
+    script(src='javascripts/uiMorphingButton_fixed.js')
+    script(src='javascripts/uiMorphingButton.js')
+
     block content

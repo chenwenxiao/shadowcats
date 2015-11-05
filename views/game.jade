@@ -14,9 +14,21 @@ block content
           list = [1, 2, 3, 4, 5]
           race = (winner, runners...) ->
             print winner, runners
-        p
-          button#run.btn.btn-primary.btn-success 运行
-     span#tutor.tutor(title="Popover title" data-container="body" data-toggle="popover" data-placement="left" data-content="左侧的 Popover 中的一些内容")
+        div.row.upload-row.clearfix
+          div.col-md-1
+            button#run.btn.btn-primary.btn-success 运行
+          div.col-md-3
+            .mockup-content
+              .morph-button.morph-button-modal.morph-button-modal-3.morph-button-fixed
+                button#back(type='button', hidden="true") Back Bigmap
+                .morph-content
+                  div
+                    .content-style-form.content-style-form-2
+                      span.icon.icon-close Close the dialog
+                      h2 Back Bigmap
+                      button(href='bigmap', role='button', onclick='window.location.href = "bigmap"') Back
+
+    span#tutor.tutor(title="Popover title" data-container="body" data-toggle="popover" data-placement="left" data-content="左侧的 Popover 中的一些内容")
        button#close.close(data-dismiss='popover', aria-hidden='true') x
     #map(style='display: none') #{map}
 

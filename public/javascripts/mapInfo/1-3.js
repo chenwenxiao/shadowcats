@@ -1,23 +1,25 @@
   var map = {
     round : 0,
     index : 0,
-    code : 'solve.left 40\n',
+    code : 'solve.left 35\n',
     tip : {
       title : '开门开门',
       content : '向左走拨动开关开门：\n\
-      solve.left 40+\n'
+      solve.left 35\n\
+      solve.use solve.map.items[3]\n\
+      items[3] is a ladder\n\'
     },
     background : {
-      src : "/images/background.jpg"
+      src : "/images/1-3.png"
     },
     items : [
       {
         type : 'player',
         id : 0,
-        x : 400,
-        y : 250,
+        x : 450,
+        y : 355,
         width : 50,
-        height : 50,
+        height : 45,
         stable : true,
         gravity : true,
         move : true,
@@ -35,87 +37,56 @@
       {
         type : 'ground',
         id : 1,
-        x : 300,
-        y : 300,
-        width : 300,
-        height : 20,
-        stable : true,
-        gravity : false,
-        src : ''
-      },
-      {
-        type : 'ladder',
-        id : 3,
-        x : 220,
+        x : 0,
         y : 400,
-        width : 50,
-        height : 100,
-        stable : false,
+        width : 600,
+        height : 10,
+        stable : true,
         gravity : false,
         src : ''
       },
       {
         type : 'knob',
-        id : 6,
-        x : 350,
-        y : 275,
-        width : 30,
-        height : 25,
-        stable : false,
-        gravity : true,
-        targets : [5],
-        status : true,
-        canuse : true,
-        src_closed : "/images/knob_closed.png",
-        src_closing : "/images/knob_closing.gif",
-        src_opened : "/images/knob_opened.png",
-        src_opening : "/images/knob_opening.gif"
-      },
-      {
-        type : 'knob',
-        id : 4,
+        id : 2,
         x : 380,
-        y : 275,
-        width : 30,
-        height : 25,
+        y : 350,
+        width : 50,
+        height : 50,
         stable : false,
         gravity : true,
         targets : [5],
         status : true,
         canuse : true,
         src_closed : "/images/knob_closed.png",
-        src_closing : "/images/knob_closing.gif",
-        src_opened : "/images/knob_opened.png",
-        src_opening : "/images/knob_opening.gif"
+        src_closing : "",
+        src_opened : "",
+        src_opening : ""
       },
       {
         type : 'door',
-        id : 5,
-        x : 480,
-        y : 200,
+        id : 3,
+        x : 150,
+        y : 320,
         width : 50,
-        height : 100,
+        height : 80,
         stable : true,
         status : true,
         src_closed : "/images/door_closed.png",
-        src_closing : "/images/door_closing.gif",
-        src_opened : "/images/door_opened.png",
-        src_opening : "/images/door_opening.gif"
+        src_closing : "",
+        src_opened : "",
+        src_opening : ""
       },
-      {
-        type : 'door',
-        id : 7,
-        x : 550,
-        y : 200,
-        width : 50,
-        height : 100,
-        stable : true,
-        status : true,
-        src_closed : "/images/door_closed.png",
-        src_closing : "/images/door_closing.gif",
-        src_opened : "/images/door_opened.png",
-        src_opening : "/images/door_opening.gif"
-      }
+	  {
+        type : 'fish',
+        id : 4,
+        x : 520,
+        y : 460,
+        width : 80,
+        height : 40,
+        stable : false,
+        canuse : true,
+        src : "/images/fish.png",
+      },
     ]
   };
 module.exports = map;

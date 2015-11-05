@@ -1,4 +1,4 @@
-define(['map', 'view', 'editor'], function(map, view, editor) {
+define(['map', 'view', 'editor', 'jquery'], function(map, view, editor, $) {
 
   var solve = {
     player : undefined,
@@ -13,8 +13,12 @@ define(['map', 'view', 'editor'], function(map, view, editor) {
           solve.round++;
           editor.getSession().clearBreakpoints();
           editor.getSession().setBreakpoint(solve.index[solve.round]);
-        } else
+        } else {
           clearInterval(timer);
+          if (solve.victory) {
+            $('#back').click();
+          }
+        }
       }, 50);
     },
     init : function() {
@@ -132,6 +136,10 @@ define(['map', 'view', 'editor'], function(map, view, editor) {
         else
           solve.player.gravity = false, solve.player.ladder = item.id;
       }
+  	  if (item.type == 'fish') {
+  		  view.use(item);
+        solve.victory = true;
+  	  }
       item._use = false;
     },
     sleep : function(msecs) {
@@ -182,7 +190,9 @@ define(['map', 'view', 'editor'], function(map, view, editor) {
           solve.finish();
         }
       },
-      useItem : function(item, num) {
+      useItem : function(id) {
+        var num = arguments[1] ? arguments[1] : 1;
+        var item = map.items[id];
         for (var i = 0; i < num; ++i) {
           if (solve.strife(solve.player, item))
             if (item.canuse) {

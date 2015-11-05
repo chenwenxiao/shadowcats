@@ -19,7 +19,7 @@ exports.emailSettings = {
 };
 
 
-exports.signup = {
+exports.signup = {  
   route: '/signup',
   tokenExpiration: '1 day',
   views: {
@@ -37,7 +37,7 @@ exports.login = {
   route: '/login',
   logoutRoute: '/logout',
   views: {
-    login: '',          // input fields 'login' and 'password' | POST /'login.route' | local variable 'error'
+    login: 'login.jade',          // input fields 'login' and 'password' | POST /'login.route' | local variable 'error'
     loggedOut: ''       // message that user logged out
   },
   handleResponse: false  // let lockit handle the response after login/logout success
