@@ -97,13 +97,13 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
         var fish = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
         background.after(fish);
         player.before(fish);
-        item_list.push({id: nitem.id, obj: ladder, type : 'fish'});
+        item_list.push({id: nitem.id, obj: fish, type : 'fish'});
       }
 	  else if(nitem.type == 'stone') {
         var stone = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
         background.after(stone);
         player.before(stone);
-        item_list.push({id: nitem.id, obj: ladder, type : 'stone'});
+        item_list.push({id: nitem.id, obj: fish, type : 'stone'});
       }
       else {
         console.log("!!!error, unknown item in initialization!!!");
@@ -199,10 +199,23 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
   // door and knob usage status function
   function __use(id) {
     for (var i in item_list) {
-      if(id == item_list[i].id) {
-        var old_cx = parseInt(item_list[i].obj.attr("x"));
-		    var old_cy = parseInt(item_list[i].obj.attr("y"));
+      if(id == item_list[i].id && item_list[i].type=='door') {
         var choose_src;
+        if(item_list[i].status == false) {
+          choose_src = item_list[i].src_closed;
+        }
+        else {
+          choose_src = item_list[i].src_opened;
+        }
+        var set = {
+            "xlink:href": choose_src,
+            preserveAspectRatio: "none"
+          };
+　　　　Snap._.$(item_list[i].obj.node, set);
+        item_list[i].cur_src = choose_src;
+        /*
+        var old_cx = parseInt(item_list[i].obj.attr("x"));
+        var old_cy = parseInt(item_list[i].obj.attr("y"));
         if(item_list[i].status == true) {
           choose_src = item_list[i].src_closing;
         }
@@ -223,18 +236,33 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
 
           });
         }, 25, mina.linear, function() {
-          /*
-          if(last_state==) {
-            console.log("what");
-            if(item_list[i].cur_src == item_list[i].src_walk_front) {
-              var set = {
-                "xlink:href": item_list[i].src_stand_front,
-                preserveAspectRatio: "none"
-              };
-  　　　　     Snap._.$(item_list[i].obj.node, set);
-              item_list[i].cur_src = item_list[i].src_stand_front;
-            }
-            */
+        });
+        */
+        break;
+      }
+      if(id == item_list[i].id && item_list[i].type=='knob') {
+        var old_cx = parseInt(item_list[i].obj.attr("x"));
+        var old_cy = parseInt(item_list[i].obj.attr("y"));
+        if(item_list[i].status == true) {
+          choose_src = item_list[i].src_closing;
+        }
+        else {
+          choose_src = item_list[i].src_opening;
+        }
+        // change the pic's src by the obj's behavier
+        if(item_list[i].cur_src != choose_src) {
+          var set = {
+            "xlink:href": choose_src,
+            preserveAspectRatio: "none"
+          };
+　　　　   Snap._.$(item_list[i].obj.node, set);
+          item_list[i].cur_src = choose_src;
+        }
+        Snap.animate([old_cx, old_cy], [old_cx, old_cy], function (val){
+          item_list[i].obj.attr({
+
+          });
+        }, 25, mina.linear, function() {
         });
         break;
       }
