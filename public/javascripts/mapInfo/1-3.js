@@ -7,7 +7,7 @@
       content : '向左走拨动开关开门：\n\
       solve.left 35\n\
       solve.use solve.map.items[3]\n\
-      items[3] is a ladder\n\'
+      items[3] is a ladder\n'
     },
     background : {
       src : "/images/1-3.png"
@@ -80,7 +80,7 @@
         type : 'fish',
         id : 4,
         x : 520,
-        y : 460,
+        y : 360,
         width : 80,
         height : 40,
         stable : false,
