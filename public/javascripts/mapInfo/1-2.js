@@ -1,19 +1,22 @@
   var map = {
     round : 0,
     index : 0,
-    code : 'six = (one = 10) + (two = 20) + (three = 30)\n\
-solve.left 67\n\
-solve.use solve.map.items[2], 1\n\
-solve.up 30\n\
-list = [1, 2, 3, 4, 5]\n\
-race = (winner, runners...) ->\n\
-  print winner, runners\n',
+    code : 'solve.left 142\n\
+solve.use solve.map.items[3]\n\
+solve.up 100\n\
+solve.use solve.map.items[3]\n\
+solve.left 60\n\
+solve.use solve.map.items[4]\n',
     tip : {
-      title : '跳崖指南',
-      content : '向左前进即可，记得抓住绳子：\n\
-      solve.left 60+\n\
-      solve.use solve.map.items[2]\n\
-      items[2] is a ladder\n'
+      title : '第二关指南',
+      content : '向左前进，抓住绳子向上爬，到达目标：\n\
+      solve.left 142\n\
+      solve.use solve.map.items[3]\n\
+      items[3] is a ladder, rewrite this code when you don\'t want to use it.\n\
+      solve.up 100\n\
+      solve.use solve.map.items[3]\n\
+      solve.left 60\n\
+      solve.useItem 4\n'
     },
     background : {
       src : "/images/1-2.png"
@@ -22,8 +25,8 @@ race = (winner, runners...) ->\n\
       {
         type : 'player',
         id : 0,
-        x : 500,
-        y : 365,
+        x : 460,
+        y : 355,
         width : 50,
         height : 45,
         stable : true,
@@ -65,23 +68,24 @@ race = (winner, runners...) ->\n\
       {
         type : 'ladder',
         id : 3,
-        x : 200,
+        x : 190,
         y : 180,
         width : 10,
-        height : 200,
+        height : 220,
         stable : false,
         gravity : false,
+        canuse: true,
         src : "/images/string.png"
       },
 	  {
         type : 'fish',
         id : 4,
         x : 20,
-        y : 165,
+        y : 160,
         width : 80,
         height : 40,
-		stable : false,
-		canuse : true,
+		    stable : false,
+		    canuse : true,
         src : "/images/fish.png",
       }
     ]
