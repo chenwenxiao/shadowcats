@@ -2,19 +2,19 @@
     round : 0,
     index : 0,
     code : 'solve.left 142\n\
-solve.use solve.map.items[3]\n\
+solve.useItem 3\n\
 solve.up 100\n\
-solve.use solve.map.items[3]\n\
+solve.useItem 3\n\
 solve.left 60\n\
-solve.use solve.map.items[4]\n',
+solve.useItem 4\n',
     tip : {
       title : '第二关指南',
       content : '向左前进，抓住绳子向上爬，到达目标：\n\
       solve.left 142\n\
-      solve.use solve.map.items[3]\n\
+      solve.useItem 3\n\
       items[3] is a ladder, rewrite this code when you don\'t want to use it.\n\
       solve.up 100\n\
-      solve.use solve.map.items[3]\n\
+      solve.useItem 3\n\
       solve.left 60\n\
       solve.useItem 4\n'
     },
