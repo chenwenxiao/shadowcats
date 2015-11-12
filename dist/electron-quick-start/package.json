@@ -4,7 +4,8 @@
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "electron main.js"
+    "start": "electron main.js",
+    "package": "electron-packager ./ ShadowCats --all --out ../ShadowCats --version 0.30.2 --overwrite --icon=./favicon.ico"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
   },
   "homepage": "https://github.com/atom/electron-quick-start#readme",
   "devDependencies": {
+    "electron-packager": "^5.1.1",
     "electron-prebuilt": "^0.34.0"
   }
 }
