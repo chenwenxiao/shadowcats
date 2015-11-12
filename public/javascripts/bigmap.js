@@ -1,7 +1,7 @@
 window.onload = function() {
   var stage = Cookies.get('stage');
-  if (stage == "")
-    stage = 1;
+  if (typeof(stage) == "undefined")
+    stage = "1";
   var player;
   $('[num]').each(function(){
     if (this.getAttribute('num') == stage) {
