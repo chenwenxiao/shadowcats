@@ -1,0 +1,43 @@
+<div class="modal fade" id="signup" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="background-image" style="background-image : url('..\public\images\background.png')"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <h1>Signup Your ShadowCats Account!</h1><br/><br/>
+        </div>
+        <form action="/signup" method="POST" autocomplete="off" class="form-horizontal">
+          <div class="form-group">
+            <div class="col-sm-2">
+              <label for="name" class="control-label">UserName</label>
+            </div>
+            <div class="col-sm-10">
+              <input type="text" name="name" placeholder="UserName" class="form-control"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-2">
+              <label for="email" class="control-label">Email</label>
+            </div>
+            <div class="col-sm-10">
+              <input id="inputEmail3" type="email" name="email" placeholder="Your email" class="form-control"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-2">
+              <label for="password" class="control-label">Password</label>
+            </div>
+            <div class="col-sm-10">
+              <input id="inputPassword3" type="password" name="password" placeholder="Create a password" class="form-control"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-success">Create Account!</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
