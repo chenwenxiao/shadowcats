@@ -9,18 +9,20 @@ router.get('/', function(req, res, next) {
 		res.redirect("/login");
 	}else{
 		console.log(req.session.email);
-		adapter.find(req.session.email, function(err, res){
+		adapter.find(req.session.email, function(err, result){
 			if (err){
 				console.log(err);
 			}else{
-				if (res == null)	console.log('no such people');
-				else				render('usrs', { title : 'User\'s infomation', info : res });
+				if (result == null)	console.log('no such people');
+				else				res.render('usrs', { title : 'User\'s infomation', info : result });
 			}
 		});
 	}
 });
 
 router.post('/', function(req, res){
+	console.log(req.body);
+	console.log('Here');
 	var email = req.session.email;
 	var name = req.session.name;
 	var age = req.body.age;
@@ -29,7 +31,7 @@ router.post('/', function(req, res){
 	var nickname = req.body.nickname;
 	var workPlace = req.body.workPlace;
 
-	var newInfo = {
+	/*var newInfo = {
 		name : name,
 		email: email,
 		nickname : nickname,
@@ -37,20 +39,34 @@ router.post('/', function(req, res){
 		sex: sex,
 		notice: notice,
 		workPlace: workPlace
-	};	
+	};*/
+	//res.redirect('/usrs');
 
-	adapter.find(email, function(err, res){
+	adapter.find(email, function(err, result){
 		if (err){
-			console.log(err)
+			console.log(err);
+			//res.redirect('/error');
 		}else{
-			if (res==null)	console.log('Something Wrong!');
-			else{
+			if (result == null){
+				console.log('Something Wrong!');
+			}else{
+				var newInfo = result;
+				if (nickname != undefined)	newInfo['nickname'] = nickname;
+				if (age != undefined)		newInfo['age'] = age;
+				if (sex != undefined)		newInfo['sex'] = sex;
+				if (notice != undefined)	newInfo['notice'] = notice;
+				if (workPlace != undefined)	newInfo['workPlace'] = workPlace; 
 				//render('success', { substance : 'success!' });
 				adapter.save(newInfo, function(err){
-					if (err){
+					/*if (err){
 						render('fail', { substance: 'fail! '});
 					}else{
 						render('success', { substance: 'success!' });
+					}*/
+					if (err){
+						console.log(err);
+					}else{
+						res.redirect('/usrs');
 					}
 				});
 			}

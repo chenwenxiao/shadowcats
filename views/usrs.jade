@@ -15,12 +15,12 @@ html
       .container
         .row
           .col-md-12
-            form.form-horizontal(role="form",action="/usrs",method=POST)
+            form.form-horizontal(role="form",action="/usrs",method="POST")
               .form-group
                 .col-sm-2
                   label.control-label(for="inputEmail3") &#29992;&#25143;&#21517;
                 .col-sm-5
-                  label.form-control #{info.username}
+                  label.form-control #{info.name}
               .form-group
                 .col-sm-2
                   label.control-label(for="inputEmail3") &#37038;&#31665;
@@ -47,12 +47,12 @@ html
                 .col-sm-2
                   label.control-label(for="inputPassword3") &#21333;&#20301;
                 .col-sm-5
-                  input#inputPassword3.form-control(type="text" value=info.workplace)
+                  input#inputPassword3.form-control(type="text" value=info.workPlace)
               .form-group
                 .col-sm-2
                   label.control-label(for="inputPassword3") &#22791;&#27880;
                 .col-sm-5
-                  textarea#inputPassword3.form-control #{info.remarks}
+                  textarea#inputPassword3.form-control #{info.notice}
               .form-group
                 .col-sm-offset-2.col-sm-10
-                  button.btn.btn-default(type="submit") Sign in
+                  button.btn.btn-default(type="submit") Submit
