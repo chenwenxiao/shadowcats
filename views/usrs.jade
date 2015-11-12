@@ -15,7 +15,7 @@ html
       .container
         .row
           .col-md-12
-            form.form-horizontal(role="form",action="/usrs",method="POST")
+            form.form-horizontal(role="form", action="/usrs", method="POST")
               .form-group
                 .col-sm-2
                   label.control-label(for="inputEmail3") &#29992;&#25143;&#21517;
@@ -30,29 +30,29 @@ html
                 .col-sm-2
                   label.control-label(for="inputPassword3") &#26165;&#31216;
                 .col-sm-5
-                  input.form-control(type="text" value=info.nickname) 
+                  input.form-control(type="text" name="nickname" value=info.nickname) 
               .form-group
                 .col-sm-2
                   label.control-label(for="inputPassword3") &#24180;&#40836;
                 .col-sm-5
-                  input.form-control(type="text" value=info.age) 
+                  input.form-control(type="text" name="age" value=info.age) 
               .form-group
                 .col-sm-2
                   label.control-label(for="inputPassword3") &#24615;&#21035;
                 .col-sm-5
-                  select#inputPassword3.form-control
+                  select#inputPassword3.form-control(name = "sex")
                     option(value="男") &#30007;
                     option(value="女") &#22899;
               .form-group
                 .col-sm-2
                   label.control-label(for="inputPassword3") &#21333;&#20301;
                 .col-sm-5
-                  input#inputPassword3.form-control(type="text" value=info.workPlace)
+                  input#inputPassword3.form-control(type="text" name="workPlace" value=info.workPlace)
               .form-group
                 .col-sm-2
                   label.control-label(for="inputPassword3") &#22791;&#27880;
                 .col-sm-5
-                  textarea#inputPassword3.form-control #{info.notice}
+                  textarea#inputPassword3.form-control(type="text" name="notice") #{info.notice}
               .form-group
                 .col-sm-offset-2.col-sm-10
-                  button.btn.btn-default(type="submit") Submit
+                  button.btn.btn-success(type="submit") Submit
