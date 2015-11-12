@@ -1,23 +1,33 @@
   var map = {
     round : 0,
     index : 0,
-    code : 'solve.right 200\n\
-solve.useItem 4\n',
+    code : 'solve.left 200\n\
+solve.right 150\n\
+solve.useItem 5\n\
+solve.up 100\n\
+solve.useItem 5\n\
+solve.left 180\n\
+solve.useItem 3\n',
     tip : {
-      title : '第五关：推推推',
-      content : '向右走推动箱子：\n\
-      solve.left 200\n\
-      solve.useItem 4\n',
+      title : '第十关：要推还要爬还要跳',
+      content : 'Tips：\n\
+        solve.left 200\n\
+        solve.right 150\n\
+        solve.useItem 5\n\
+        solve.up 100\n\
+        solve.useItem 5\n\
+        solve.left 180\n\
+        solve.useItem 3\n',
     },
     background : {
-      src : "/images/1-5.png"
+      src : "/images/1-10.png"
     },
     items : [
       {
         type : 'player',
         id : 0,
-        x : 40,
-        y : 155,
+        x : 520,
+        y : 355,
         width : 50,
         height : 45,
         stable : true,
@@ -37,9 +47,9 @@ solve.useItem 4\n',
       {
         type : 'ground',
         id : 1,
-        x : 0,
+        x : 150,
         y : 200,
-        width : 400,
+        width : 300,
         height : 10,
         stable : true,
         gravity : false,
@@ -48,19 +58,30 @@ solve.useItem 4\n',
       {
         type : 'ground',
         id : 2,
-        x : 400,
-        y : 500,
-        width : 200,
+        x : 0,
+        y : 400,
+        width : 600,
         height : 10,
         stable : true,
         gravity : false,
         src : ''
       },
+	  {
+        type : 'fish',
+        id : 3,
+        x : 50,
+        y : 310,
+        width : 80,
+        height : 40,
+        stable : false,
+        canuse : true,
+        src : "/images/fish.png",
+      },
       {
         type : 'box',
-        id : 3,
+        id : 4,
         x : 300,
-        y : 150,
+        y : 350,
         vx : 0,
         vy : 0,
         width : 50,
@@ -70,17 +91,18 @@ solve.useItem 4\n',
         move : true,
         src : '/images/box.png'
       },
-	  {
-        type : 'fish',
-        id : 4,
-        x : 420,
-        y : 400,
-        width : 80,
-        height : 40,
+      {
+        type : 'ladder',
+        id : 5,
+        x : 430,
+        y : 190,
+        width : 10,
+        height : 220,
         stable : false,
-        canuse : true,
-        src : "/images/fish.png",
-      },
+        gravity : false,
+        canuse: true,
+        src : "/images/string.png"
+      }
     ]
   };
 module.exports = map;

@@ -1,27 +1,31 @@
   var map = {
     round : 0,
     index : 0,
-    code : 'solve.left 30\n\
-solve.useItem 2\n\
+    code : 'solve.right 100\n\
 solve.left 190\n\
+solve.useItem 5\n\
+solve.up 100\n\
+solve.right 40\n\
 solve.useItem 4\n',
     tip : {
-      title : '第四关指南:开门开门',
-      content : '向左走拨动开关开门：\n\
-      solve.left 30\n\
-      solve.useItem 2\n\
-      solve.left 190\n\
-      solve.useItem 4\n',
+      title : '第九关：绕一圈',
+      content : '绕一圈绕到目标：\n\
+        solve.right 100\n\
+        solve.left 190\n\
+        solve.useItem 5\n\
+        solve.up 100\n\
+        solve.right 40\n\
+        solve.useItem 4\n',
     },
     background : {
-      src : "/images/1-4.png"
+      src : "/images/1-9.png"
     },
     items : [
       {
         type : 'player',
         id : 0,
-        x : 450,
-        y : 355,
+        x : 320,
+        y : 155,
         width : 50,
         height : 45,
         stable : true,
@@ -41,6 +45,28 @@ solve.useItem 4\n',
       {
         type : 'ground',
         id : 1,
+        x : 150,
+        y : 200,
+        width : 300,
+        height : 10,
+        stable : true,
+        gravity : false,
+        src : ''
+      },
+      {
+        type : 'ground',
+        id : 2,
+        x : 295,
+        y : 0,
+        width : 10,
+        height : 200,
+        stable : true,
+        gravity : false,
+        src : ''
+      },
+      {
+        type : 'ground',
+        id : 3,
         x : 0,
         y : 400,
         width : 600,
@@ -49,48 +75,29 @@ solve.useItem 4\n',
         gravity : false,
         src : ''
       },
-      {
-        type : 'knob',
-        id : 2,
-        x : 380,
-        y : 350,
-        width : 50,
-        height : 50,
-        stable : false,
-        gravity : true,
-        targets : [3],
-        status : true,
-        canuse : true,
-        src_closed : "/images/knob_closed.png",
-        src_closing : "",
-        src_opened : "/images/knob_closed.png",
-        src_opening : ""
-      },
-      {
-        type : 'door',
-        id : 3,
-        x : 150,
-        y : 320,
-        width : 50,
-        height : 80,
-        stable : true,
-        status : true,
-        src_closed : "/images/door_closed.png",
-        src_closing : "",
-        src_opened : "/images/door_opened.png",
-        src_opening : ""
-      },
 	  {
         type : 'fish',
         id : 4,
-        x : 0,
-        y : 360,
+        x : 200,
+        y : 160,
         width : 80,
         height : 40,
         stable : false,
         canuse : true,
         src : "/images/fish.png",
       },
+      {
+        type : 'ladder',
+        id : 5,
+        x : 150,
+        y : 190,
+        width : 10,
+        height : 220,
+        stable : false,
+        gravity : false,
+        canuse: true,
+        src : "/images/string.png"
+      }
     ]
   };
 module.exports = map;

@@ -1,29 +1,27 @@
   var map = {
     round : 0,
     index : 0,
-    code : 'solve.left 30\n\
-solve.useItem 2\n\
-solve.left 190\n\
-solve.useItem 4\n',
+    code : 'for i in [0..4]\n\
+    if (i & 1)\n\
+        solve.left 250\n\
+    else\n\
+        solve.right 250\n\
+solve.useItem 6\n',
     tip : {
-      title : '第四关指南:开门开门',
-      content : '向左走拨动开关开门：\n\
-      solve.left 30\n\
-      solve.useItem 2\n\
-      solve.left 190\n\
-      solve.useItem 4\n',
+      title : '第七关：跑跑跑',
+      content : '是男人就下一百层：\n',
     },
     background : {
-      src : "/images/1-4.png"
+      src : "/images/1-7.png"
     },
     items : [
       {
         type : 'player',
         id : 0,
-        x : 450,
-        y : 355,
+        x : 40,
+        y : 50,
         width : 50,
-        height : 45,
+        height : 50,
         stable : true,
         gravity : true,
         move : true,
@@ -42,49 +40,62 @@ solve.useItem 4\n',
         type : 'ground',
         id : 1,
         x : 0,
-        y : 400,
-        width : 600,
+        y : 100,
+        width : 500,
         height : 10,
         stable : true,
         gravity : false,
         src : ''
       },
       {
-        type : 'knob',
+        type : 'ground',
         id : 2,
-        x : 380,
-        y : 350,
-        width : 50,
-        height : 50,
-        stable : false,
-        gravity : true,
-        targets : [3],
-        status : true,
-        canuse : true,
-        src_closed : "/images/knob_closed.png",
-        src_closing : "",
-        src_opened : "/images/knob_closed.png",
-        src_opening : ""
+        x : 100,
+        y : 200,
+        width : 500,
+        height : 10,
+        stable : true,
+        gravity : false,
+        src : ''
       },
       {
-        type : 'door',
+        type : 'ground',
         id : 3,
-        x : 150,
-        y : 320,
-        width : 50,
-        height : 80,
+        x : 0,
+        y : 300,
+        width : 500,
+        height : 10,
         stable : true,
-        status : true,
-        src_closed : "/images/door_closed.png",
-        src_closing : "",
-        src_opened : "/images/door_opened.png",
-        src_opening : ""
+        gravity : false,
+        src : ''
+      },
+      {
+        type : 'ground',
+        id : 4,
+        x : 100,
+        y : 400,
+        width : 500,
+        height : 10,
+        stable : true,
+        gravity : false,
+        src : ''
+      },
+      {
+        type : 'ground',
+        id : 5,
+        x : 0,
+        y : 500,
+        width : 600,
+        height : 10,
+        stable : true,
+        gravity : false,
+        src : ''
       },
 	  {
         type : 'fish',
-        id : 4,
-        x : 0,
-        y : 360,
+        id : 6,
+        x : 500,
+        y : 460,
         width : 80,
         height : 40,
         stable : false,

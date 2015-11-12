@@ -1,11 +1,11 @@
   var map = {
     round : 0,
     index : 0,
-    code : 'solve.right 200\n',
+    code : 'solve.useItem 2\n',
     tip : {
-      title : '第一关指南',
-      content : '向右前进即可：\n\
-      solve.right 200\n'
+      title : '第一关指南：我要赢',
+      content : '获胜判定，对小鱼useItem：2\n\
+      solve.useItem 2\n'
     },
     background : {
       src : "/images/1-1.png"
@@ -14,8 +14,8 @@
       {
         type : 'player',
         id : 0,
-        x : 120,
-        y : 155,
+        x : 275,
+        y : 255,
         width : 50,
         height : 45,
         stable : true,
@@ -35,53 +35,9 @@
       {
         type : 'ground',
         id : 1,
-        x : 0,
-        y : 100,
-        width : 100,
-        height : 10,
-        stable : true,
-        gravity : false,
-        src : ""
-      },
-	  {
-        type : 'ground',
-        id : 2,
         x : 100,
-        y : 200,
-        width : 100,
-        height : 10,
-        stable : true,
-        gravity : false,
-        src : ""
-      },
-	  {
-        type : 'ground',
-        id : 3,
-        x : 200,
         y : 300,
-        width : 100,
-        height : 10,
-        stable : true,
-        gravity : false,
-        src : ""
-      },
-	  {
-        type : 'ground',
-        id : 4,
-        x : 300,
-        y : 400,
-        width : 100,
-        height : 10,
-        stable : true,
-        gravity : false,
-        src : ""
-      },
-	  {
-        type : 'ground',
-        id : 5,
-        x : 400,
-        y : 500,
-        width : 200,
+        width : 400,
         height : 10,
         stable : true,
         gravity : false,
@@ -89,9 +45,9 @@
       },
 	  {
         type : 'fish',
-        id : 6,
-        x : 520,
-        y : 460,
+        id : 2,
+        x : 260,
+        y : 260,
         width : 80,
         height : 40,
 		stable : false,
@@ -100,9 +56,19 @@
       },
 	  {
         type : 'stone',
-        id : 7,
-        x : 0,
-        y : 25,
+        id : 3,
+        x : 100,
+        y : 225,
+        width : 80,
+        height : 75,
+        stable : true,
+        src : "/images/stone.png"
+      },
+      {
+        type : 'stone',
+        id : 4,
+        x : 420,
+        y : 225,
         width : 80,
         height : 75,
         stable : true,
