@@ -66,8 +66,9 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
         });
       }
       else if(nitem.type == 'knob') {
+        var knob;
         if(nitem.status == true) {
-          var knob = svg.paper.image(nitem.src_closed, nitem.x, nitem.y, nitem.width, nitem.height);
+          knob = svg.paper.image(nitem.src_closed, nitem.x, nitem.y, nitem.width, nitem.height);
           item_list.push({id: nitem.id, obj: knob, type : 'knob',
                           status : nitem.status,
                           cur_src : nitem.src_closed,
@@ -77,7 +78,7 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
                           src_opening : nitem.src_opening});
         }
         else {
-          var knob = svg.paper.image(nitem.src_opened, nitem.x, nitem.y, nitem.width, nitem.height);
+          knob = svg.paper.image(nitem.src_opened, nitem.x, nitem.y, nitem.width, nitem.height);
           item_list.push({id: nitem.id, obj: knob, type : 'knob',
                           status : nitem.status,
                           cur_src : nitem.src_opened,
@@ -95,8 +96,9 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
         });
       }
       else if(nitem.type == 'door') {
+        var door;
         if(nitem.status == true) {
-          var door = svg.paper.image(nitem.src_closed, nitem.x, nitem.y, nitem.width, nitem.height);
+          door = svg.paper.image(nitem.src_closed, nitem.x, nitem.y, nitem.width, nitem.height);
           item_list.push({id: nitem.id, obj: door, type : 'door',
                           status : nitem.status,
                           cur_src : nitem.src_closed,
@@ -106,7 +108,7 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
                           src_opening : nitem.src_opening});
         }
         else {
-          var door = svg.paper.image(nitem.src_opened, nitem.x, nitem.y, nitem.width, nitem.height);
+          door = svg.paper.image(nitem.src_opened, nitem.x, nitem.y, nitem.width, nitem.height);
           item_list.push({id: nitem.id, obj: door, type : 'door',
                           status : nitem.status,
                           cur_src : nitem.src_opened,
@@ -240,74 +242,44 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
   function __use(id) {
     for (var i in item_list) {
       if(id == item_list[i].id && item_list[i].type=='door') {
-        var choose_src;
-        if(item_list[i].status == false) {
-          choose_src = item_list[i].src_closed;
-        }
-        else {
-          choose_src = item_list[i].src_opened;
-        }
-        var set = {
-            "xlink:href": choose_src,
-            preserveAspectRatio: "none"
-          };
-　　　　Snap._.$(item_list[i].obj.node, set);
-        item_list[i].cur_src = choose_src;
-        /*
-        var old_cx = parseInt(item_list[i].obj.attr("x"));
-        var old_cy = parseInt(item_list[i].obj.attr("y"));
-        if(item_list[i].status == true) {
-          choose_src = item_list[i].src_closing;
-        }
-        else {
-          choose_src = item_list[i].src_opening;
-        }
-        // change the pic's src by the obj's behavier
-        if(item_list[i].cur_src != choose_src) {
-          var set = {
-            "xlink:href": choose_src,
-            preserveAspectRatio: "none"
-          };
-　　　　   Snap._.$(item_list[i].obj.node, set);
-          item_list[i].cur_src = choose_src;
-        }
-        Snap.animate([old_cx, old_cy], [old_cx, old_cy], function (val){
-          item_list[i].obj.attr({
-
-          });
-        }, 25, mina.linear, function() {
+        Snap.animate(0, 12, function (val){ }, 10, mina.linear, function(){
+          if(item_list[i].status == false) {
+            item_list[i].status = true;
+            var set = {
+              "xlink:href": item_list[i].src_closed,
+              preserveAspectRatio: "none"
+            };
+  　　　　  Snap._.$(item_list[i].obj.node, set);
+          }
+          else {
+            item_list[i].status = false;
+            var set = {
+              "xlink:href": item_list[i].src_opened,
+              preserveAspectRatio: "none"
+            };
+  　　　　  Snap._.$(item_list[i].obj.node, set);
+          }
         });
-        */
         break;
       }
+
       if(id == item_list[i].id && item_list[i].type=='knob') {
         var old_cx = parseInt(item_list[i].obj.attr("x"));
         var old_cy = parseInt(item_list[i].obj.attr("y"));
+        var rot_start = 0;
+        var rot_end;
         if(item_list[i].status == true) {
-          choose_src = item_list[i].src_closing;
+          rot_end = 90;
         }
         else {
-          choose_src = item_list[i].src_opening;
+          rot_end = -90;
         }
-        // change the pic's src by the obj's behavier
-        if(item_list[i].cur_src != choose_src) {
-          var set = {
-            "xlink:href": choose_src,
-            preserveAspectRatio: "none"
-          };
-　　　　   Snap._.$(item_list[i].obj.node, set);
-          item_list[i].cur_src = choose_src;
-        }
-        Snap.animate([old_cx, old_cy], [old_cx, old_cy], function (val){
-          item_list[i].obj.attr({
-
-          });
-        }, 25, mina.linear, function() {
-        });
+        Snap.animate(rot_start, rot_end, function (val){
+          item_list[i].obj.transform(new Snap.Matrix().rotate(val, old_cx+25, old_cy+25));
+        }, 2000);
         break;
       }
     }
-    console.log("one use...done...");
   };
 
   function startAnimate(round) {
