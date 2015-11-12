@@ -19,7 +19,7 @@ router.post('/', function(req, res){
 	var stage = req.query['stage'];
 	var total = req.query['total'];
 	
-	adapter.find(req.email, function(err, result){
+	adapter.find(req.session.email, function(err, result){
 		if (err){
 			console.log(err);
 		}else{
