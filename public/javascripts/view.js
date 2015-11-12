@@ -11,7 +11,8 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
     item_list.push(background);
     var player;
     // initialize every objects in map
-    map.items.forEach(function(nitem){
+    for (var i in map.items) {
+      var nitem = map.items[i];
       if(nitem.type == 'player') {
         player = svg.paper.image(nitem.src_stand_front, nitem.x, nitem.y, nitem.width, nitem.height);
         item_list.push({id: nitem.id, obj: player, type : 'player',
@@ -25,45 +26,24 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
                         src_stand_left : nitem.src_stand_left,
                         src_stand_right : nitem.src_stand_right});
         background.after(player);
-        console.log(nitem.id);
-        
-        player.mouseover(function(e) {
-          var str = "Object Type: player\nItem ID: " + nitem.id + "\n";
-          console.log(str);
-        });
       }
       else if(nitem.type == 'ground') {
         var ground = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
         background.after(ground);
         player.before(ground);
         item_list.push({id: nitem.id, obj: ground, type : 'ground'});
-        
-        ground.mouseover(function(e) {
-          var str = "Object Type: ground\nItem ID: " + nitem.id + "\n";
-          console.log(str);
-        });
       }
       else if(nitem.type == 'box') {
         var box = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
         background.after(box);
         player.before(box);
         item_list.push({id: nitem.id, obj: box, type : 'box'});
-
-        box.mouseover(function(e) {
-          var str = "Object Type: box\nItem ID: " + nitem.id + "\n";
-          console.log(str);
-        });
       }
       else if(nitem.type == 'ladder') {
         var ladder = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
         background.after(ladder);
         player.before(ladder);
         item_list.push({id: nitem.id, obj: ladder, type : 'ladder'});
-
-        ladder.mouseover(function(e) {
-          var str = "Object Type: ladder\nItem ID: " + nitem.id + "\n";
-          console.log(str);
-        });
       }
       else if(nitem.type == 'knob') {
         var knob;
@@ -89,11 +69,6 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
         }
         background.after(knob);
         player.before(knob);
-
-        knob.mouseover(function(e) {
-          var str = "Object Type: knob\nItem ID: " + nitem.id + "\n";
-          console.log(str);
-        });
       }
       else if(nitem.type == 'door') {
         var door;
@@ -119,38 +94,23 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
         }
         background.after(door);
         player.before(door);
-
-        door.mouseover(function(e) {
-          var str = "Object Type: door\nItem ID: " + nitem.id + "\n";
-          console.log(str);
-        });
       }
 	  else if(nitem.type == 'fish') {
         var fish = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
         background.after(fish);
         player.before(fish);
         item_list.push({id: nitem.id, obj: fish, type : 'fish'});
-
-        fish.mouseover(function(e) {
-          var str = "Object Type: fish\nItem ID: " + nitem.id + "\n";
-          console.log(str);
-        });
       }
 	  else if(nitem.type == 'stone') {
         var stone = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
         background.after(stone);
         player.before(stone);
         item_list.push({id: nitem.id, obj: fish, type : 'stone'});
-
-        stone.mouseover(function(e) {
-          var str = "Object Type: stone\nItem ID: " + nitem.id + "\n";
-          console.log(str);
-        });
       }
       else {
         console.log("!!!error, unknown item in initialization!!!");
       }
-    });
+    }
     console.log("initialization finished...");
   };
   // player movement function
