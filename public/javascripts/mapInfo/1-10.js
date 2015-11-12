@@ -1,6 +1,7 @@
   var map = {
     round : 0,
     index : 0,
+    stage : '1-10',
     code : 'solve.left 200\n\
 solve.right 150\n\
 solve.useItem 5\n\

@@ -1,6 +1,7 @@
   var map = {
     round : 0,
     index : 0,
+    stage : '1-7',
     code : 'for i in [0..4]\n\
     if (i & 1)\n\
         solve.left 250\n\
