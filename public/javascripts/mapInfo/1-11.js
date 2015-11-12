@@ -1,0 +1,193 @@
+  var map = {
+    round : 0,
+    index : 0,
+    code : '\n',
+    tip : {
+      title : '第十一关：地下探险',
+      content : '要求：编写上下T型台的函数\n\
+        No Tips!\n',
+    },
+    background : {
+      src : "/images/1-11.png"
+    },
+    items : [
+      {
+        type : 'player',
+        id : 0,
+        x : 0,
+        y : 155,
+        width : 50,
+        height : 45,
+        stable : true,
+        gravity : true,
+        move : true,
+        vx : 0,
+        vy : 0,
+        src_walk_front : "/images/player_walk_front.gif",
+        src_walk_back : "/images/player_walk_back.gif",
+        src_walk_left : "/images/player_walk_left.gif",
+        src_walk_right : "/images/player_walk_right.gif",
+        src_stand_front : "/images/player_stand_front.png",
+        src_stand_back : "/images/player_stand_back.png",
+        src_stand_left : "/images/player_stand_left.png",
+        src_stand_right : "/images/player_stand_right.png"
+      },
+	  {
+        type : 'fish',
+        id : 1,
+        x : -30,
+        y : 460,
+        width : 80,
+        height : 40,
+        stable : false,
+        canuse : true,
+        src : "/images/fish.png",
+      },
+      {
+        type : 'ladder',
+        id : 2,
+        x : 160,
+        y : 190,
+        width : 10,
+        height : 320,
+        stable : false,
+        gravity : false,
+        canuse: true,
+        src : "/images/string.png"
+      },
+      {
+        type : 'ladder',
+        id : 3,
+        x : 260,
+        y : 190,
+        width : 10,
+        height : 320,
+        stable : false,
+        gravity : false,
+        canuse: true,
+        src : "/images/string.png"
+      },
+      {
+        type : 'ladder',
+        id : 2,
+        x : 450,
+        y : 190,
+        width : 10,
+        height : 320,
+        stable : false,
+        gravity : false,
+        canuse: true,
+        src : "/images/string.png"
+      },
+      {
+        type : 'ladder',
+        id : 3,
+        x : 550,
+        y : 190,
+        width : 10,
+        height : 320,
+        stable : false,
+        gravity : false,
+        canuse: true,
+        src : "/images/string.png"
+      },
+      {
+        type : 'ground',
+        id : 6,
+        x : 0,
+        y : 200,
+        width : 100,
+        height : 10,
+        stable : true,
+        gravity : false,
+        src : ''
+      },
+      {
+        type : 'ground',
+        id : 7,
+        x : 150,
+        y : 200,
+        width : 100,
+        height : 10,
+        stable : true,
+        gravity : false,
+        src : ''
+      },
+      {
+        type : 'ground',
+        id : 8,
+        x : 450,
+        y : 200,
+        width : 100,
+        height : 10,
+        stable : true,
+        gravity : false,
+        src : ''
+      },
+      {
+        type : 'ground',
+        id : 9,
+        x : 200,
+        y : 200,
+        width : 10,
+        height : 300,
+        stable : true,
+        gravity : false,
+        src : ''
+      },
+      {
+        type : 'ground',
+        id : 10,
+        x : 500,
+        y : 200,
+        width : 10,
+        height : 300,
+        stable : true,
+        gravity : false,
+        src : ''
+      },
+      {
+        type : 'ground',
+        id : 11,
+        x : 0,
+        y : 500,
+        width : 600,
+        height : 10,
+        stable : true,
+        gravity : false,
+        src : ''
+      },
+      {
+        type : 'knob',
+        id : 12,
+        x : 520,
+        y : 450,
+        width : 50,
+        height : 50,
+        stable : false,
+        gravity : true,
+        targets : [13],
+        status : true,
+        canuse : true,
+        src_closed : "/images/knob_closed.png",
+        src_closing : "",
+        src_opened : "/images/knob_closed.png",
+        src_opening : ""
+      },
+      {
+        type : 'door',
+        id : 13,
+        x : 50,
+        y : 420,
+        width : 50,
+        height : 80,
+        stable : true,
+        status : true,
+        src_closed : "/images/door_closed.png",
+        src_closing : "",
+        src_opened : "/images/door_opened.png",
+        src_opening : ""
+      }
+    ]
+  };
+module.exports = map;

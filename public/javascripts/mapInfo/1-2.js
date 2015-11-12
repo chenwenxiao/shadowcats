@@ -1,22 +1,13 @@
   var map = {
     round : 0,
     index : 0,
-    code : 'solve.left 142\n\
-solve.useItem 3\n\
-solve.up 100\n\
-solve.useItem 3\n\
-solve.left 60\n\
-solve.useItem 4\n',
+    code : 'solve.right 200\n\
+solve.useItem 6\n',
     tip : {
       title : '第二关指南',
-      content : '向左前进，抓住绳子向上爬，到达目标：\n\
-      solve.left 142\n\
-      solve.useItem 3\n\
-      items[3] is a ladder, rewrite this code when you don\'t want to use it.\n\
-      solve.up 100\n\
-      solve.useItem 3\n\
-      solve.left 60\n\
-      solve.useItem 4\n'
+      content : '向右前进即可：\n\
+      solve.right 200\n\
+      solve.useItem 6\n'
     },
     background : {
       src : "/images/1-2.png"
@@ -25,8 +16,8 @@ solve.useItem 4\n',
       {
         type : 'player',
         id : 0,
-        x : 460,
-        y : 355,
+        x : 120,
+        y : 155,
         width : 50,
         height : 45,
         stable : true,
@@ -43,12 +34,12 @@ solve.useItem 4\n',
         src_stand_left : "/images/player_stand_left.png",
         src_stand_right : "/images/player_stand_right.png"
       },
-	  {
+      {
         type : 'ground',
         id : 1,
         x : 0,
-        y : 200,
-        width : 200,
+        y : 100,
+        width : 100,
         height : 10,
         stable : true,
         gravity : false,
@@ -58,35 +49,66 @@ solve.useItem 4\n',
         type : 'ground',
         id : 2,
         x : 100,
-        y : 400,
-        width : 500,
+        y : 200,
+        width : 100,
         height : 10,
         stable : true,
         gravity : false,
         src : ""
       },
-      {
-        type : 'ladder',
+	  {
+        type : 'ground',
         id : 3,
-        x : 190,
-        y : 180,
-        width : 10,
-        height : 220,
-        stable : false,
+        x : 200,
+        y : 300,
+        width : 100,
+        height : 10,
+        stable : true,
         gravity : false,
-        canuse: true,
-        src : "/images/string.png"
+        src : ""
+      },
+	  {
+        type : 'ground',
+        id : 4,
+        x : 300,
+        y : 400,
+        width : 100,
+        height : 10,
+        stable : true,
+        gravity : false,
+        src : ""
+      },
+	  {
+        type : 'ground',
+        id : 5,
+        x : 400,
+        y : 500,
+        width : 200,
+        height : 10,
+        stable : true,
+        gravity : false,
+        src : ""
       },
 	  {
         type : 'fish',
-        id : 4,
-        x : 20,
-        y : 160,
+        id : 6,
+        x : 520,
+        y : 460,
         width : 80,
         height : 40,
-		    stable : false,
-		    canuse : true,
+		stable : false,
+		canuse : true,
         src : "/images/fish.png",
+      },
+	  {
+        type : 'stone',
+        id : 7,
+        x : 0,
+        y : 25,
+        width : 80,
+        height : 75,
+        stable : true,
+        src : "/images/stone.png"
       }
     ]
   };

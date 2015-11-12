@@ -4,7 +4,7 @@ html
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
-    title #{title}
+    title
     link(rel='shortcut icon', href='images/favicon.ico')
     link(rel='bookmark', href='images/favicon.ico')
     // Bootstrap core CSS
@@ -15,7 +15,65 @@ html
     link(rel='stylesheet', type='text/css', href='stylesheets/demo.css')
     link(rel='stylesheet', type='text/css', href='stylesheets/component.css')
     link(rel='stylesheet', type='text/css', href='stylesheets/content.css')
+    //link(href='https://www.wasify.com/assets/css/style.css', rel='stylesheet')
   body
+    #login.modal.fade(tabindex='-1', role='dialog', aria-hidden='true')
+      //.background-image(style="background-image : url('..\public\images\background.png')")
+      .container
+        .row.text-center
+          h2
+            |Log in to ShadowCats
+            br
+          img.logo(src='/images/favicon.ico', alt='shadowcats')
+          br
+          br
+          .col-md-8.col-md-offset-3
+            form.form-horizontal(role='form')
+              .form-group
+                .col-sm-2
+                  label.control-label(for='inputEmail3') Email
+                .col-sm-6
+                  input#inputEmail3.form-control(type='email', placeholder='Email')
+              .form-group
+                .col-sm-2
+                  label.control-label(for='inputPassword3') Password
+                .col-sm-6
+                  input#inputPassword3.form-control(type='password', placeholder='Password')
+              .form-group
+                .col-sm-offset-2.col-sm-6
+                  button.btn.btn-block.btn-info(type='submit', name='commandLogin', value='1') Log in
+
+    #signup.modal.fade(tabindex='-1', role='dialog', aria-hidden='true')
+      //.background-image(style="background-image : url('..\public\images\background.png')")
+      .container
+        .row
+          .col-md-8.col-md-offset-2
+            .row.text-center
+              h2 Signup Your ShadowCats Account!
+              br
+              img.logo(src='/images/favicon.ico', alt='shadowcats', style='text-align:center;')
+              br
+              br
+            form.form-horizontal(action='/signup', method='POST', autocomplete='off')
+              .form-group
+                .col-sm-2.col-sm-offset-1
+                  label.control-label(for='name') UserName
+                .col-sm-6
+                  input.form-control(type='text', name='name', placeholder='UserName')
+              .form-group
+                .col-sm-2.col-sm-offset-1
+                  label.control-label(for='email') Email
+                .col-sm-6
+                  input#inputEmail3.form-control(type='email', name='email', placeholder='Your email')
+              .form-group
+                .col-sm-2.col-sm-offset-1
+                  label.control-label(for='password') Password
+                .col-sm-6
+                  input#inputPassword3.form-control(type='password', name='password', placeholder='Create a password')
+              .form-group
+                .col-sm-offset-3.col-sm-6
+                  button.btn.btn-block.btn-info(type='submit') Create Account!
+
     nav.navbar.navbar-inverse.navbar-fixed-top.site-navbar
       .container
         .navbar-header
@@ -47,10 +105,9 @@ html
               a(href='recipes') 使用技巧
         // /.nav-collapse
     // Jumbotron
-
     script(src='javascripts/modernizr.custom.js')
     script(src='javascripts/classie.js')
     script(src='javascripts/uiMorphingButton_fixed.js')
     script(src='javascripts/uiMorphingButton.js')
-
+    
     block content
