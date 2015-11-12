@@ -18,7 +18,7 @@ router.get('/', function(req, res, next){
 router.post('/', function(req, res){
 	var stage = req.query['stage'];
 	var total = req.query['total'];
-	
+	console.log(" stage = " + stage + " total = " + total);
 	adapter.find(req.email, function(err, result){
 		if (err){
 			console.log(err);
