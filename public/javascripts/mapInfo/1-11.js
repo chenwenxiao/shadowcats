@@ -1,6 +1,7 @@
   var map = {
     round : 0,
     index : 0,
+    stage : '1-11',
     code : '\n',
     tip : {
       title : '第十一关：地下探险',

@@ -16,7 +16,7 @@ define(['editor', 'coffeescript', 'jquery', 'solve'], function(editor, coffeescr
     });
     //solve.init();
     eval(compiledJS);
-    solve.startAnimate();
+    solve.startAnimate(coffeeCode.length);
   });
   editor.getSession().getDocument().setValue(solve.map.code);
   $('.tutor').attr('title', solve.map.tip.title);

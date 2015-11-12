@@ -1,6 +1,7 @@
   var map = {
     round : 0,
     index : 0,
+    stage : '1-2',
     code : 'solve.right 200\n\
 solve.useItem 6\n',
     tip : {

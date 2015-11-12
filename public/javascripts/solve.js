@@ -6,7 +6,7 @@ define(['map', 'view', 'editor', 'jquery'], function(map, view, editor, $) {
     view : view,
     round : 0,
     index : [],
-    startAnimate : function() {
+    startAnimate : function(code) {
       var timer = setInterval(function(){
         if (solve.round < map.round) {
           view.startAnimate(solve.round);
@@ -17,6 +17,8 @@ define(['map', 'view', 'editor', 'jquery'], function(map, view, editor, $) {
           clearInterval(timer);
           if (solve.victory) {
             $('#back').click();
+            $.post("game?"+"stage="+map.stage+"&total="+code,{},function(result){
+            });
           }
         }
       }, 50);
@@ -27,7 +29,7 @@ define(['map', 'view', 'editor', 'jquery'], function(map, view, editor, $) {
       solve.round = 0;
       map.index = 0;
       solve.index = [];
-
+      solve.victory = false;
       view.init(map);
       solve.player = solve.findPlayers()[0];
     },

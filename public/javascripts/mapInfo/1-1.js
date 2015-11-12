@@ -1,6 +1,7 @@
   var map = {
     round : 0,
     index : 0,
+    stage : '1-1',
     code : 'solve.useItem 2\n',
     tip : {
       title : '第一关指南：我要赢',
