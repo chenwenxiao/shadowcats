@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var adapter = require('../models/mongodb.js')();
 
 /* 获取地图信息 */
 router.get('/', function(req, res, next){
@@ -12,6 +13,29 @@ router.get('/', function(req, res, next){
 　　	console.log("map : " + map);
 		res.render('game', { title: 'stage', map : map});
 	}
+})
+
+router.post('/', function(req, res){
+	var stage = req.query['stage'];
+	var total = req.query['total'];
+	
+	adapter.find(req.email, function(err, result){
+		if (err){
+			console.log(err);
+		}else{
+			if (result == null){
+				console.log("The user do not exist");
+			}else{
+				var newInfo = result;
+				var record = newInfo.success['stage'];
+				if (record == undefined || record > total)
+					newInfo.success['stage'] = total;
+
+				adapter.save(newInfo, function(err){
+				});
+			}
+		}
+	});	
 })
 
 module.exports = router;
