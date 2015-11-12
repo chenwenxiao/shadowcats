@@ -90,17 +90,31 @@ html
             if email
                 li
                     a(href='logout') 登出
-                li 
+                li
                     a(href='usrs') 个人信息
-                           
-                li  
-                    a(href='bigmap') 大地图    
+
+                li
+                    a(href='bigmap') 大地图
 
             else
                 li
                     a(href='#',rel='nofollow', data-toggle='modal', data-target='#signup') 注册
                 li
                     a(href='#', rel='nofollow', data-toggle='modal', data-target='#login') 登陆
+            li.dropdown
+              a.dropdown-toggle(data-toggle="dropdown", aria-expanded="false", href="#") 下载
+                span.caret
+              ul.dropdown-menu(role="menu")
+                li
+                  a(href='ShadowCats-darwin-x64.zip') Mac OS
+                li
+                  a(href='ShadowCats-linux-ia32.zip') Linux 32
+                li
+                  a(href='ShadowCats-linux-x64.zip') Linux 64
+                li
+                  a(href='ShadowCats-win32-ia32.zip') Windows 32
+                li
+                  a(href='ShadowCats-win32-x64.zip') Windows 64
             li
               a(href='faq') 常见问题
             li
@@ -111,5 +125,5 @@ html
     script(src='javascripts/classie.js')
     script(src='javascripts/uiMorphingButton_fixed.js')
     script(src='javascripts/uiMorphingButton.js')
-    
+
     block content
