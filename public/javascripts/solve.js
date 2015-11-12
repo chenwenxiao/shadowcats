@@ -17,7 +17,7 @@ define(['map', 'view', 'editor', 'jquery'], function(map, view, editor, $) {
           clearInterval(timer);
           if (solve.victory) {
             $('#back').click();
-            $.post("game",{stage: map.stage, total: code},function(result){
+            $.post("game?"+"stage="+map.stage+"&total="+code,{},function(result){
             });
           }
         }
@@ -29,7 +29,7 @@ define(['map', 'view', 'editor', 'jquery'], function(map, view, editor, $) {
       solve.round = 0;
       map.index = 0;
       solve.index = [];
-
+      solve.victory = false;
       view.init(map);
       solve.player = solve.findPlayers()[0];
     },
