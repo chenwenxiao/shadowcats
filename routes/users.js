@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var adapter = require('../models/mongodb.js')();
+var agent = require('../models/MongoAgent.js');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -57,18 +58,21 @@ router.post('/', function(req, res){
 				if (notice != undefined)	newInfo['notice'] = notice;
 				if (workPlace != undefined)	newInfo['workPlace'] = workPlace; 
 				//render('success', { substance : 'success!' });
-				adapter.save(newInfo, function(err){
+				//adapter.save(newInfo, function(err){
 					/*if (err){
 						render('fail', { substance: 'fail! '});
 					}else{
 						render('success', { substance: 'success!' });
 					}*/
-					if (err){
-						console.log(err);
-					}else{
-						res.redirect('/usrs');
-					}
-				});
+				//	if (err){
+				//		console.log(err);
+				//	}else{
+				//		res.redirect('/usrs');
+				//	}
+				//});
+
+				agent.saveAgent(newInfo);
+				res.redirect('/bigmap')
 			}
 		}
 	});

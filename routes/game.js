@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var adapter = require('../models/mongodb.js')();
+var agent = require('../models/MongoAgent.js');
 
 /* 获取地图信息 */
 router.get('/', function(req, res, next){
@@ -19,6 +20,8 @@ router.post('/', function(req, res){
 	var stage = req.query['stage'];
 	var total = req.query['total'];
 	
+	console.log(stage + " " + total);
+
 	adapter.find(req.session.email, function(err, result){
 		if (err){
 			console.log(err);
@@ -27,12 +30,46 @@ router.post('/', function(req, res){
 				console.log("The user do not exist");
 			}else{
 				var newInfo = result;
-				var record = newInfo.success['stage'];
-				if (record == undefined || record > total)
-					newInfo.success['stage'] = total;
+				//var tmp = newInfo.success;
+				//console.log(tmp);
+				//tmp[stage] = total;
+				//console.log(tmp);
+				//console.log(newInfo.success);
+				//var record = newInfo.success[stage];
+				//console.log(record);
+				//if (record == undefined || record > total)
+					//newInfo['success'].append({stage: total});
+					//newInfo['success'] = tmp;
+				stageIndex = parseInt(stage.slice(2));
+				console.log(newInfo['process']);
+				tmp = newInfo['process'];
+				console.log(stageIndex);
+				if (tmp == NaN || tmp == undefined || stageIndex > tmp){				
+					newInfo['process'] = stageIndex;
+					console.log(tmp == NaN);
+					console.log(tmp == undefined);
+					console.log(stageIndex > tmp);
+					console.log(2 > 1);
+				}
 
-				adapter.save(newInfo, function(err){
-				});
+				total = parseInt(total);
+				tmp = newInfo[stage];
+				if (tmp == undefined || tmp > total){
+					newInfo[stage] = total;
+				}
+
+				agent.saveAgent(newInfo);
+				//console.log(newInfo);
+				//adapter.save(newInfo, function(error){
+					/*if (error){
+						console.log(error);
+					}*/
+				//	console.log(error);
+				//});
+
+				//adapter.save({"name": "test", "process": "2-1", "success": ["2-1", 3]}, function(error){
+				//	console.log("please check the database");
+				//});
 			}
 		}
 	});	

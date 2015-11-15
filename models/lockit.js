@@ -21,8 +21,8 @@ module.exports = function(app){
 			name: user.name,
 			nickname: user.name,
 			email: user.email,
-			process: 1,
-			success: []
+			process: 0,
+			//success: []
 		};
 
 		adapter.save(new_usr, function(err){
