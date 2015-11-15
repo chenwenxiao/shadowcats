@@ -21,4 +21,15 @@ describe('test_map()', function() {
       assert.equal(window.require('map').items[0].type, 'player');
     });
   });
+
+
+  it('should return svg', function() {
+    jsdom.env(
+    'http://localhost:3000/game?stage=1-1',
+    [],
+    function(err, window) {
+      console.log("svg" + window.$('#svg'));
+      assert.equal(window.require('map').items[0].type, 'player');
+    });
+  });
 });
