@@ -15,69 +15,66 @@ html
     link(rel='stylesheet', type='text/css', href='stylesheets/demo.css')
     link(rel='stylesheet', type='text/css', href='stylesheets/component.css')
     link(rel='stylesheet', type='text/css', href='stylesheets/content.css')
+    script(src='http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js')
+    script(src='http://libs.baidu.com/jquery/2.0.0/jquery.min.js')
     //link(href='https://www.wasify.com/assets/css/style.css', rel='stylesheet')
   body
-    #login.modal.fade(tabindex='-1', role='dialog', aria-hidden='true')
-      //.background-image(style="background-image : url('..\public\images\background.png')")
-      .container
-        .row.text-center
-          h2
+    #login.modal.fade.text-center(tabindex='-1', role='dialog', aria-hidden='true')
+      .modal-dialog
+        .modal-content.background-image(style="background-image : url('../images/background.png')")
+          h2(style='font-family:Comic Sans MS;color:#8F8F8F')
             |Log in to ShadowCats
             br
           img.logo(src='/images/favicon.ico', alt='shadowcats')
           br
           br
-          .col-md-8.col-md-offset-3
-            form.form-horizontal(role='form', action="/login", method="POST")
-              .form-group
-                .col-sm-2
-                  label.control-label(for="login") Email
-                .col-sm-6
-                  input#inputEmail3.form-control(type="email", name="login",placeholder="Email")
-              .form-group
-                .col-sm-2
-                  label.control-label(for="password") Password
-                .col-sm-6
-                  input#inputPassword3.form-control(type="password", name="password",placeholder="Password")
-              .form-group
-                .col-sm-offset-2.col-sm-6
-                  button.btn.btn-block.btn-info(type='submit', name='commandLogin', value='1') Log in
+          form.form-horizontal(role='form', action="/login", method="POST")
+            .form-group
+              .col-sm-2.col-sm-offset-1
+                label.control-label(for="login") 
+              .col-sm-6
+                input#inputEmail3.form-control(type="email", name="login",placeholder="Email")
+            .form-group
+              .col-sm-2.col-sm-offset-1
+                label.control-label(for="password") 
+              .col-sm-6
+                input#inputPassword3.form-control(type="password", name="password",placeholder="Password")
+            .form-group
+              .col-sm-offset-3.col-sm-6
+                button.btn.btn-block.btn-info(type='submit', name='commandLogin', value='1') Log in  
 
-    #signup.modal.fade(tabindex='-1', role='dialog', aria-hidden='true')
-      //.background-image(style="background-image : url('..\public\images\background.png')")
-      .container
-        .row
-          .col-md-8.col-md-offset-2
-            .row.text-center
-              h2 Signup Your ShadowCats Account!
-              br
-              img.logo(src='/images/favicon.ico', alt='shadowcats', style='text-align:center;')
-              br
-              br
-            form.form-horizontal(action='/signup', method='POST', autocomplete='off')
-              .form-group
-                .col-sm-2.col-sm-offset-1
-                  label.control-label(for='name') UserName
-                .col-sm-6
-                  input.form-control(type='text', name='name', placeholder='UserName')
-              .form-group
-                .col-sm-2.col-sm-offset-1
-                  label.control-label(for='email') Email
-                .col-sm-6
-                  input#inputEmail3.form-control(type='email', name='email', placeholder='Your email')
-              .form-group
-                .col-sm-2.col-sm-offset-1
-                  label.control-label(for='password') Password
-                .col-sm-6
-                  input#inputPassword3.form-control(type='password', name='password', placeholder='Create a password')
-              .form-group
-                .col-sm-offset-3.col-sm-6
-                  button.btn.btn-block.btn-info(type='submit') Create Account!
+    #signup.modal.fade.text-center(tabindex='-1', role='dialog', aria-hidden='true')
+      .modal-dialog
+        .modal-content.background-image(style="background-image : url('../images/background.png')")
+          h2(style='font-family:Comic Sans MS;color:#8F8F8F') Signup Your ShadowCats Account!
+          br
+          img.logo(src='/images/favicon.ico', alt='shadowcats')
+          br
+          br
+          form.form-horizontal(action='/signup', method='POST', autocomplete='off')
+            .form-group
+              .col-sm-2.col-sm-offset-1
+                label.control-label(for='name',style='font-size:1.5em;color:#F4F4F4') 
+              .col-sm-6
+                input.form-control(type='text', name='name', placeholder='UserName')
+            .form-group
+              .col-sm-2.col-sm-offset-1
+                label.control-label(for='email',style='font-size:1.5em') 
+              .col-sm-6
+                input#inputEmail3.form-control(type='email', name='email', placeholder='Your email')
+            .form-group
+              .col-sm-2.col-sm-offset-1
+                label.control-label(for='password',style='font-size:1.5em')
+              .col-sm-6
+                input#inputPassword3.form-control(type='password', name='password', placeholder='Create a password')
+            .form-group
+              .col-sm-offset-3.col-sm-6
+                button.btn.btn-block.btn-info(type='submit') Create Account!
 
     nav.navbar.navbar-inverse.navbar-fixed-top.site-navbar
       .container
         .navbar-header
-          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+          button.navbar-toggle.collapsed(type='button', datadata-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
             span.sr-only Toggle navigation
             span.icon-bar
             span.icon-bar
