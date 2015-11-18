@@ -15,8 +15,8 @@ html
     link(rel='stylesheet', type='text/css', href='stylesheets/demo.css')
     link(rel='stylesheet', type='text/css', href='stylesheets/component.css')
     link(rel='stylesheet', type='text/css', href='stylesheets/content.css')
-    script(src='http://libs.baidu.com/jquery/2.0.0/jquery.min.js')
-    script(src='http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js')
+    script(src='libs/jquery/dist/jquery.min.js')
+    script(src='libs/bootstrap/dist/js/bootstrap.min.js')
     //link(href='https://www.wasify.com/assets/css/style.css', rel='stylesheet')
   body
     #login.modal.fade.text-center(tabindex='-1', role='dialog', aria-hidden='true')
@@ -33,7 +33,7 @@ html
               .col-sm-2.col-sm-offset-1
                 label.control-label(for="login") 
               .col-sm-6
-                input#inputEmail3.form-control(type="email", name="login",placeholder="Email")
+                input#inputEmail3.form-control(type="text", name="login",placeholder="Email or username")
             .form-group
               .col-sm-2.col-sm-offset-1
                 label.control-label(for="password") 
@@ -41,7 +41,35 @@ html
                 input#inputPassword3.form-control(type="password", name="password",placeholder="Password")
             .form-group
               .col-sm-offset-3.col-sm-6
-                button.btn.btn-block.btn-info(type='submit', name='commandLogin', value='1') Log in  
+                button.btn.btn-block.btn-info(type='submit', name='commandLogin', value='1') Log in 
+
+    if error2
+      #login2.modal.text-center(tabindex='-1', role='dialog', aria-hidden='true')
+        .modal-dialog
+          .modal-content.background-image(style="background-image : url('../images/background.png')")
+            h2(style='font-family:Comic Sans MS;color:#8F8F8F')
+              |Log in to ShadowCats
+              br
+            img.logo(src='/images/favicon.ico', alt='shadowcats')
+            br
+            br
+            form.form-horizontal(role='form', action="/login", method="POST")
+              .form-group
+                .col-sm-2.col-sm-offset-1
+                  label.control-label(for="login") 
+                .col-sm-6
+                  input#inputEmail3.form-control(type="email", name="login",placeholder="Email")
+              .form-group
+                .col-sm-2.col-sm-offset-1
+                  label.control-label(for="password") 
+                .col-sm-6
+                  input#inputPassword3.form-control(type="password", name="password",placeholder="Password")
+              if error2
+                .col-sm-6.col-sm-offset-3
+                  .alert.alert-warning #{error2}
+              .form-group
+                .col-sm-offset-3.col-sm-6
+                  button.btn.btn-block.btn-info(type='submit', name='commandLogin', value='1') Log in
 
     #signup.modal.fade.text-center(tabindex='-1', role='dialog', aria-hidden='true')
       .modal-dialog
@@ -70,6 +98,42 @@ html
             .form-group
               .col-sm-offset-3.col-sm-6
                 button.btn.btn-block.btn-info(type='submit') Create Account!
+    if error
+      #signup2.modal.text-center(tabindex='-1', role='dialog', aria-hidden='true')
+        .modal-dialog
+          .modal-content.background-image(style="background-image : url('../images/background.png')")
+            h2(style='font-family:Comic Sans MS;color:#8F8F8F') Signup Your ShadowCats Account!
+            br
+            img.logo(src='/images/favicon.ico', alt='shadowcats')
+            br
+            br
+            form.form-horizontal(action='/signup', method='POST', autocomplete='off')
+              .form-group
+                .col-sm-2.col-sm-offset-1
+                  label.control-label(for='name',style='font-size:1.5em;color:#F4F4F4') 
+                .col-sm-6
+                  input.form-control(type='text', name='name', placeholder='UserName')
+              .form-group
+                .col-sm-2.col-sm-offset-1
+                  label.control-label(for='email',style='font-size:1.5em') 
+                .col-sm-6
+                  input#inputEmail3.form-control(type='email', name='email', placeholder='Your email')
+              .form-group
+                .col-sm-2.col-sm-offset-1
+                  label.control-label(for='password',style='font-size:1.5em')
+                .col-sm-6
+                  input#inputPassword3.form-control(type='password', name='password', placeholder='Create a password')
+              if error
+                .col-sm-6.col-sm-offset-3
+                  .alert.alert-warning #{error}
+              .form-group
+                .col-sm-offset-3.col-sm-6
+                  button.btn.btn-block.btn-info(type='submit') Create Account!
+
+    
+
+
+
 
     nav.navbar.navbar-inverse.navbar-fixed-top.site-navbar
       .container
@@ -92,10 +156,12 @@ html
 
                 li
                     a(href='bigmap') 大地图
+                li              
+                    a(href='#',rel='nofollow', data-toggle='modal', data-target='#signup') 注册 
 
             else
                 li
-                    a(href='#',rel='nofollow', data-toggle='modal', data-target='#signup') 注册
+                    a#ss(href='#',rel='nofollow', data-toggle='modal', data-target='#signup') 注册 
                 li
                     a(href='#', rel='nofollow', data-toggle='modal', data-target='#login') 登陆
             li.dropdown
@@ -113,7 +179,7 @@ html
                 li
                   a(href='ShadowCats-win32-x64.zip') Windows 64
             li
-              a(href='faq') 常见问题
+              a#faq(href='faq') 常见问题
             li
               a(href='recipes') 使用技巧
         // /.nav-collapse
@@ -122,5 +188,11 @@ html
     script(src='javascripts/classie.js')
     script(src='javascripts/uiMorphingButton_fixed.js')
     script(src='javascripts/uiMorphingButton.js')
+    script.
+      $(function(){
+      $('#signup2').modal('show');
+      $('#login2').modal('show');
+      });
 
+      
     block content
