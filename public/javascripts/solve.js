@@ -13,6 +13,13 @@ define(['map', 'view', 'editor', 'jquery'], function(map, view, editor, $) {
           solve.round++;
           editor.getSession().clearBreakpoints();
           editor.getSession().setBreakpoint(solve.index[solve.round]);
+          var playerPos = view.getItemPos(solve.player.id);
+          if (playerPos.x < -50 || playerPos.x > 600 || playerPos.y < -45 || playerPos.y > 600) {
+            clearInterval(timer);
+            solve.init();
+            $('#lose').click();
+          }
+
         } else {
           clearInterval(timer);
           if (solve.victory) {
@@ -25,9 +32,12 @@ define(['map', 'view', 'editor', 'jquery'], function(map, view, editor, $) {
     },
     init : function() {
       // test code
+
+      var str = $('#map').text();
+      map = JSON.parse(str);
+
       map.round = 0;
       solve.round = 0;
-      map.index = 0;
       solve.index = [];
       solve.victory = false;
       view.init(map);

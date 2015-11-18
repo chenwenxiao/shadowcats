@@ -4,7 +4,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	if (req.session.email == null){
-		res.redirect("/login");
+		res.redirect("/");
 	}
 	else{
 		console.log(req.session.email);

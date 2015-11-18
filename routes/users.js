@@ -7,7 +7,7 @@ var agent = require('../models/MongoAgent.js');
 router.get('/', function(req, res, next) {
   //res.send('respond with a resource');
 	if (req.session.email == null){
-		res.redirect("/login");
+		res.redirect("/");
 	}else{
 		console.log(req.session.email);
 		adapter.find(req.session.email, function(err, result){

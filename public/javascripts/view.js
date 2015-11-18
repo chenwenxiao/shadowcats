@@ -1,8 +1,10 @@
-define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
+define(['jquery', 'snapsvg'], function($, snapsvg) {
   var item_list = [];
   var stack = [];
+  var map;
 
-  function init(map) {
+  function init(_map) {
+    map = _map;
     stack = [];
     item_list = [];
 
@@ -100,6 +102,12 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
         background.after(fish);
         player.before(fish);
         item_list.push({id: nitem.id, obj: fish, type : 'fish'});
+
+        fish.mouseover(function(e) {
+          var str = "Object Type: fish\nItem ID: " + nitem.id + "\n";
+          console.log(str);
+        });
+
       }
 	  else if(nitem.type == 'stone') {
         var stone = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
@@ -274,10 +282,24 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
     stack[map.round].push({id : item.id, type : 'use'});
   };
 
+  function getItemPos(id) {
+    for (var i in item_list) {
+      if (id == item_list[i].id) {
+        var old_cx = parseInt(item_list[i].obj.attr("x"));
+		    var old_cy = parseInt(item_list[i].obj.attr("y"));
+        return {
+          x : old_cx,
+          y : old_cy
+        };
+      }
+    }
+  };
+
   return {
     init : init,
     move : move,
     use : use,
-    startAnimate : startAnimate
+    startAnimate : startAnimate,
+    getItemPos : getItemPos
   };
 });

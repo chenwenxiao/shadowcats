@@ -29,10 +29,12 @@ body {
 	position: relative;
 	background: url('../images/background.png');
 	color: #faf1e0;
+/*
 	font-size: 100%;
 	line-height: 1.25;
 	font-weight: 300;
 	font-family: 'Lato', Arial, sans-serif;
+*/
 }
 
 a, button {
