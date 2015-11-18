@@ -15,7 +15,7 @@ block content
           race = (winner, runners...) ->
             print winner, runners
         div.row.upload-row.clearfix
-          div.col-md-6
+          div.col-md-12
             button#run.button.button-large.button-plain.button-border.button-circle
               i.fa.fa-play
             button#left.button.button-large.button-plain.button-border.button-circle
@@ -24,6 +24,8 @@ block content
               i.fa.fa-angle-right
             button#useItem.button.button-large.button-plain.button-border.button-circle
               i.fa.fa-hand-rock-o
+            button#recycle.button.button-large.button-plain.button-border.button-circle
+              i.fa.fa-recycle
             .mockup-content
               .morph-button.morph-button-modal.morph-button-modal-3.morph-button-fixed
                 button#back(type='button', hidden="true") Back Bigmap
