@@ -100,6 +100,12 @@ define(['map', 'jquery', 'snapsvg'], function(map, $, snapsvg) {
         background.after(fish);
         player.before(fish);
         item_list.push({id: nitem.id, obj: fish, type : 'fish'});
+
+        fish.mouseover(function(e) {
+          var str = "Object Type: fish\nItem ID: " + nitem.id + "\n";
+          console.log(str);
+        });
+
       }
 	  else if(nitem.type == 'stone') {
         var stone = svg.paper.image(nitem.src, nitem.x, nitem.y, nitem.width, nitem.height);
