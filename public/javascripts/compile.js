@@ -18,6 +18,29 @@ define(['editor', 'coffeescript', 'jquery', 'solve'], function(editor, coffeescr
     eval(compiledJS);
     solve.startAnimate(coffeeCode.length);
   });
+  $('#left').click(function() {
+    editor.clearSelection();
+    editor.insert("\nsolve.left nums");
+    editor.selectMore(0, true);
+    editor.focus();
+  });
+  $('#right').click(function() {
+    editor.clearSelection();
+    editor.insert("\nsolve.right nums");
+    editor.selectMore(0, true);
+    editor.focus();
+  });
+  $('#useItem').click(function() {
+    editor.clearSelection();
+    editor.insert("\nsolve.useItem itemId");
+    editor.selectMore(0, true);
+    editor.focus();
+  });
+  $('#recycle').click(function() {
+    editor.insert("\nfor i in range[0..sup]");
+    editor.insert("\n\tDoSth");
+    editor.focus();
+  });
   editor.getSession().getDocument().setValue(solve.map.code);
   $('.tutor').attr('title', solve.map.tip.title);
   $('.tutor').attr('data-content', solve.map.tip.content);

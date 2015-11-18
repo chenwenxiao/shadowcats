@@ -4,5 +4,6 @@ var router = express.Router();
 
 
 router.get('/', function(req, res, next) {
-  	res.render('please-login', { title: 'ShadowCats' });
+	res.render('please-login',{show:true});
 });
+module.exports = router;
