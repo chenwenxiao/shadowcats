@@ -8,7 +8,7 @@ var multiparty = require('multiparty');
 
 router.get('/avater', function(req, res, next){
 	//res.render('avater', {title: 'Express' });
-	var filePath = req.body.avater;
+	var filePath = req.query['avater'];
 	fs.exists(filePath, function(exists) {
 		if (!exists)
 			console.log('avater do not exist');

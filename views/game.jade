@@ -15,9 +15,15 @@ block content
           race = (winner, runners...) ->
             print winner, runners
         div.row.upload-row.clearfix
-          div.col-md-1
-            button#run.btn.btn-primary.btn-success 运行
-          div.col-md-3
+          div.col-md-6
+            button#run.button.button-large.button-plain.button-border.button-circle
+              i.fa.fa-play
+            button#left.button.button-large.button-plain.button-border.button-circle
+              i.fa.fa-angle-left
+            button#right.button.button-large.button-plain.button-border.button-circle
+              i.fa.fa-angle-right
+            button#useItem.button.button-large.button-plain.button-border.button-circle
+              i.fa.fa-play
             .mockup-content
               .morph-button.morph-button-modal.morph-button-modal-3.morph-button-fixed
                 button#back(type='button', hidden="true") Back Bigmap
@@ -27,7 +33,6 @@ block content
                       span.icon.icon-close Close the dialog
                       h2 Back Bigmap
                       button(href='bigmap', role='button', onclick='window.location.href = "bigmap"') Back
-          div.col-md-3
             .mockup-content
               .morph-button.morph-button-modal.morph-button-modal-3.morph-button-fixed
                 button#lose(type='button', hidden="true") You Lose!
