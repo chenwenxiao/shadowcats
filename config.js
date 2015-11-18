@@ -23,7 +23,7 @@ exports.signup = {
   route: '/signup',
   tokenExpiration: '1 day',
   views: {
-    signup: '',         // input fields 'name', 'email' and 'password' | local variable 'error' | POST /'signup.route'
+    signup: 'index.jade',         // input fields 'name', 'email' and 'password' | local variable 'error' | POST /'signup.route'
     linkExpired: '',    // message link has expired | input field 'email' | POST /'signup.route'/resend-verification
     verified: '',       // message email is now verified and maybe link to /'login.route'
     signedUp: '',       // message email has been sent => check your inbox
@@ -37,7 +37,7 @@ exports.login = {
   route: '/login',
   logoutRoute: '/logout',
   views: {
-    login: '',          // input fields 'login' and 'password' | POST /'login.route' | local variable 'error'
+    login: 'index.jade',          // input fields 'login' and 'password' | POST /'login.route' | local variable 'error'
     loggedOut: ''       // message that user logged out
   },
   handleResponse: false  // let lockit handle the response after login/logout success
