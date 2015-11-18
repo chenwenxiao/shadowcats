@@ -1,11 +1,21 @@
 define(['map', 'view', 'editor', 'jquery'], function(map, view, editor, $) {
-
+  /* 游戏关卡逻辑
+   * map: 地图模块
+   * view: 界面宣热模块
+   * editor: 代码编辑模块
+   * $: jquery
+   */
   var solve = {
     player : undefined,
     map : map,
     view : view,
     round : 0,
     index : [],
+
+    /* startAnimate : function(code)
+     * 动画事件序列生成
+     * code: 代码编辑模块传入的经解析过的文本
+     */
     startAnimate : function(code) {
       var timer = setInterval(function(){
         if (solve.round < map.round) {
@@ -14,13 +24,15 @@ define(['map', 'view', 'editor', 'jquery'], function(map, view, editor, $) {
           editor.getSession().clearBreakpoints();
           editor.getSession().setBreakpoint(solve.index[solve.round]);
           var playerPos = view.getItemPos(solve.player.id);
+          // 失败判断
           if (playerPos.x < -50 || playerPos.x > 600 || playerPos.y < -45 || playerPos.y > 600) {
             clearInterval(timer);
             solve.init();
             $('#lose').click();
           }
-
-        } else {
+        }
+        // 获胜（过关判断）
+        else {
           clearInterval(timer);
           if (solve.victory) {
             $('#back').click();
@@ -30,9 +42,11 @@ define(['map', 'view', 'editor', 'jquery'], function(map, view, editor, $) {
         }
       }, 50);
     },
-    init : function() {
-      // test code
 
+    /* init : function()
+     * 初始化游戏界面
+     */
+    init : function() {
       var str = $('#map').text();
       map = JSON.parse(str);
 
@@ -43,6 +57,10 @@ define(['map', 'view', 'editor', 'jquery'], function(map, view, editor, $) {
       view.init(map);
       solve.player = solve.findPlayers()[0];
     },
+
+    /* strife : function(item1, item2)
+     * 物件碰撞判定函数
+     */
     strife : function(item1, item2) {
       if ((item2.x < item1.x + item1.width && item2.x >= item1.x) ||
           (item1.x < item2.x + item2.width && item1.x >= item2.x))
@@ -51,6 +69,11 @@ define(['map', 'view', 'editor', 'jquery'], function(map, view, editor, $) {
             return true;
       return false;
     },
+
+    /* judge : function (item)
+     * 将一个物件 与之相交的物件放入该物件的数组中
+     * item: 物件个体
+     */
     judge : function (item) {
       var array = [];
       for (var nitem in map.items) {
@@ -60,6 +83,11 @@ define(['map', 'view', 'editor', 'jquery'], function(map, view, editor, $) {
       }
       return array;
     },
+
+    /* movex : function(item)
+     * 物件物理属性（ x 坐标方向上是否可移动）判断函数
+     * item: 物件个体
+     */
     movex : function(item) {
       if (!item.move)
          return !item.stable;
@@ -81,6 +109,11 @@ define(['map', 'view', 'editor', 'jquery'], function(map, view, editor, $) {
       item._use = false;
       return flag;
     },
+
+    /* movey : function(item)
+     * 物件物理属性（ y 坐标方向上是否可移动）判断函数
+     * item: 物件个体
+     */
     movey : function(item) {
       if (!item.move)
          return !item.stable;
@@ -102,6 +135,11 @@ define(['map', 'view', 'editor', 'jquery'], function(map, view, editor, $) {
       item._use = false;
       return flag;
     },
+
+    /* _move : function(item)
+     * 物件物理属性控制（ 关卡地图上是否可移动）函数
+     * item: 物件个体
+     */
     _move : function(item) {
       if (item.ladder != null) {
         item.x += item.vx;
@@ -117,6 +155,8 @@ define(['map', 'view', 'editor', 'jquery'], function(map, view, editor, $) {
         view.move(item);
       }
     },
+
+
     setIndex : function(num) {
       map.index = num;
     },
