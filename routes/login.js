@@ -5,7 +5,7 @@ var router = express.Router();
 
 router.get('/', function(req, res, next) {
 	if (req.session.email == null){
-  		res.render('login', { title: 'Editor' });
+  		res.render('index', { title: 'ShadowCats' });
 	}else{
 		res.redirect('/bigmap');
 	}

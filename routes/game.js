@@ -6,7 +6,7 @@ var agent = require('../models/MongoAgent.js');
 /* 获取地图信息 */
 router.get('/', function(req, res, next){
 	if (req.session.email == null){
-		res.redirect('/login');
+		res.redirect('/');
 	}else{
 		var map = require('../public/javascripts/mapInfo/' + req.query['stage']);
 		map = JSON.stringify(map);

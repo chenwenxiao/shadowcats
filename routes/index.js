@@ -15,7 +15,7 @@ var doc = require('./doc');
 module.exports = function(app){
 	app.get('/', function(req, res){
 		console.log(res.locals.email);
-		res.render('index', { title: 'Express', email: res.locals.email });
+		res.render('index', { title: 'ShadowCats', email: res.locals.email });
 	});
 
 	app.use('/editor', editor);
