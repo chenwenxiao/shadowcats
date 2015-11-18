@@ -156,10 +156,16 @@ define(['map', 'view', 'editor', 'jquery'], function(map, view, editor, $) {
       }
     },
 
-
+    /* setIndex : function(num)
+     * 方便动画及相应时间内核对应
+     */
     setIndex : function(num) {
       map.index = num;
     },
+
+    /* finish : function()
+     * 对一个回合进行完整计算操作
+     */
     finish : function() {
       var item;
       for (item in map.items)
@@ -180,6 +186,11 @@ define(['map', 'view', 'editor', 'jquery'], function(map, view, editor, $) {
           if (map.items[item].vy < 0) map.items[item].vy += 2;
         }
     },
+
+    /* use : function(item)
+     * 物件功能使用函数
+     * item: 物件个体
+     */
     use : function(item) {
       var nitem;
       item._use = true;
@@ -209,12 +220,21 @@ define(['map', 'view', 'editor', 'jquery'], function(map, view, editor, $) {
   	  }
       item._use = false;
     },
+
+    /* sleep : function(msecs)
+     * 自实现 sleep 函数
+     */
     sleep : function(msecs) {
       var start = new Date().getTime();
       var cur = start;
       while(cur - start < msecs)
         cur = new Date().getTime();
     },
+
+    /* findId : function(id)
+     * 通过 id 找寻物件在地图中的对应个体
+     * id: 物件唯一 id
+     */
     findId : function(id) {
       var item;
       for (item in map.items) {
@@ -222,6 +242,10 @@ define(['map', 'view', 'editor', 'jquery'], function(map, view, editor, $) {
           return map.items[item];
       }
     },
+
+    /* findPlayers : function()
+     * 返回 player（原设计考虑多角色，待实现……）
+     */
     findPlayers : function() {
       var array = [];
       var item;
@@ -231,48 +255,78 @@ define(['map', 'view', 'editor', 'jquery'], function(map, view, editor, $) {
       }
       return array;
     },
-      left : function(num) {
-        for (var i = 0; i < num; ++i) {
-          solve.player.vx -= 2;
-          solve.finish();
-        }
-      },
-      right : function(num) {
-        for (var i = 0; i < num; ++i) {
-          solve.player.vx += 2;
-          solve.finish();
-        }
-      },
-      up : function(num) {
-        for (var i = 0; i < num; ++i) {
-          if (solve.player.ladder != null)
-            solve.player.vy -= 2;
-          solve.finish();
-        }
-      },
-      down : function(num) {
-        for (var i = 0; i < num; ++i) {
-          if (solve.player.ladder != null)
-              solve.player.vy -= 2;
-          solve.finish();
-        }
-      },
-      useItem : function(id) {
-        var num = arguments[1] ? arguments[1] : 1;
-        var item = map.items[id];
-        for (var i = 0; i < num; ++i) {
-          if (solve.strife(solve.player, item))
-            if (item.canuse) {
-              solve.use(item);
-            }
-          solve.finish();
-        }
-      },
-      wait : function(num) {
-        for (var i = 0; i < num; ++i) {
-          solve.finish();
-        }
+
+    /* left : function(num)
+     * 物件向左移动函数
+     * num: 程序执行与动画播放关联的内核对应
+     */
+    left : function(num) {
+      for (var i = 0; i < num; ++i) {
+        solve.player.vx -= 2;
+        solve.finish();
       }
+    },
+
+    /* right : function(num)
+     * 物件向右移动函数
+     * num: 程序执行与动画播放关联的内核对应
+     */
+    right : function(num) {
+      for (var i = 0; i < num; ++i) {
+        solve.player.vx += 2;
+        solve.finish();
+      }
+    },
+
+    /* up : function(num)
+     * 物件向上移动函数
+     * num: 程序执行与动画播放关联的内核对应
+     */
+    up : function(num) {
+      for (var i = 0; i < num; ++i) {
+        if (solve.player.ladder != null)
+          solve.player.vy -= 2;
+        solve.finish();
+      }
+    },
+
+    /* down : function(num)
+     * 物件向下移动函数
+     * num: 程序执行与动画播放关联的内核对应
+     */
+    down : function(num) {
+      for (var i = 0; i < num; ++i) {
+        if (solve.player.ladder != null)
+            solve.player.vy -= 2;
+        solve.finish();
+      }
+    },
+
+    /* useItem : function(num)
+     * 物件功能使用函数
+     * num: 程序执行与动画播放关联的内核对应
+     */
+    useItem : function(id) {
+      var num = arguments[1] ? arguments[1] : 1;
+      var item = map.items[id];
+      for (var i = 0; i < num; ++i) {
+        if (solve.strife(solve.player, item))
+          if (item.canuse) {
+            solve.use(item);
+          }
+        solve.finish();
+      }
+    },
+
+    /* wait : function(num)
+     * 程序执行完毕后物件动画播放的等待函数
+     * num: 程序执行与动画播放关联的内核对应
+     */
+    wait : function(num) {
+      for (var i = 0; i < num; ++i) {
+        solve.finish();
+      }
+    }
   };
   solve.init();
   return solve;
