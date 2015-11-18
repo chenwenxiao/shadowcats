@@ -29,7 +29,7 @@ describe('test_map()', function() {
     [],
     function(err, window) {
       console.log("svg" + window.$('#svg'));
-      assert.equal(window.require('map').items[0].type, 'player');
+      assert.equal(window.require('map').items[0].type, 'players');
     });
   });
 });
