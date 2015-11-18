@@ -8,11 +8,38 @@ router.get('/', function(req, res, next){
 	if (req.session.email == null){
 		res.redirect('/');
 	}else{
-		var map = require('../public/javascripts/mapInfo/' + req.query['stage']);
-		map = JSON.stringify(map);
+		var stage = req.query['stage'];
+		adapter.find(req.session.email, function(err, result){
+			if (result == null){
+				console.log("The user do not exist");
+				res.direct('/login');
+			}else{
+				var stage = req.query['stage'];
+				stageIndex = parseInt(stage.slice(2));
+				var process = result['process'];
+			
+				console.log(stageIndex);
+				console.log(process);
+				
+				if (stageIndex > process + 1){
+					//alert('关卡未解锁');
+					//res.redirect('/login');
+					res.send('关卡未解锁');
+				}else{
+					var map = require('../public/javascripts/mapInfo/' + req.query['stage']);
+        			map = JSON.stringify(map);
 
-　　	console.log("map : " + map);
-		res.render('game', { title: 'stage', map : map});
+　　    			console.log("map : " + map);
+        			res.render('game', { title: 'stage', map : map});
+				}
+			}
+		})
+
+		//var map = require('../public/javascripts/mapInfo/' + req.query['stage']);
+		//map = JSON.stringify(map);
+
+　　	//console.log("map : " + map);
+		//res.render('game', { title: 'stage', map : map});
 	}
 })
 
