@@ -3,26 +3,46 @@ var router = express.Router();
 var adapter = require('../models/mongodb.js')();
 var agent = require('../models/MongoAgent.js');
 var fs = require('fs');
-var gm = require('gm').subClass({ imageMagick: true} );
+var imageMagick = require('gm').subClass({ imageMagick: true} );
 var multiparty = require('multiparty');
+var path = require('path');
 
+//用户信息界面的头像获取
 router.get('/avater', function(req, res, next){
 	//res.render('avater', {title: 'Express' });
-	var filePath = req.query['avater'];
-	fs.exists(filePath, function(exists) {
-		if (!exists)
-			console.log('avater do not exist');
+	adapter.find(req.session.email, function(err, result){
+		if (err){
+			console.log('no such people');
+			res.redirect('/');
+		}
+		var filePath = result['avater'];
 
-		var gm = gm(filePath);
+		fs.exists(filePath, function(exists) {
+			if (!exists)
+				console.log('avater do not exist');
 
-		gm.resize(150, 150).autoOrient().write('public/images/1.jpg', function(err){
-			if (err){
-				//console.log('gm error:' err);
-				console.log('gm error: ' + err );
-			} else {
-				res.sendFile('public/images/1.jpg');
-			}
-		});
+			var gm = imageMagick(filePath);
+
+			gm.resize(150, 150).autoOrient().write('./public/images/1.jpg', function(err){
+				if (err){
+					//console.log('gm error:' err);
+					console.log('gm error: ' + err );
+				} else {
+					var filePath = './public/images/1.jpg'
+					console.log(filePath);
+					res.sendFile('/root/Desktop/mfhraven/shadowcats/public/images/1.jpg', function(err){
+						if (err){
+							console.log('send failed!' + filePath);
+						}else{
+							fs.unlink(filePath, function(err){
+								if (err){
+									console.log('unlink error:' + filePath);
+								}
+							})
+						}
+					});
+				}
+			});
 		
 
 		/*gm.toBuffer(function(err, buffer) {
@@ -31,7 +51,8 @@ router.get('/avater', function(req, res, next){
 
 			res.set('Content-Type', contentTypes(exty))
 		});*/
-	});
+		});
+	})
 });
 
 //上传头像
