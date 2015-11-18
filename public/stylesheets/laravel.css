@@ -792,7 +792,7 @@ input[type="button"].btn-block {
   transition: opacity 0.15s linear; }
 
 .fade.in {
-  opacity: 1; }
+  }
 
 .collapse {
   display: none; }
@@ -1323,7 +1323,6 @@ pre.line-numbers > code {
 .btn {
   border: none;
   border-radius: 3px;
-  background: #f4645f;
   color: #fff;
   padding: 10px 15px;
   font-size: 16px; }

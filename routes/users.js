@@ -7,52 +7,8 @@ var imageMagick = require('gm').subClass({ imageMagick: true} );
 var multiparty = require('multiparty');
 var path = require('path');
 
-//用户信息界面的头像获取
 router.get('/avater', function(req, res, next){
-	//res.render('avater', {title: 'Express' });
-	adapter.find(req.session.email, function(err, result){
-		if (err){
-			console.log('no such people');
-			res.redirect('/');
-		}
-		var filePath = result['avater'];
-
-		fs.exists(filePath, function(exists) {
-			if (!exists)
-				console.log('avater do not exist');
-
-			var gm = imageMagick(filePath);
-
-			gm.resize(150, 150).autoOrient().write('./public/images/1.jpg', function(err){
-				if (err){
-					//console.log('gm error:' err);
-					console.log('gm error: ' + err );
-				} else {
-					var filePath = './public/images/1.jpg'
-					console.log(filePath);
-					res.sendFile('/root/Desktop/mfhraven/shadowcats/public/images/1.jpg', function(err){
-						if (err){
-							console.log('send failed!' + filePath);
-						}else{
-							fs.unlink(filePath, function(err){
-								if (err){
-									console.log('unlink error:' + filePath);
-								}
-							})
-						}
-					});
-				}
-			});
-		
-
-		/*gm.toBuffer(function(err, buffer) {
-			if (err) 
-				console.log('gm.toBuffer error!');
-
-			res.set('Content-Type', contentTypes(exty))
-		});*/
-		});
-	})
+	res.render('avater', {title: 'Express'});
 });
 
 //上传头像
@@ -120,8 +76,24 @@ router.get('/', function(req, res, next) {
 			if (err){
 				console.log(err);
 			}else{
+				
+				//var avaterPath = result['avater'];
+				//console.log(avaterPath);
+				//准备头像缩略图
+				var toSendPath = 'images/' + req.session.email + '.jpg';
+				console.log(toSendPath);
+				
+	            var gm = imageMagick(result['avater']);
+            	gm.resize(150, 150).autoOrient().write('./public/' + toSendPath, function(err){
+					if (err){
+						console.log('gm error: ' + err);
+					}else{
+						console.log('Please check the path: ./public/' + toSendPath);
+					}
+				});
+
 				if (result == null)	console.log('no such people');
-				else				res.render('usrs', { title : 'User\'s infomation', info : result });
+				else				res.render('usrs', { title : 'User\'s infomation', info : result, avater: toSendPath });
 			}
 		});
 	}
