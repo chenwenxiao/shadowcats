@@ -30,6 +30,8 @@
 	"connect-flash": "*",
 	"lockit-template-blank": "*",
 	"nodemailer-smtp-transport": "*",
-    "nodemailer": "*"
+    "nodemailer": "*",
+	"gm": "*",
+	"multiparty": "*"
   }
 }

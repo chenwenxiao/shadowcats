@@ -23,6 +23,8 @@ module.exports = function(app){
 			email: user.email,
 			process: 0,
 			//success: []
+
+			avater: "./public/images/default.jpg"
 		};
 
 		adapter.save(new_usr, function(err){
