@@ -11,7 +11,7 @@ var game = require('./game');
 var doc = require('./doc');
 var please_login = require('./please-login');
 
-/* 路由 */
+/* 首页路由及路由管理 */
 
 module.exports = function(app){
 	app.get('/', function(req, res){
@@ -19,7 +19,8 @@ module.exports = function(app){
 		res.render('index', { title: 'ShadowCats', email: res.locals.email });
 	});
 
-	app.use('/editor', editor);
+	//分配路由
+	app.use('/editor', editor);	
 	app.use('/usrs', users);
 	app.use('/bigmap', bigmap);
 	app.use('/game', game);

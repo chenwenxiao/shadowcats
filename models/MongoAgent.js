@@ -1,5 +1,6 @@
 var adapter = require('./mongodb.js')();
 
+//mongodb数据的统一保存接口
 saveAgent = function(personality){
 	adapter.save(personality, function(err){
 		if (err){

@@ -6,14 +6,17 @@ var adapter = require('./mongodb.js')()
 
 console.log(adapter);
 
+//lockit模组的回调处理
 module.exports = function(app){
+	//会话设置
 	app.use(cookieSession({
 		secret: 'secret String'
 	}));
 	
 	app.use(lockit.router);
+
+	//当新用户注册激活成功时的回调函数
 	lockit.on('signup', function(user, res){
-		//req.session.user = user;
 		console.log(user);
 		res.redirect('/bigmap');
 
@@ -22,10 +25,10 @@ module.exports = function(app){
 			nickname: user.name,
 			email: user.email,
 			process: 0,
-			//success: []
 
-			avater: "./public/images/default.jpg"
+			avater: "./public/images/fish.png"
 		};
+		//设置用户初始信息
 
 		adapter.save(new_usr, function(err){
 			if (err){
@@ -34,15 +37,13 @@ module.exports = function(app){
 		});
 	});
 
+	//用户登陆成功时用的回调函数
 	lockit.on('login', function(user, res, target){
-		//res.cookie(user.name, 'cookie', {httpOnly: false });
 		res.redirect('/bigmap');
-		//res.cookie(user.name, 'cookie', { httpOnly: false });
 	});
 
+	//用户成功登出时的回调函数
 	lockit.on('logout', function(user, res){
-		//res.clearCookie(user.name, 'cookie', { httpOnly: false });
 		res.redirect('/');
-		//res.clearCookie(user.name, { httpOnly: false });
 	});
 }

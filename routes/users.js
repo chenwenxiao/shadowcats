@@ -13,6 +13,7 @@ router.get('/avater', function(req, res, next){
 
 //上传头像
 router.post('/avater', function(req, res, next){
+	//multiparty组件添加,指定下载目录
 	var form = new multiparty.Form({uploadDir: './public/images/'});
 	
 	form.parse(req, function(err, fields, files) {
@@ -24,23 +25,21 @@ router.post('/avater', function(req, res, next){
 			console.log('parse files: ' + filesTmp);
 
 			var inputFile = files.inputFile[0];
-			var uploadedPath = inputFile.path;
-			var targetPath = './public/images/' + inputFile.originalFilename;
+			var uploadedPath = inputFile.path;									//暂存目录
+			var targetPath = './public/images/' + inputFile.originalFilename;	//目标目录
 
 			console.log(uploadedPath);			
 			console.log(targetPath);
 
+			//移动图片目录
 			fs.rename(uploadedPath, targetPath, function(err) {
 				if (err){
 					console.log('rename error: ' + err + ' uploadPath: ' + uploadedPath + ' targetPath: ' + targetPath);
 				} else {
 					console.log('rename ok');
-
-					/*fs.unlink(uploadedPath, function(err){
-						console.log('unlink error: the uploadPath is ' + uploadedPath);
-					});*/
 				}
 
+				//更新数据库
 				adapter.find(req.session.email, function(err, result){
 					if (err){
 						console.log(err);
@@ -49,23 +48,21 @@ router.post('/avater', function(req, res, next){
 							console.log('no such people');
 						} else {
 							var newInfo = result;
-							newInfo['avater'] = targetPath;
+							newInfo['avater'] = targetPath;			//更改头像
 
 							agent.saveAgent(newInfo);
 						}
 					}
 				});
 
-				res.redirect('/usrs');
+				res.redirect('/usrs');					//重定向回usrs界面
 			});
 		}
 	});
 })
 
-/* GET users listing. */
+//获取用户信息界面
 router.get('/', function(req, res, next) {
-  //res.send('respond with a resource');
-
 	if (req.session.email == null){
 		//未登录时访问
 		res.redirect("/login");
@@ -76,14 +73,12 @@ router.get('/', function(req, res, next) {
 			if (err){
 				console.log(err);
 			}else{
-				
-				//var avaterPath = result['avater'];
-				//console.log(avaterPath);
 				//准备头像缩略图
 				var toSendPath = 'images/' + req.session.email + '.jpg';
 				console.log(toSendPath);
 				
-	            var gm = imageMagick(result['avater']);
+				//利用gm组件,讲头像原图放缩为头像大小
+	            var gm = imageMagick(result['avater']);				
             	gm.resize(150, 150).autoOrient().write('./public/' + toSendPath, function(err){
 					if (err){
 						console.log('gm error: ' + err);
@@ -92,6 +87,7 @@ router.get('/', function(req, res, next) {
 					}
 				});
 
+				//发送用户信息
 				if (result == null)	console.log('no such people');
 				else				res.render('usrs', { title : 'User\'s infomation', info : result, avater: toSendPath });
 			}
@@ -99,9 +95,8 @@ router.get('/', function(req, res, next) {
 	}
 });
 
+//用户信息更改
 router.post('/', function(req, res){
-	//console.log(req.body);
-	//console.log('Here');
 
 	//获取新设置的用户信息
 	var email = req.session.email;
@@ -111,12 +106,6 @@ router.post('/', function(req, res){
 	var notice = req.body.notice;
 	var nickname = req.body.nickname;
 	var workPlace = req.body.workPlace;
-
-	//获取头像的临时路径并指定存放路径
-	/*if (req.files){
-		var tmp_path = req.files.thumbnail.path;
-		var target_path = './public/images/' + req.files.thumbnail.name;
-	}*/
 
 	//更新用户信息
 	adapter.find(email, function(err, result){
@@ -136,24 +125,6 @@ router.post('/', function(req, res){
 
 				//保存用户信息
 				agent.saveAgent(newInfo);
-
-				/*if (req.files){				
-					console.log(tmp_path);
-					console.log(target_path);
-					//保存头像
-					fs.rename(tmp_path, target_path, function(err){
-						if (err){
-							console.log('保存失败:' + tmp_path + ' to ' + target_path)					
-						}
-
-						//删除临时文件
-						fs.unlink(tmp_path, function(){
-							if (err){	
-								console.log("临时文件删除失败:" + tmp_path);
-							}
-						});
-					});
-				}*/
 
 				res.redirect('/usrs');
 			}
