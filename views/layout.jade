@@ -41,17 +41,17 @@ html
           form.form-horizontal(role='form', action="/login", method="POST")
             .form-group
               .col-sm-2.col-sm-offset-1
-                label.control-label(for="login") 
+                label.control-label(for="login")
               .col-sm-6
                 input#inputEmail3.form-control(type="text", name="login",placeholder="Email or username")
             .form-group
               .col-sm-2.col-sm-offset-1
-                label.control-label(for="password") 
+                label.control-label(for="password")
               .col-sm-6
                 input#inputPassword3.form-control(type="password", name="password",placeholder="Password")
             .form-group
               .col-sm-offset-3.col-sm-6
-                button.btn.btn-block.btn-info(type='submit', name='commandLogin', value='1') Log in 
+                button.btn.btn-block.btn-info(type='submit', name='commandLogin', value='1') Log in
 
     if error2
       #login2.modal.text-center(tabindex='-1', role='dialog', aria-hidden='true')
@@ -66,12 +66,12 @@ html
             form.form-horizontal(role='form', action="/login", method="POST")
               .form-group
                 .col-sm-2.col-sm-offset-1
-                  label.control-label(for="login") 
+                  label.control-label(for="login")
                 .col-sm-6
                   input#inputEmail3.form-control(type="email", name="login",placeholder="Email")
               .form-group
                 .col-sm-2.col-sm-offset-1
-                  label.control-label(for="password") 
+                  label.control-label(for="password")
                 .col-sm-6
                   input#inputPassword3.form-control(type="password", name="password",placeholder="Password")
               if error2
@@ -92,19 +92,19 @@ html
           form.form-horizontal(action='/signup', method='POST', autocomplete='off')
             .form-group
               .col-sm-2.col-sm-offset-1
-                label.control-label(for='name',style='font-size:1.5em;color:#F4F4F4') 
+                label.control-label(for='name',style='font-size:1.5em;color:#F4F4F4')
               .col-sm-6
-                input.form-control(type='text', name='name', placeholder='UserName',value="zhoujy")
+                input.form-control(type='text', name='name', placeholder='UserName',value="")
             .form-group
               .col-sm-2.col-sm-offset-1
-                label.control-label(for='email',style='font-size:1.5em') 
+                label.control-label(for='email',style='font-size:1.5em')
               .col-sm-6
-                input#inputEmail3.form-control(type='email', name='email', placeholder='Your email',value="zjybox@126.com")
+                input#inputEmail3.form-control(type='email', name='email', placeholder='Your email',value="")
             .form-group
               .col-sm-2.col-sm-offset-1
                 label.control-label(for='password',style='font-size:1.5em')
               .col-sm-6
-                input#inputPassword3.form-control(type='password', name='password', placeholder='Create a password',value='123')
+                input#inputPassword3.form-control(type='password', name='password', placeholder='Create a password',value='')
             .form-group
               .col-sm-offset-3.col-sm-6
                 button.btn.btn-block.btn-info(type='submit') Create Account!
@@ -120,12 +120,12 @@ html
             form.form-horizontal(action='/signup', method='POST', autocomplete='off')
               .form-group
                 .col-sm-2.col-sm-offset-1
-                  label.control-label(for='name',style='font-size:1.5em;color:#F4F4F4') 
+                  label.control-label(for='name',style='font-size:1.5em;color:#F4F4F4')
                 .col-sm-6
                   input.form-control(type='text', name='name', placeholder='UserName')
               .form-group
                 .col-sm-2.col-sm-offset-1
-                  label.control-label(for='email',style='font-size:1.5em') 
+                  label.control-label(for='email',style='font-size:1.5em')
                 .col-sm-6
                   input#inputEmail3.form-control(type='email', name='email', placeholder='Your email')
               .form-group
@@ -140,7 +140,7 @@ html
                 .col-sm-offset-3.col-sm-6
                   button.btn.btn-block.btn-info(type='submit') Create Account!
 
-    
+
 
 
 
@@ -166,10 +166,10 @@ html
 
                 li
                     a(href='bigmap') 大地图
-                li              
+                li
             else
                 li
-                    a#ss(href='#',rel='nofollow', data-toggle='modal', data-target='#signup') 注册 
+                    a#ss(href='#',rel='nofollow', data-toggle='modal', data-target='#signup') 注册
                 li
                     a(href='#', rel='nofollow', data-toggle='modal', data-target='#login') 登陆
             li.dropdown
@@ -200,5 +200,5 @@ html
       $('#login2').modal('show');
       });
 
-      
+
     block content

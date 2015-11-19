@@ -1,4 +1,4 @@
-define(['jquery', 'snapsvg'], function($, snapsvg) {
++define(['jquery', 'snapsvg'], function($, snapsvg) {
   /* item_list: 关卡地图上所有物件的属性存放表
    * stack: 存放动画事件的栈
    * map: 模块传入map的拷贝
@@ -39,6 +39,10 @@ define(['jquery', 'snapsvg'], function($, snapsvg) {
                         src_stand_left : nitem.src_stand_left,
                         src_stand_right : nitem.src_stand_right});
         background.after(player);
+        player.mousedown(function(e) {
+          var str = "Object Type: player\nItem ID: " + nitem.id + "\n";
+          console.log(str);
+        });
       }
       // 渲染 ground
       else if(nitem.type == 'ground') {
@@ -46,6 +50,10 @@ define(['jquery', 'snapsvg'], function($, snapsvg) {
         background.after(ground);
         player.before(ground);
         item_list.push({id: nitem.id, obj: ground, type : 'ground'});
+        ground.mousedown(function(e) {
+          var str = "Object Type: ground\nItem ID: " + nitem.id + "\n";
+          console.log(str);
+        });
       }
       // 渲染 box
       else if(nitem.type == 'box') {
@@ -53,6 +61,10 @@ define(['jquery', 'snapsvg'], function($, snapsvg) {
         background.after(box);
         player.before(box);
         item_list.push({id: nitem.id, obj: box, type : 'box'});
+        box.mousedown(function(e) {
+          var str = "Object Type: box\nItem ID: " + nitem.id + "\n";
+          console.log(str);
+        });
       }
       // 渲染 ladder
       else if(nitem.type == 'ladder') {
@@ -60,6 +72,10 @@ define(['jquery', 'snapsvg'], function($, snapsvg) {
         background.after(ladder);
         player.before(ladder);
         item_list.push({id: nitem.id, obj: ladder, type : 'ladder'});
+        ladder.mousedown(function(e) {
+          var str = "Object Type: ladder\nItem ID: " + nitem.id + "\n";
+          console.log(str);
+        });
       }
       // 渲染 knob
       else if(nitem.type == 'knob') {
@@ -84,6 +100,10 @@ define(['jquery', 'snapsvg'], function($, snapsvg) {
                           src_opened : nitem.src_opened,
                           src_opening : nitem.src_opening});
         }
+        knob.mousedown(function(e) {
+          var str = "Object Type: knob\nItem ID: " + nitem.id + "\n";
+          console.log(str);
+        });
         background.after(knob);
         player.before(knob);
       }
@@ -110,6 +130,10 @@ define(['jquery', 'snapsvg'], function($, snapsvg) {
                           src_opened : nitem.src_opened,
                           src_opening : nitem.src_opening});
         }
+        door.mousedown(function(e) {
+          var str = "Object Type: door\nItem ID: " + nitem.id + "\n";
+          console.log(str);
+        });
         background.after(door);
         player.before(door);
       }
@@ -120,7 +144,7 @@ define(['jquery', 'snapsvg'], function($, snapsvg) {
         player.before(fish);
         item_list.push({id: nitem.id, obj: fish, type : 'fish'});
 
-        fish.mouseover(function(e) {
+        fish.mousedown(function(e) {
           var str = "Object Type: fish\nItem ID: " + nitem.id + "\n";
           console.log(str);
         });
@@ -131,6 +155,10 @@ define(['jquery', 'snapsvg'], function($, snapsvg) {
         background.after(stone);
         player.before(stone);
         item_list.push({id: nitem.id, obj: fish, type : 'stone'});
+        stone.mousedown(function(e) {
+          var str = "Object Type: stone\nItem ID: " + nitem.id + "\n";
+          console.log(str);
+        });
       }
       // 报错
       else {
