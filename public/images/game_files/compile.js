@@ -6,11 +6,12 @@ define(['editor', 'coffeescript', 'jquery', 'solve'], function(editor, coffeescr
     var realCode = "";
     for (var code in coffeeCode) {
       var str = coffeeCode[code];
-      var _str = str.replace(/(\d)\.times->/g, "for __i in [1..$1]");
+      var reg=new RegExp("(\\d+).times->","gmi");
+      str.replace(reg, "for __i in range[0..$1]");
       if (str[0] != ' ' && str[0] != '\t')
         realCode += "solve.setIndex " + code + " \n";
         //realCode += "session.clearBreakpoints" + "\n" + "session.setBreakpoint " + code + "\n" + "solve.sleep　500" + "\n";
-      realCode += _str + "\n";
+      realCode += str + "\n";
     }
     compiledJS = coffeescript.compile(realCode, {
       bare : true
@@ -38,7 +39,7 @@ define(['editor', 'coffeescript', 'jquery', 'solve'], function(editor, coffeescr
     editor.focus();
   });
   $('#recycle').click(function() {
-    editor.insert("\nfor i in [1..sup]");
+    editor.insert("\nfor i in range[0..sup]");
     editor.insert("\n\tDoSth");
     editor.focus();
   });
