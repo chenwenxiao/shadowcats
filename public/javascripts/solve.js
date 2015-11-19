@@ -11,6 +11,7 @@ define(['map', 'view', 'editor', 'jquery'], function(map, view, editor, $) {
     view : view,
     round : 0,
     index : [],
+    shadow : undefined,
 
     /* startAnimate : function(code)
      * 动画事件序列生成
@@ -56,6 +57,10 @@ define(['map', 'view', 'editor', 'jquery'], function(map, view, editor, $) {
       solve.victory = false;
       view.init(map);
       solve.player = solve.findPlayers()[0];
+      solve.shadow = {
+        x: solve.player.x,
+        y: solve.player.y
+      };
     },
 
     /* strife : function(item1, item2)
@@ -316,6 +321,16 @@ define(['map', 'view', 'editor', 'jquery'], function(map, view, editor, $) {
           }
         solve.finish();
       }
+    },
+
+    /* toShadow : function()
+     * 回到影子使用函数
+     * 使用后会回到影子所在处
+     */
+    toShadow : function() {
+      solve.player.x = solve.shadow.x;
+      solve.player.y = solve.shadow.y;
+      solve.finish();
     },
 
     /* wait : function(num)
