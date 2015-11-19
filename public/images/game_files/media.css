@@ -1,0 +1,90 @@
+@charset "utf-8";
+
+/* CSS Document */
+
+
+
+@media (max-width:1200px) {
+
+	.CzarIs{ font-size:34px;} #logoTxts img{height:220px;}
+
+}
+
+
+
+
+
+@media (max-width:1024px) {
+
+	#logoNvideoBox{height:auto !important;} #homeBox{position:static; height:auto;} .ScrollIco{display:none;}
+
+}
+
+
+
+@media only screen and (max-width:992px) {
+
+img{max-width: 100%;}
+
+.Boxes {    float: left;    margin: 2%; width: 46%; font-size: 17px;}
+
+#zootashBoxWrap{margin-left: 0; margin-right: 0;}
+
+.mailWhiteBox{width: 96%; margin-left: 2%;}
+
+}
+
+	
+
+@media only screen and (max-width:767px) {
+
+.checkUL{width: 100%;}
+
+#functionsImg{margin-bottom: 40px;}
+
+
+
+#functionsImg{width: 100%; margin-right: 0;}
+
+
+
+.Small-container,.big-container{padding: 0 15px;}
+
+}				
+
+			
+
+@media only screen and (max-width: 600px){
+
+.Boxes{width: 96%}
+
+.pluginBoxes{height: auto;}
+
+.dispTable{display: block;}
+
+.mailWhiteBox .inputBox{display: block; margin-bottom: 10px;}
+
+	.mailWhiteBox{ padding: 30px 10px 10px;}
+
+	.mailWhiteBox{text-align: center;}
+
+	.notSpamTxt{width: 100%;}
+
+}	
+
+
+
+@media only screen and (max-width:479px){
+
+	.kickBtn{width:100%;}
+
+}
+
+
+
+
+
+
+
+
+
