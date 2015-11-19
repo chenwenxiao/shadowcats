@@ -9,9 +9,9 @@ block content
     .section
       .container
         .row
-          .col-md-12
+          .col-md-8
             form.form-horizontal(role="form", action="/usrs", method="POST")
-              .col-md-8
+              .col-md-12
                 .form-group
                   .col-sm-4
                     label.control-label(for="inputEmail3") &#29992;&#25143;&#21517;
@@ -54,16 +54,15 @@ block content
                     button.button.button-rounded.button-plain.button-small-caps.button-border(type="submit")
                       i.fa.fa-download
                       | 上传信息
-              .col-md-4
-                .row
-                  img(src="#{avater}", style="width: 150px; height: 150px")
-                .row
-                  form(method='post', action='/usrs/avater', enctype='multipart/form-data')
-
-                    a.button.button-rounded.button-plain.button-small-caps.button-border(href="#")
-                      i.fa.fa-download
-                      | 选择头像
-                    input(name='inputFile', type='file', multiple='mutiple' style="opacity:0; position: absolute; top: 150px; height: 40px; width: 160px;")
-                    button.button.button-rounded.button-plain.button-small-caps.button-border(type="submit")
-                      i.fa.fa-download
-                      | 上传头像
+          .col-md-4
+            .row
+              img(src="#{avater}", style="width: 150px; height: 150px")
+            .row
+              form(method='post', action='/usrs/avater', enctype='multipart/form-data')
+                a.button.button-rounded.button-plain.button-small-caps.button-border(href="#")
+                  i.fa.fa-download
+                  | 选择头像
+                input(name='inputFile', type='file', multiple='mutiple' style="opacity:0; position: absolute; top: 150px; height: 40px; width: 160px;")
+                button.button.button-rounded.button-plain.button-small-caps.button-border(type="submit")
+                  i.fa.fa-download
+                  | 上传头像
