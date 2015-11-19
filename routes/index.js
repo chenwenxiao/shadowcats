@@ -10,6 +10,7 @@ var bigmap = require('./bigmap');
 var game = require('./game');
 var doc = require('./doc');
 var please_login = require('./please-login');
+var email_sent=require('./email-sent');
 
 /* 首页路由及路由管理 */
 
@@ -26,5 +27,6 @@ module.exports = function(app){
 	app.use('/game', game);
 	app.use('/doc', doc);
 	app.use('/please-login',please_login);
+	app.use('/email-sent',email_sent);
 };
 
