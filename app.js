@@ -6,7 +6,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var flash = require('connect-flash');
-var login  = require('./database-zjy/login');
 var routes = require('./routes/index');
 var lockit = require('./models/lockit');
 //var users = require('./routes/users');
